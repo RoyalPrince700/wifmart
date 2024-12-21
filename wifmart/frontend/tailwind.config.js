@@ -1,4 +1,3 @@
-// tailwind.config.js
 module.exports = {
   content: [
     "./index.html",
@@ -7,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        paymentslate: "#f5f5f5", // Ensure this custom color is defined
+        paymentslate: "#f5f5f5",
       },
     },
   },

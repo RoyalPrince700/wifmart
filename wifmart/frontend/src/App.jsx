@@ -1,4 +1,4 @@
-import './App.css';
+import './app.css';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';

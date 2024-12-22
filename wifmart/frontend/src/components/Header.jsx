@@ -254,7 +254,7 @@ const Header = () => {
 
   {!user?._id && (
     <div className="lg:flex hidden items-center gap-5">
-      <Link to="/account" className="flex items-center gap-1">
+      <Link className="flex items-center gap-1">
         <FaRegCircleUser className="text-2xl" />
         <p className="font-semibold">Account</p>
       </Link>
@@ -456,7 +456,7 @@ const Header = () => {
           {/* These items should stack vertically */}
           <div className='flex flex-col w-full justify-center'>
                 <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                   onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center 
                     gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
                     >
@@ -563,13 +563,13 @@ const Header = () => {
         </div>
             <div className='bottom-0 absolute bg-red-100 shadow-2xl  w-full h-36'>
               <div className='flex flex-col gap-3 items-center my-4'>
-              <button 
-              onClick={() => window.location.href = '/login'} className='bg-red-600 border hover:border-red-600 hover:text-red-600 hover:bg-red-100 text-white py-3 rounded mx-4 w-[90vw] px'
-            >  Log In </button>
+              <Link to="/login" 
+                     className='bg-red-600 border hover:border-red-600 hover:text-red-600 hover:bg-red-100 text-white py-3 rounded mx-4 w-[90vw] px'
+            >  Log In </Link>
 
-            <button
-            onClick={() => window.location.href = '/singup'}
-            className='bg-inherit border border-red-600 text-red-600 hover:bg-red-600 hover:text-white py-3 rounded  mx-4  w-[90vw] px'>Sign Up </button>
+            <Link to="sign-up"
+           
+            className='bg-inherit border border-red-600 text-red-600 hover:bg-red-600 hover:text-white py-3 rounded  mx-4  w-[90vw] px'>Sign Up </Link>
 
               </div>
           

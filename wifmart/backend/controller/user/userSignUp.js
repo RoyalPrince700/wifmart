@@ -1,61 +1,63 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const userModel = require("../../models/userModel");
+const userModel = require('../../models/userModel'); // Ensure this path is correct
 
-async function userSignUpController(req, res) {
+async function UserSignUpController(req, res) {
     try {
-        const { email, password } = req.body;
-
-        if (!email) {
-            return res.json({ message: 'Please provide an email', error: true, success: false });
-        }
-        if (!password) {
-            return res.json({ message: 'Please provide a password', error: true, success: false });
-        }
-
-        // Normalize email to lowercase
-        const normalizedEmail = email.trim().toLowerCase();
+        const { email, password, name, location, hostel } = req.body;
 
         // Check if user already exists
-        const existingUser = await userModel.findOne({ email: normalizedEmail });
+        const existingUser = await userModel.findOne({ email });
         if (existingUser) {
-            return res.json({ message: 'User already exists', error: true, success: false });
+            return res.status(409).json({ 
+                message: 'User with this email already exists', 
+                error: true, 
+                success: false 
+            });
+        }
+
+        // Validate required fields
+        if (!email || !password || !name ) {
+            return res.status(400).json({ 
+                message: 'Please provide email, password, and name', 
+                error: true, 
+                success: false 
+            });
         }
 
         // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
+         const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        // Create the new user
-        const newUser = await userModel.create({
-            email: normalizedEmail,
-            password: hashedPassword,
-        });
-
-        // Generate JWT token
-        const tokenData = {
-            _id: newUser._id,
-            email: newUser.email,
+        // Create user payload
+        const payload = {
+            ...req.body,     // Includes all fields such as email, name, location, hostel
+            role: "GENERAL", // Default role
+            password: hashedPassword, // Overwrite the plain password with the hashed one
         };
-        const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, { expiresIn: '8h' });
 
-        // Set token in a secure cookie
-        const tokenOptions = {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        };
-        res.cookie("token", token, tokenOptions).json({
-            message: "Signup and login successful",
-            data: tokenData,
+        // Save user to database
+        const userData = new userModel(payload);
+        const savedUser = await userData.save();
+
+        // Remove password from the response object for security
+        const { password: _, ...userWithoutPassword } = savedUser.toObject();
+
+        // Respond with success message and user details (excluding password)
+        return res.status(201).json({
+            data: userWithoutPassword,  // User data without the password field
             success: true,
             error: false,
+            message: 'User created successfully',
         });
+
     } catch (err) {
-        res.json({
-            message: err.message || err,
+        // Catch and handle any errors
+        return res.status(500).json({
+            message: err.message || 'Server error',
             error: true,
             success: false,
         });
     }
 }
 
-module.exports = userSignUpController;
+module.exports = UserSignUpController;

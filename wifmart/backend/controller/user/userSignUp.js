@@ -42,7 +42,6 @@ async function userSignUpController(req, res) {
         const tokenOptions = {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-            sameSite: 'Strict', // Ensure cookies are sent only to the same site
         };
         res.cookie("token", token, tokenOptions).json({
             message: "Signup and login successful",

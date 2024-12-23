@@ -24,42 +24,43 @@ const Login = () => {
       [name]: value
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    // Clear existing session cookies
-    document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-
+    setIsSubmitting(true); // disable button on submit
+  
     try {
-        const response = await fetch(SummaryApi.signIn.url, {
-            method: SummaryApi.signIn.method,
-            credentials: 'include',
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-            toast.success(result.message);
-            // Ensure user details and cart are fetched for the current session
-            await fetchUserDetails();
-            await fetchUserAddToCart();
-            navigate('/');
-        } else {
-            toast.error(result.message || "An error occurred. Please try again.");
-        }
+      console.log("Submitting login form with data:", data); // Debug log
+  
+      const response = await fetch(SummaryApi.signIn.url, {
+        method: SummaryApi.signIn.method,
+        credentials: 'include',
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      console.log("Response status:", response.status); // Log HTTP status
+      const result = await response.json();
+      console.log("Response body:", result); // Log API response
+  
+      if (response.ok && result.success) {
+        console.log("Login successful:", result.message); // Debug log for success
+        toast.success(result.message);
+        fetchUserDetails();
+        fetchUserAddToCart();
+        navigate('/');
+      } else {
+        console.warn("API returned an error:", result.message); // Warn for backend errors
+        toast.error(result.message || "An error occurred. Please try again.");
+      }
     } catch (error) {
-        toast.error("Network error. Please try again later.");
+      console.error("Network or other error occurred:", error); // Error log
+      toast.error("Network error. Please try again later.");
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false); // Re-enable button
     }
-};
-
+  };
   
   return (
     <section id='login'>

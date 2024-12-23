@@ -15,11 +15,13 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [process.env.FRONTEND_URL, 'https://wifmart.vercel.app'], // Add your frontend URLs
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
 app.options('*', cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [process.env.FRONTEND_URL, 'https://wifmart.vercel.app'], // Add your frontend URLs
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
 app.use(express.json());  // Middleware to parse JSON bodies

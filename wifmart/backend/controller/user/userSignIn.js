@@ -1,3 +1,4 @@
+// filepath: /c:/Users/HP/Desktop/com/wifmart/backend/controller/user/userSignIn.js
 const bcrypt = require('bcryptjs');
 const userModel = require("../../models/userModel");
 const jwt = require('jsonwebtoken');
@@ -40,7 +41,8 @@ async function userSignInController(req, res) {
       // Set cookie options
       const tokenOptions = {
         httpOnly: true,
-        secure: true, // Set to true in production
+        secure: process.env.NODE_ENV === 'production', // Set to true in production
+        sameSite: 'None', // Allow cross-site cookies
       };
 
       // Send token as a cookie and return response with token data

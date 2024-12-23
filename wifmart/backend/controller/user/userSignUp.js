@@ -3,7 +3,7 @@ const userModel = require('../../models/userModel'); // Ensure this path is corr
 
 async function UserSignUpController(req, res) {
     try {
-        const { email, password, name, location, hostel } = req.body;
+        const { email, password } = req.body;
 
         // Check if user already exists
         const existingUser = await userModel.findOne({ email });
@@ -16,9 +16,9 @@ async function UserSignUpController(req, res) {
         }
 
         // Validate required fields
-        if (!email || !password || !name ) {
+        if (!email || !password ) {
             return res.status(400).json({ 
-                message: 'Please provide email, password, and name', 
+                message: 'Please provide email, password,', 
                 error: true, 
                 success: false 
             });
@@ -30,7 +30,7 @@ async function UserSignUpController(req, res) {
 
         // Create user payload
         const payload = {
-            ...req.body,     // Includes all fields such as email, name, location, hostel
+            ...req.body,     // Includes all fields such as email, , location, hostel
             role: "GENERAL", // Default role
             password: hashedPassword, // Overwrite the plain password with the hashed one
         };

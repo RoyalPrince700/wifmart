@@ -42,7 +42,7 @@ async function userSignInController(req, res) {
       const tokenOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production', // Set to true in production
-        sameSite: 'None', // Allow cross-site cookies
+        sameSite: 'Strict', // Ensure cookies are sent only to the same site
       };
 
       // Send token as a cookie and return response with token data

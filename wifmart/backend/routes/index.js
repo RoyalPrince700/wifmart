@@ -48,7 +48,7 @@ const getActiveLAs = require('../controller/logistic/getActiveLA');
 router.post("/signup", UserSignUpController);
 router.post("/signin", userSignInController);
 router.get("/user-details", authToken, userDetailsController);
-router.get("/userLogout", userLogout);
+router.post("/userLogout", userLogout);
 
 // Token verification route
 router.get("/auth/verify", authToken, (req, res) => {

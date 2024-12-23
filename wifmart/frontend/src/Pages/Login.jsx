@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import loginIcons from '../assets/signin.gif';
+import React, { useContext, useState } from 'react'
+import loginIcons from '../assets/signin.gif'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -11,11 +11,11 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
-    password: ""
+    password: "" // corrected typo
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { fetchUserDetails, fetchUserAddToCart } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart, } = useContext(Context);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,52 +27,55 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // disable button on submit
+    setIsSubmitting(true);
+
+    // Clear existing session cookies
+    document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 
     try {
-      console.log("Submitting login form with data:", data); // Debug log
+        const response = await fetch(SummaryApi.signIn.url, {
+            method: SummaryApi.signIn.method,
+            credentials: 'include',
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
 
-      const response = await fetch(SummaryApi.signIn.url, {
-        method: SummaryApi.signIn.method,
-        credentials: 'include',
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+        const result = await response.json();
 
-      console.log("Response status:", response.status); // Log HTTP status
-      const result = await response.json();
-      console.log("Response body:", result); // Log API response
-
-      if (response.ok && result.success) {
-        console.log("Login successful:", result.message); // Debug log for success
-        toast.success(result.message);
-        await fetchUserDetails();
-        await fetchUserAddToCart();
-        navigate('/');
-      } else {
-        console.warn("API returned an error:", result.message); // Warn for backend errors
-        toast.error(result.message || "An error occurred. Please try again.");
-      }
+        if (response.ok && result.success) {
+            toast.success(result.message);
+            // Ensure user details and cart are fetched for the current session
+            await fetchUserDetails();
+            await fetchUserAddToCart();
+            navigate('/');
+        } else {
+            toast.error(result.message || "An error occurred. Please try again.");
+        }
     } catch (error) {
-      console.error("Network or other error occurred:", error); // Error log
-      toast.error("Network error. Please try again later.");
+        toast.error("Network error. Please try again later.");
     } finally {
-      setIsSubmitting(false); // Re-enable button
+        setIsSubmitting(false);
     }
-  };
+};
 
+  
   return (
     <section id='login'>
       <div className='mx-auto container p-4 mt-16 lg:mt-0'>
-        <div className='flex justify-center mb-8'>
-          <Link to="/">
+
+      <div className='flex justify-center mb-8'>
+              <Link to="/">
             <Logo w="120px" h="30px" />
-          </Link>
-        </div>
+
+            </Link>
+              </div>
+
 
         <div className='bg-white mx-auto p-4 w-full max-w-md py-5'>
+                        
+             
           <form className='pt-6 flex flex-col gap-2' onSubmit={handleSubmit}>
             <div className='grid'>
               <label>Email :</label>
@@ -135,3 +138,5 @@ const Login = () => {
 }
 
 export default Login;
+
+

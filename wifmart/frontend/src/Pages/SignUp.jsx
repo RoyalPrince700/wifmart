@@ -31,39 +31,43 @@ const SignUp = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (data.password === data.confirmPassword) {
-      try {
+    // Clear existing session cookies
+    document.cookie = "token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+
+    if (data.password !== data.confirmPassword) {
+        toast.error("Passwords do not match");
+        setIsSubmitting(false);
+        return;
+    }
+
+    try {
         const response = await fetch(SummaryApi.signUp.url, {
-          method: SummaryApi.signUp.method,
-          credentials: 'include', // Include cookies
-          headers: {
-            'content-type': 'application/json',
-          },
-          body: JSON.stringify(data),
+            method: SummaryApi.signUp.method,
+            credentials: 'include',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(data),
         });
 
         const result = await response.json();
 
-        if (result.success) {
-          toast.success(result.message);
-
-          // Automatically redirect to home
-          navigate('/');
-          await fetchUserDetails();
-          await fetchUserAddToCart();
+        if (response.ok && result.success) {
+            toast.success(result.message);
+            // Redirect and ensure user details and cart are fetched
+            await fetchUserDetails();
+            await fetchUserAddToCart();
+            navigate('/');
         } else {
-          toast.error(result.message);
+            toast.error(result.message || "An error occurred. Please try again.");
         }
-      } catch (error) {
-        toast.error("An error occurred. Please try again.");
-      } finally {
+    } catch (error) {
+        toast.error("Network error. Please try again later.");
+    } finally {
         setIsSubmitting(false);
-      }
-    } else {
-      toast.error("Passwords do not match");
-      setIsSubmitting(false);
     }
-  };
+};
+
 
   return (
     <section id='signup'>

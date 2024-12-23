@@ -6,11 +6,10 @@ import SummaryApi from '../common';
 import Context from '../context';
 import Logo from '../components/Logo';
 
-
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { fetchUserDetails, fetchUserAddToCart, } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart } = useContext(Context);
 
   const [data, setData] = useState({
     email: '',
@@ -33,48 +32,47 @@ const SignUp = () => {
     setIsSubmitting(true);
 
     if (data.password === data.confirmPassword) {
-        try {
-            const response = await fetch(SummaryApi.signUp.url, {
-                method: SummaryApi.signUp.method,
-                credentials: 'include', // Include cookies
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+      try {
+        const response = await fetch(SummaryApi.signUp.url, {
+          method: SummaryApi.signUp.method,
+          credentials: 'include', // Include cookies
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
 
-            const result = await response.json();
+        const result = await response.json();
 
-            if (result.success) {
-                toast.success(result.message);
+        if (result.success) {
+          toast.success(result.message);
 
-                // Automatically redirect to home
-                navigate('/');
-                fetchUserDetails();
-                fetchUserAddToCart();
-            } else {
-                toast.error(result.message);
-            }
-        } catch (error) {
-            toast.error("An error occurred. Please try again.");
-        } finally {
-            setIsSubmitting(false);
+          // Automatically redirect to home
+          navigate('/');
+          await fetchUserDetails();
+          await fetchUserAddToCart();
+        } else {
+          toast.error(result.message);
         }
+      } catch (error) {
+        toast.error("An error occurred. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     } else {
-        toast.error("Passwords do not match");
+      toast.error("Passwords do not match");
+      setIsSubmitting(false);
     }
-};
-
+  };
 
   return (
     <section id='signup'>
       <div className='mx-auto container p-4 mt-[100px] lg:mt-0'>
-      <div className='flex justify-center mb-8'>
-              <Link to="/">
+        <div className='flex justify-center mb-8'>
+          <Link to="/">
             <Logo w="120px" h="30px" />
-
-            </Link>
-              </div>
+          </Link>
+        </div>
         <div className='bg-white mx-auto p-4 w-full max-w-md py-5'>
           <form className='pt-6 flex flex-col gap-2' onSubmit={handleSubmit}>
             <div className='grid'>

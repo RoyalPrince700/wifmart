@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import loginIcons from '../assets/signin.gif'
+import React, { useContext, useState } from 'react';
+import loginIcons from '../assets/signin.gif';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -11,11 +11,11 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
-    password: "" // corrected typo
+    password: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { fetchUserDetails, fetchUserAddToCart, } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart } = useContext(Context);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,13 +24,14 @@ const Login = () => {
       [name]: value
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true); // disable button on submit
-  
+
     try {
       console.log("Submitting login form with data:", data); // Debug log
-  
+
       const response = await fetch(SummaryApi.signIn.url, {
         method: SummaryApi.signIn.method,
         credentials: 'include',
@@ -39,16 +40,16 @@ const Login = () => {
         },
         body: JSON.stringify(data),
       });
-  
+
       console.log("Response status:", response.status); // Log HTTP status
       const result = await response.json();
       console.log("Response body:", result); // Log API response
-  
+
       if (response.ok && result.success) {
         console.log("Login successful:", result.message); // Debug log for success
         toast.success(result.message);
-        fetchUserDetails();
-        fetchUserAddToCart();
+        await fetchUserDetails();
+        await fetchUserAddToCart();
         navigate('/');
       } else {
         console.warn("API returned an error:", result.message); // Warn for backend errors
@@ -61,22 +62,17 @@ const Login = () => {
       setIsSubmitting(false); // Re-enable button
     }
   };
-  
+
   return (
     <section id='login'>
       <div className='mx-auto container p-4 mt-16 lg:mt-0'>
-
-      <div className='flex justify-center mb-8'>
-              <Link to="/">
+        <div className='flex justify-center mb-8'>
+          <Link to="/">
             <Logo w="120px" h="30px" />
-
-            </Link>
-              </div>
-
+          </Link>
+        </div>
 
         <div className='bg-white mx-auto p-4 w-full max-w-md py-5'>
-                        
-             
           <form className='pt-6 flex flex-col gap-2' onSubmit={handleSubmit}>
             <div className='grid'>
               <label>Email :</label>
@@ -139,5 +135,3 @@ const Login = () => {
 }
 
 export default Login;
-
-

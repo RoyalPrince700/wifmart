@@ -27,3 +27,5 @@ async function userLogout(req, res) {
 }
 
 module.exports = userLogout;
+
+

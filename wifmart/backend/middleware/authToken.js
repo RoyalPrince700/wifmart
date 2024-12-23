@@ -25,8 +25,9 @@ async function authToken(req, res, next) {
             next(); // Proceed to the next middleware or route handler
         });
     } catch (err) {
+        console.error("Error in authToken middleware:", err.message);
         res.status(500).json({
-            message: err.message || "Internal Server Error",
+            message: "Internal Server Error",
             error: true,
             success: false,
         });

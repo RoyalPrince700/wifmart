@@ -1,3 +1,6 @@
+
+module.exports = authToken;
+// filepath: /c:/Users/HP/Desktop/com/wifmart/backend/middleware/authToken.js
 const jwt = require('jsonwebtoken');
 
 async function authToken(req, res, next) {
@@ -26,14 +29,12 @@ async function authToken(req, res, next) {
 
       // Set the user ID in the request object
       req.userId = decoded._id;
-
-      // Proceed to the next middleware or route handler
       next();
     });
   } catch (err) {
-    // Handle unexpected errors
-    res.status(500).json({
-      message: err.message || "Internal server error",
+    res.status(400).json({
+      message: err.message || err,
+      data: [],
       error: true,
       success: false,
     });

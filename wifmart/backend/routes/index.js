@@ -4,7 +4,6 @@ const router = express.Router();
 const authToken = require('../middleware/authToken');
 
 const userSignInController = require('../controller/user/userSignIn');
-const userDetailsController = require('../controller/user/userDetails');
 const userLogout = require('../controller/user/userLogout');
 const allUsers = require('../controller/user/allUsers');
 const updateUser = require('../controller/user/updateUser');
@@ -24,7 +23,7 @@ const filterProductController = require('../controller/product/filterProduct');
 const paymentController = require('../controller/order/paymentController');
 const webhooks = require('../controller/order/webhooks');
 const orderController = require('../controller/order/orderController');
-const UserSignUpController = require('../controller/user/userSignUp');
+const userSignUpController = require('../controller/user/userSignUp');
 const allOrdersController = require('../controller/order/allOrders');
 const deleteProductController = require('../controller/product/deleteProduct');
 const placeFoodOrder = require('../controller/food/foodOrderController');
@@ -43,12 +42,14 @@ const assignOrderToLA = require('../controller/logistic/assignOrderToLA');
 const getActiveLogisticsAssociates = require('../controller/logistic/getActiveLA');
 const getOrderForLA = require('../controller/logistic/getOrderforLA');
 const getActiveLAs = require('../controller/logistic/getActiveLA');
+const userDetailsController = require('../controller/user/userDetails');
 
 // Authentication routes
-router.post("/signup", UserSignUpController);
-router.post("/signin", userSignInController);
-router.get("/user-details", authToken, userDetailsController);
-router.get("/userLogout", userLogout);
+router.post('/signin', userSignInController);
+router.post('/signup', userSignUpController);
+router.post('/logout', authToken, userLogout);
+router.get('/user-details', authToken, userDetailsController);
+
 
 // Token verification route
 router.get("/auth/verify", authToken, (req, res) => {

@@ -1,3 +1,4 @@
+// filepath: /c:/Users/HP/Desktop/com/wifmart/backend/controller/user/userDetails.js
 const userModel = require('../../models/userModel');
 
 async function userDetailsController(req, res) {
@@ -5,8 +6,8 @@ async function userDetailsController(req, res) {
     // Log the user ID from the auth middleware
     console.log("userId:", req.userId);
 
-    // Fetch the user details by ID
-    const user = await userModel.findById(req.userId);
+    // Fetch the user details by ID and exclude the password field
+    const user = await userModel.findById(req.userId).select('-password');
 
     // Check if the user exists
     if (!user) {

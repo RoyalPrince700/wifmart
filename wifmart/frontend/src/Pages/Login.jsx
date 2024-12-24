@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import loginIcons from '../assets/signin.gif';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,11 +10,11 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
     email: "",
-    password: "" // corrected typo
+    password: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { fetchUserDetails, fetchUserAddToCart,fetchUserLikedProduct } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart, fetchUserLikedProduct } = useContext(Context);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,9 +26,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // disable button on submit
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    setIsSubmitting(true); // Disable button on submit
     try {
-      const dataResponse = await fetch(SummaryApi.signIn.url, {
+      const response = await fetch(SummaryApi.signIn.url, {
         method: SummaryApi.signIn.method,
         credentials: 'include',
         headers: {
@@ -37,21 +45,21 @@ const Login = () => {
         body: JSON.stringify(data)
       });
 
-      const dataApi = await dataResponse.json();
+      const result = await response.json();
 
-      if (dataApi.success) {
-        toast.success(dataApi.message);
+      if (result.success) {
+        toast.success(result.message);
         navigate('/');
-        fetchUserDetails()
+        fetchUserDetails();
         fetchUserAddToCart();
         fetchUserLikedProduct();
       } else {
-        toast.error(dataApi.message);
+        toast.error(result.message || "Login failed. Please try again.");
       }
     } catch (error) {
       toast.error("An error occurred. Please try again.");
     } finally {
-      setIsSubmitting(false); // re-enable button after process completes
+      setIsSubmitting(false); // Re-enable button after process completes
     }
   };
 
@@ -59,15 +67,14 @@ const Login = () => {
     <section id='login'>
       <div className='mx-auto container p-4 mt-16 lg:mt-0'>
         <div className='bg-white mx-auto p-4 w-full max-w-md py-5'>
-          
 
           <form className='pt-6 flex flex-col gap-2' onSubmit={handleSubmit}>
             <div className='grid'>
-              <label>Email :</label>
+              <label>Email:</label>
               <div className='bg-slate-100 p-2'>
                 <input
                   type='email'
-                  placeholder='enter mail'
+                  placeholder='Enter email'
                   name='email'
                   value={data.email}
                   onChange={handleChange}
@@ -78,51 +85,53 @@ const Login = () => {
             </div>
 
             <div>
-              <label>Password :</label>
+              <label>Password:</label>
               <div className='bg-slate-100 flex p-2'>
                 <input
                   type={showPassword ? "text" : "password"}
                   name='password'
                   value={data.password}
                   onChange={handleChange}
-                  placeholder='enter password'
+                  placeholder='Enter password'
                   className='w-full h-full outline-none bg-transparent'
                   required
                 />
-                <div className='cursor-pointer text-xl'
-                  onClick={() => setShowPassword((prev) => !prev)}>
-                  <span>
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                  </span>
+                <div
+                  className='cursor-pointer text-xl'
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
-              <Link to={'/forgot-password'}
-                className='block w-fit ml-auto hover:underline hover:text-yellow-500'>
-                Forgot Password ?
+              <Link to='/forgot-password' className='block w-fit ml-auto hover:underline hover:text-yellow-500'>
+                Forgot Password?
               </Link>
             </div>
 
-            <button className='bg-yellow-600 hover:bg-yellow-700 text-white px-6
-              py-4 w-full text-center max-w-[150px] rounded-full hover:scale-110 
-              transition-all mx-auto block mt-6'
+            <button
+              className='bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-4 w-full text-center max-w-[150px] rounded-full hover:scale-110 transition-all mx-auto block mt-6'
               type='submit'
-              disabled={isSubmitting}>
+              disabled={isSubmitting}
+            >
               {isSubmitting ? "Logging in..." : "Login"}
             </button>
           </form>
 
-          <p className='my-5'>Don't have account ?
-            <Link to={"/sign-up"} className='text-yellow-600 hover:underline hover:text-yellow-700'>
+          <p className='my-5'>
+            Don't have an account?{" "}
+            <Link to='/sign-up' className='text-yellow-600 hover:underline hover:text-yellow-700'>
               Sign up
             </Link>
           </p>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Login;
+
 
 
 

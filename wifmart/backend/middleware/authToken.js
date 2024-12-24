@@ -1,5 +1,3 @@
-
-module.exports = authToken;
 // filepath: /c:/Users/HP/Desktop/com/wifmart/backend/middleware/authToken.js
 const jwt = require('jsonwebtoken');
 

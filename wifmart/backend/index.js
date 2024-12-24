@@ -6,6 +6,12 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const router = require('./routes');
 
+// Log Environment Variables (for debugging purposes; avoid in production)
+console.log('Token Secret Key:', process.env.TOKEN_SECRET_KEY || 'Not Found');
+console.log('Frontend URL:', process.env.FRONTEND_URL || 'Not Found');
+console.log('MongoDB URI:', process.env.MONGODB_URI ? 'Exists' : 'Not Found'); // Do not log full URI
+console.log('Backend Port:', process.env.PORT || 8080);
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to DB'))
@@ -28,9 +34,19 @@ app.options('*', cors());
 app.use(express.json());
 app.use(cookieParser());
 
-// Add a Root Route for Testing
+// Root Route for Testing
 app.get('/', (req, res) => {
     res.send('Welcome to the Wifmart Backend! The server is running.');
+});
+
+// Debugging Route to Check Environment Variables
+app.get('/debug', (req, res) => {
+    res.json({
+        frontendUrl: process.env.FRONTEND_URL || 'Not Found',
+        mongodbUri: process.env.MONGODB_URI ? 'Exists' : 'Not Found',
+        tokenSecretKey: process.env.TOKEN_SECRET_KEY || 'Not Found',
+        backendPort: process.env.PORT || 8080,
+    });
 });
 
 // API Routes

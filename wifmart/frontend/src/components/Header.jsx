@@ -1,187 +1,3 @@
-// import React, { useContext, useEffect, useState } from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { toast } from "react-toastify";
-// import { setUserDetails } from "../store/userSlice";
-// import SummaryApi from "../common";
-// import Context from "../context";
-// import Logo from "./Logo";
-// import { FaRegCircleUser, FaBars } from "react-icons/fa6";
-// import { RiShoppingCartLine } from "react-icons/ri";
-
-// const Header = () => {
-//   const [menuDisplay, setMenuDisplay] = useState(false);
-//   const [mobileMenu, setMobileMenu] = useState(false);
-//   const user = useSelector((state) => state?.user?.user);
-//   const dispatch = useDispatch();
-//   const context = useContext(Context);
-//   const navigate = useNavigate();
-
-//   const handleLogout = async () => {
-//     try {
-//       const response = await fetch(SummaryApi.logout_user.url, {
-//         method: SummaryApi.logout_user.method,
-//         credentials: "include",
-//       });
-
-//       const result = await response.json();
-//       if (result.success) {
-//         toast.success(result.message);
-//         dispatch(setUserDetails(null));
-//         navigate("/");
-//       } else {
-//         toast.error(result.message);
-//       }
-//     } catch (error) {
-//       toast.error("An error occurred. Please try again.");
-//     }
-//   };
-
-//   useEffect(() => {
-//     const handleClickOutside = (e) => {
-//       if (!e.target.closest(".user-menu") && menuDisplay) {
-//         setMenuDisplay(false);
-//       }
-//     };
-
-//     document.addEventListener("click", handleClickOutside);
-//     return () => {
-//       document.removeEventListener("click", handleClickOutside);
-//     };
-//   }, [menuDisplay]);
-
-//   return (
-//     <header className="w-full fixed top-0 bg-white shadow-md z-40">
-//       <div className="px-4 sm:px-6 flex items-center justify-between py-3">
-//         <div className="flex items-center gap-5">
-//           <Link to="/">
-//             <Logo w="150px" h="30px" />
-//           </Link>
-//         </div>
-
-//         <div className="lg:hidden flex items-center">
-//           <button
-//             onClick={() => setMobileMenu(!mobileMenu)}
-//             className="text-2xl focus:outline-none"
-//           >
-//             <FaBars />
-//           </button>
-//         </div>
-
-//         <div className="hidden lg:flex items-center gap-7">
-//           {user?._id && (
-//             <div
-//               className="text-3xl cursor-pointer flex justify-center user-menu relative"
-//               onClick={() => setMenuDisplay((prev) => !prev)}
-//             >
-//               {user?.profilePic ? (
-//                 <img
-//                   src={user?.profilePic}
-//                   className="w-10 h-10 rounded-full"
-//                   alt={user?.name}
-//                 />
-//               ) : (
-//                 <div className="flex gap-2 items-center">
-//                   <FaRegCircleUser className="text-2xl" />
-//                   <p className="font-semibold text-[18px]">
-//                     Hi, {user?.email?.split("@")[0]}
-//                   </p>
-//                 </div>
-//               )}
-//             </div>
-//           )}
-
-//           {menuDisplay && (
-//             <div className="absolute bg-white bottom-0 top-11 h-fit p-4 shadow-lg z-40 rounded w-40">
-//               <nav className="flex flex-col gap-2">
-//                 <Link
-//                   to="/payondeliveryorder"
-//                   className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
-//                   onClick={() => setMenuDisplay(false)}
-//                 >
-//                   Orders
-//                 </Link>
-//                 <button
-//                   onClick={() => {
-//                     handleLogout();
-//                     setMenuDisplay(false);
-//                   }}
-//                   className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-left"
-//                 >
-//                   Logout
-//                 </button>
-//               </nav>
-//             </div>
-//           )}
-
-//           <Link to="/cart" className="text-2xl flex relative items-center gap-2">
-//             <RiShoppingCartLine className="text-2xl" />
-//             <p className="font-semibold text-[18px]">My Cart</p>
-//             <div className="bg-red-600 rounded-full text-white w-5 h-5 p-1 flex items-center justify-center absolute -top-2 -right-3">
-//               <p className="text-sm">{context?.cartProductCount}</p>
-//             </div>
-//           </Link>
-
-//           {!user?._id && (
-//             <Link
-//               to="/login"
-//               className="px-4 py-2 rounded-md text-white hover:bg-red-700 bg-red-600"
-//             >
-//               Login
-//             </Link>
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       {mobileMenu && (
-//         <div className="lg:hidden flex flex-col bg-white shadow-md px-4 py-3">
-//           {user?._id && (
-//             <>
-//               <Link
-//                 to="/payondeliveryorder"
-//                 className="py-2 hover:bg-gray-100 rounded"
-//                 onClick={() => setMobileMenu(false)}
-//               >
-//                 Orders
-//               </Link>
-//               <button
-//                 onClick={() => {
-//                   handleLogout();
-//                   setMobileMenu(false);
-//                 }}
-//                 className="py-2 hover:bg-gray-100 rounded text-left"
-//               >
-//                 Logout
-//               </button>
-//             </>
-//           )}
-//           <Link
-//             to="/cart"
-//             className="py-2 flex items-center justify-between hover:bg-gray-100 rounded"
-//           >
-//             <span>My Cart</span>
-//             <span className="bg-red-600 text-white rounded-full px-2">
-//               {context?.cartProductCount}
-//             </span>
-//           </Link>
-//           {!user?._id && (
-//             <Link
-//               to="/login"
-//               className="py-2 rounded-md text-center text-white bg-red-600 hover:bg-red-700"
-//               onClick={() => setMobileMenu(false)}
-//             >
-//               Login
-//             </Link>
-//           )}
-//         </div>
-//       )}
-//     </header>
-//   );
-// };
-
-// export default Header;
-
 
 import React, { useContext, useEffect, useState } from "react";
 import Logo from "./Logo";
@@ -202,6 +18,7 @@ import { MdOutlineContactSupport } from "react-icons/md";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { SlArrowRight } from "react-icons/sl";
 import CategoryDropdown from './CategoryList';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 
@@ -282,50 +99,51 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full  fixed top-0 bg-white shadow-md z-40 flex md:py-4 lg:px-4 sm:py-3 flex-col">
-            <div className="px-2 sm:px-6 flex items-center justify-between sm:py-4">
+    <header className="w-full  fixed max-h-[85px] h-[95px] bg-white top-0 lg:bg-white lg:h-[90px]  shadow-sm  z-40 flex md:py-4 lg:px-4 sm:py-3 flex-col">
+           <div className="px-2 sm:px-6 flex items-center justify-between sm:py-4 w-full flex-shrink-0">
 
-          <div className="flex items-center gap-5">
-   {/* Logo and Hamburger Menu */}
-   <div className="hidden md:flex items-center ">
-          <Link to="/">
-            <Logo w="150px" h="30px" />
-          </Link>
-        </div>
+{/* Left Section - Logo and Links */}
+<div className="flex items-center gap-5 flex-shrink-0">
+  {/* Logo */}
+  <div className="hidden md:flex items-center">
+    <Link to="/">
+      <Logo w="100px" h="20px" />
+    </Link>
+  </div>
 
-         {/* Common Links */}
-                <div className="lg:flex gap-5 hidden items-center">
-                  <div className="flex gap-2 items-center">
-                    <CategoryDropdown />
-                         {/* Other navbar items */}
-                  </div>
-                  <div className="flex">
-                    <p className="font-semibold">Sell on Wifmart</p>
-                  </div>
-                </div>
+  {/* Common Links */}
+  <div className="lg:flex gap-5 hidden items-center flex-shrink-0">
+    <div className="flex gap-2 items-center flex-shrink-0">
+      <CategoryDropdown />
+    </div>
+    <div className="flex">
+      <p className="text-[14px] font-normal whitespace-nowrap">Sell on Wifmart</p>
+    </div>
+  </div>
+</div>
 
-          </div>
-     
-         {/* Search Bar */}
-               {!hideSearchBar && (
-                 <div className="lg:flex w-[500px] gap-1  hidden">
-                   <div className="inline-flex py-2 px-3 border border-gray-400 rounded-md items-center w-[35vw]">
-                     <GrSearch className="text-gray-500" />
-                     <input
-                       type="text"
-                       className="w-full font-semibold outline-none bg-inherit pl-3"
-                       placeholder="Search products, brands and categories"
-                       onChange={handleSearch}
-                       value={search}
-                     />
-                   </div>
-                   <button className="bg-red-600 shadow-lg text-white py-2 px-6 font-semibold rounded-md">
-                     SEARCH
-                   </button>
-                 </div>
-               )}
+{/* Search Bar */}
+{!hideSearchBar && (
+  <div className="lg:flex w-[500px] gap-1 hidden flex-shrink-0">
+    <div className="inline-flex px-3 border border-gray-400 rounded-md items-center w-[35vw] min-w-[300px]">
+      <GrSearch className="text-gray-500" />
+      <input
+        type="text"
+        className="w-full text-[12px] font-normal outline-none bg-inherit pl-3"
+        placeholder="Search products, brands and categories"
+        onChange={handleSearch}
+        value={search}
+      />
+    </div>
+    <button className="bg-yellow-500 text-[12px] shadow-lg text-white py-2 px-4 font-normal rounded-md">
+      Search
+    </button>
+  </div>
+)}
 
-<div className="lg:flex hidden items-center gap-7">
+{/* Right Section - User Menu and Links */}
+<div className="lg:flex hidden items-center gap-7 flex-shrink-0">
+  {/* User Menu */}
   <div className="relative flex justify-center">
     {user?._id && (
       <div
@@ -339,11 +157,9 @@ const Header = () => {
             alt={user?.name}
           />
         ) : (
-          
           <div className="flex gap-2 items-center">
             <FaRegCircleUser className="text-2xl" />
-            <p className="font-semibold text-[18px]">Hi, {user?.email?.split('@')[0]}</p>
-            {/* Extracts and displays only the part before @ */}
+            <p className="text-[14px] font-normal whitespace-nowrap">Hi, {user?.email?.split('@')[0]}</p>
           </div>
         )}
       </div>
@@ -355,36 +171,33 @@ const Header = () => {
           {user?.role === ROLE.ADMIN && (
             <Link
               to="/admin-panel/all-products"
-              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+              className="whitespace-nowrap text-[14px] font-normal hover:bg-gray-100 p-2 rounded"
               onClick={() => setMenuDisplay(false)}
             >
               Admin Panel
             </Link>
           )}
-
           {user?.role === ROLE.HR && (
             <Link
               to="/hr-panel"
-              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-[14px] font-normal"
               onClick={() => setMenuDisplay(false)}
             >
               HR Panel
             </Link>
           )}
-
           {user?.role === ROLE.LOGISTICS_ASSOCIATE && (
             <Link
               to="/la-panel"
-              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+              className="whitespace-nowrap text-[14px] font-normal hover:bg-gray-100 p-2 rounded"
               onClick={() => setMenuDisplay(false)}
             >
               Logistics Panel
             </Link>
           )}
-
           <Link
             to="/payondeliveryorder"
-            className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+            className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-[14px] font-normal"
             onClick={() => setMenuDisplay(false)}
           >
             Orders
@@ -394,7 +207,7 @@ const Header = () => {
               handleLogout();
               setMenuDisplay(false);
             }}
-            className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-left"
+            className="whitespace-nowrap hover:bg-gray-100 p-2 text-[14px] font-normal rounded text-left"
           >
             Logout
           </button>
@@ -403,88 +216,90 @@ const Header = () => {
     )}
   </div>
 
-  {user?._id && (
+  {/* Cart and Support Links */}
+  {user?._id ? (
     <div className="flex items-center gap-6">
       <Link to="/cart" className="text-2xl flex relative">
         <div className="flex items-center gap-2">
-          <RiShoppingCartLine className="text-2xl" />
-          <p className="font-semibold text-[18px]">My Cart</p>
+          <RiShoppingCartLine className="text-xl" />
+          <p className="font-normal text-[14px] whitespace-nowrap">Cart</p>
         </div>
-
-        <div className="bg-yellow-600 rounded-full text-white w-5 h-5 p-1 flex items-center justify-center absolute -top-2 -right-3">
+        <div className="bg-yellow-600 rounded-full text-white w-3 h-3 p-2 flex items-center justify-center absolute -top-1 -right-3">
           <p className="text-sm">{context?.cartProductCount}</p>
         </div>
       </Link>
       <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-2xl" />
-        <p className="font-semibold">Support </p>
+        <MdOutlineContactSupport className="text-xl" />
+        <p className="font-normal text-[14px] whitespace-nowrap">Support</p>
       </Link>
     </div>
-  )}
-
-  {!user?._id && (
+  ) : (
     <div className="lg:flex hidden items-center gap-5">
       <Link className="flex items-center gap-1">
-        <FaRegCircleUser className="text-2xl" />
-        <p className="font-semibold">Account</p>
+        <FaRegCircleUser className="text-xl" />
+        <p className="text-[14px] font-medium whitespace-nowrap">Account</p>
       </Link>
       <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-2xl" />
-        <p className="font-semibold">Support</p>
+        <MdOutlineContactSupport className="text-xl" />
+        <p className="text-[14px] font-medium whitespace-nowrap">Support</p>
       </Link>
       <Link to="/cart" className="flex items-center gap-1">
-        <RiShoppingCartLine className="text-2xl" />
-        <p className="font-semibold">My Cart</p>
+        <RiShoppingCartLine className="text-xl" />
+        <p className="text-[14px] font-medium whitespace-nowrap">My Cart</p>
       </Link>
       <Link
         to="/login"
-        className="px-2 py-1 rounded-md text-white hover:bg-yellow-700 bg-yellow-600 p-3"
+        className="px-4 py-2 rounded-md text-white hover:bg-yellow-700 bg-yellow-500 font-normal p-3 text-[12px]"
       >
         Login
       </Link>
     </div>
   )}
- 
-
+</div>
 </div>
 
-      </div>
 
       {/* mobile */}
 
-          <div className="flex-col pt-4 pb-2 md:hidden">
+          <div className="flex-col pt-4 pb-3 md:hidden">
               
-           <div className="flex px-4 justify-between md:hidden pb-3 items-center">
+           <div className="flex px-4 justify-between pb-2 md:hidden items-center">
                   {/* Logo and Hamburger Menu */}
                   <div className="flex md:hidden items-center  gap-1 sm:gap-6">
                     
-                <RxHamburgerMenu onClick={() => setHambugDrop(!hambugDrop)} className='lg:hidden flex text-md cursor-pointer' />
+                <GiHamburgerMenu onClick={() => setHambugDrop(!hambugDrop)} 
+                className='lg:hidden flex text-md cursor-pointer text-xl' />
                   <Link to="/" className="">
                     <Logo w="130px" h="20px" />
                   </Link>
                 </div>
 
-                <div className="flex lg:hidden items-center gap-3">
+                <div className="flex  lg:hidden items-center gap-3">
           <div className="relative flex justify-center">
             {user?._id && (
               <div
-                className="text-3xl cursor-pointer flex justify-center user-menu"
+                className="text-3xl cursor-pointer flex  justify-center user-menu"
                 onClick={() => setMenuDisplay((prev) => !prev)}
               >
-                {user?.profilePic ? (
-                  <img
-                    src={user?.profilePic}
-                    className="w-10 h-10 rounded-full"
-                    alt={user?.name}
-                  />
-                ) : (
-                  
-                    <div className="flex gap-1 items-center">
-                    <FaRegCircleUser className="text-xl" />
-                    <p className="font-semibold text-[10px]">Hi, {user?.email?.split('@')[0]}</p>
-                    {/* Extracts and displays only the part before @ */}
-                  </div>
-                )}
+               {user?.profilePic ? (
+                              <img
+                                src={user?.profilePic}
+                                className="text-xl rounded-full"
+                                alt={user?.name}
+                              />
+                            ) : (
+                              <div className="flex h-6 gap-1 items-center">
+                                <FaRegCircleUser className="text-xl" />
+                                <p
+                                  className="font-semibold text-[10px]  truncate max-w-[100px] overflow-hidden text-ellipsis"
+                                  style={{ whiteSpace: 'nowrap' }}
+                                >
+                                  Hi, {user?.email?.split('@')[0]}
+                                </p>
+                                {/* Extracts and displays only the part before @ */}
+                              </div>
+                            )}
+
               </div>
             )}
 
@@ -544,13 +359,13 @@ const Header = () => {
 
           {user?._id && (
             <div className="flex items-center gap-6">
-                  <Link to="/cart" className="text-2xl flex relative">
+                  <Link to="/cart" className="text-2xl flex items-center ">
                   <div className="flex items-center gap-2">
                   <RiShoppingCartLine className="text-xl" />
                   </div>
                   
-                  <div className="bg-yellow-600 rounded-full text-white w-3 h-3 p-1 flex items-center 
-                  justify-center absolute -top-1 -right-2">
+                  <div className="bg-yellow-600 rounded-sm text-white w-3 h-3 flex items-center 
+                  justify-center ">
                     <p className="text-[10px]">{context?.cartProductCount}</p>
                   </div>
                 </Link>
@@ -572,18 +387,6 @@ const Header = () => {
             
           )}
         </div>
-
-
-
-
-
-
-
-
-                {/* <div className="flex items-center gap-6">
-                <MdOutlineContactSupport className="text-xl text-gray-600 lg:hidden" />
-                <RiShoppingCartLine className="text-xl text-gray-600 lg:hidden" />
-                </div> */}
             </div>
      
 
@@ -609,7 +412,7 @@ const Header = () => {
         <div>
           <div className='flex items-center justify-center pt-6'>
             <Link to="/" onClick={() => setHambugDrop(false)}>
-            <Logo w="100px" h="25px" />
+            <Logo w="130px" h="20px" />
 
             </Link>
           </div>
@@ -625,15 +428,6 @@ const Header = () => {
         <div className='px-6 pt-4 font-normal overflow-y-auto h-[calc(100vh-64px)]'>
           {/* These items should stack vertically */}
           <div className='flex flex-col w-full justify-center'>
-                <NavLink
-                   onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center 
-                    gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
-                    >
-                      <FaRegCircleUser className="text-xl" />
-                    <p>Account</p>
-                 </NavLink>
-
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5
@@ -644,7 +438,7 @@ const Header = () => {
                  </NavLink>
 
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/cart" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <RiShoppingCartLine className="text-xl" />
@@ -731,19 +525,35 @@ const Header = () => {
               </div>   
         
         </div>
-            <div className='bottom-0 absolute bg-yellow-100 shadow-2xl  w-full h-36'>
-              <div className='flex flex-col gap-3 items-center my-4'>
-              <Link to="/login" 
-                     className='bg-yellow-600 border hover:border-yellow-600 hover:text-yellow-600 hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
-            >  Log In </Link>
+        <div className='bottom-0 absolute bg-yellow-100 shadow-2xl w-full h-36'>
+  <div className='flex flex-col gap-3 items-center my-4'>
+    {user ? (
+      // Logout button when user is logged in
+      <button
+        onClick={() => {
+          handleLogout();
+          setHambugDrop(false); // Close dropdown after logging out
+        }}
+        className='bg-yellow-500 border hover:border-yellow-600 hover:text-yellow-600
+        hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
+      >
+        Logout
+      </button>
+    ) : (
+      // Login button when user is not logged in
+      <Link to="/login">
+        <button
+          onClick={() => setHambugDrop(false)} // Close dropdown after clicking login
+          className='bg-yellow-500 border hover:border-yellow-600 hover:text-yellow-600
+          hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
+        >
+          Login
+        </button>
+      </Link>
+    )}
+  </div>
+</div>
 
-            <Link to="sign-up"
-           
-            className='bg-inherit border border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white py-3 rounded  mx-4  w-[90vw] px'>Sign Up </Link>
-
-              </div>
-          
-            </div>
 
 
       </div>

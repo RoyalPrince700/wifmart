@@ -126,7 +126,7 @@ const Cart = () => {
 
     return (
         <div className=' px-4 mx-auto mt-[100px] lg:mt-[120px]'>
-            <h1 className="text-2xl px-4 ">My Cart</h1>
+            <h1 className="text-2xl font-bold mb-5 ">My Cart</h1>
 
             <div className='text-center text-lg '>
                 {data.length === 0 && !loading && <p className='bg-white py-5'>No Data</p>}
@@ -143,30 +143,33 @@ const Cart = () => {
                         : data.map((product) => (
                               <div
                                   key={product?._id}
-                                  className='w-full bg-white lg:h-32 h-44 border border-slate-300 my-2 rounded grid grid-cols-[128px,1fr]'>
-                                  <div className='w-32 h-full bg bg-slate-200'>
+                                  className='w-full bg-white lg:h-32 h-32 border border-slate-300 my-2 rounded grid 
+                                  grid-cols-[128px,1fr]'>
+                                  <div className='w-32 lg:h-full h-32 bg bg-slate-200'>
                                       <img
                                           src={product?.productId?.productImage[0]}
-                                          className='w-full h-44 lg:h-32 object-scale-down mix-blend-multiply'
+                                          className='w-full h-32 lg:h-32 object-scale-down mix-blend-multiply'
                                       />
                                   </div>
                                   <div className='px-4 py-2 relative'>
                                       <div
-                                          className='absolute right-0 text-red-600 rounded-full p-2 hover:bg-red-600 hover:text-white cursor-pointer'
+                                          className='absolute right-0 bottom-0 text-yellow-600 rounded-full p-2
+                                           hover:bg-yellow-600
+                                           hover:text-white cursor-pointer'
                                           onClick={() => deleteCartProduct(product?._id)}>
                                           <MdDelete />
                                       </div>
-                                      <h2 className='text-lg lg:text-xl text-ellipsis line-clamp-1'>
+                                      <h2 className='text-[14px] lg:text-xl  text-ellipsis line-clamp-1'>
                                           {product?.productId?.productName}
                                       </h2>
-                                      <p className='capitalize text-slate-500'>
+                                      <p className='capitalize text-[12px] text-slate-500'>
                                           {product?.productId?.category}
                                       </p>
-                                      <div className='flex mb-4 lg:mb-1 flex-col lg:flex-row lg:items-center  lg:justify-between'>
-                                          <p className='text-black font-medium text-lg'>
+                                      <div className='flex mb-2  lg:mb-1 flex-col lg:flex-row lg:items-center  lg:justify-between'>
+                                          <p className='text-black font-medium text-[14px] lg:text-lg'>
                                               {displayNARCurrency(product?.productId?.sellingPrice)}
                                           </p>
-                                          <p className='text-slate-600 font-semibold text-lg'>
+                                          <p className='text-slate-600 font-semibold text-[14px] lg:text-lg'>
                                               {displayNARCurrency(
                                                   product?.productId?.sellingPrice * product?.quantity
                                               )}
@@ -174,13 +177,13 @@ const Cart = () => {
                                       </div>
                                       <div className='flex items-center gap-3 mt-1'>
                                           <button
-                                              className='flex rounded hover:bg-red-600 hover:text-white justify-center items-center border w-6 h-6 border-red-600 text-red-600'
+                                              className='flex rounded hover:bg-yellow-600 hover:text-white justify-center items-center border w-6 h-6 border-yellow-600 text-yellow-600'
                                               onClick={() => decreaseQty(product?._id, product?.quantity)}>
                                               -
                                           </button>
                                           <span>{product?.quantity}</span>
                                           <button
-                                              className='flex rounded hover:bg-red-600 hover:text-white justify-center items-center border w-6 h-6 border-red-600 text-red-600'
+                                              className='flex rounded hover:bg-yellow-600 hover:text-white justify-center items-center border w-6 h-6 border-yellow-600 text-yellow-600'
                                               onClick={() => increaseQty(product?._id, product?.quantity)}>
                                               +
                                           </button>
@@ -195,7 +198,7 @@ const Cart = () => {
                         {loading ? (
                             <div className='lg:h-36  bg-slate-200 border border-slate-300 animate-pulse'></div>
                         ) : (
-                            <div className='h-36 bg-red-50'>
+                            <div className='h-36 bg-yellow-50'>
                                 <h2 className='text-black px-4 py-1'>Summary</h2>
                                 <div className='flex items-center justify-between px-4 font-medium text-lg text-slate-600 gap-2'>
                                     <p>Quantity</p>
@@ -206,7 +209,7 @@ const Cart = () => {
                                     <p>{displayNARCurrency(totalPrice)}</p>
                                 </div>
                                 <button
-                                    className='bg-red-600 p-2 text-white w-full'
+                                    className='bg-yellow-600 p-2 text-white w-full'
                                     onClick={handleCheckout}>
                                     Checkout
                                 </button>

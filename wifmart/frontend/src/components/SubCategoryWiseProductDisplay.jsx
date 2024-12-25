@@ -34,7 +34,7 @@ const SubCategoryWiseProductDisplay = ({ subCategory, heading }) => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 my-6 relative">
+    <div className=" mx-auto px-4 my-6 relative">
       <h2 className="text-2xl font-semibold py-4">{heading}</h2>
       <div
         className="flex flex-wrap items-start gap-4
@@ -57,7 +57,8 @@ const SubCategoryWiseProductDisplay = ({ subCategory, heading }) => {
           : data.map((product) => (
               <div
                 key={product?._id}
-                className="flex w-full max-w-sm bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition-shadow relative"
+                className="flex w-full max-w-sm bg-white rounded-lg shadow overflow-hidden 
+                hover:shadow-md transition-shadow relative h-[60px]"
               >
                 <Link
                   to={`/product/${product?._id}`}
@@ -68,11 +69,11 @@ const SubCategoryWiseProductDisplay = ({ subCategory, heading }) => {
                     <img
                       src={product?.productImage[0]}
                       alt={product?.productName || 'Product Image'}
-                      className="object-cover h-20 rounded"
+                      className="object-cover h-[60px] rounded"
                     />
                   </div>
-                  <div className="flex-1 p-4">
-                    <h2 className="font-medium text-lg text-black truncate">
+                  <div className="flex-1 px-4 py-2 ">
+                    <h2 className="font-medium text-[12px] text-black truncate">
                       {product?.productName}
                     </h2>
                     <p className="text-slate-500 capitalize">
@@ -87,7 +88,7 @@ const SubCategoryWiseProductDisplay = ({ subCategory, heading }) => {
                         </p>
                       )}
                       {product?.sellingPrice > 0 && (
-                        <p className="text-red-600 font-semibold text-lg">
+                        <p className="text-black font-semibold text-md">
                           {displayNARCurrency(product?.sellingPrice)}
                         </p>
                       )}
@@ -103,8 +104,9 @@ const SubCategoryWiseProductDisplay = ({ subCategory, heading }) => {
                   </div>
                 </Link>
                 <button
-                  className="absolute top-2 right-2 text-sm text-red-600 
-                  hover:bg-yellow-700 hover:shadow-sm hover:text-white transition-all p-2 py-0.5 rounded-full"
+                  className="absolute top-2 right-2 text-sm text-yellow-600 
+                  hover:bg-yellow-700 hover:shadow-sm hover:text-white transition-all p-1
+                  py-0.5 rounded-full"
                   onClick={(e) => handleAddToCart(e, product?._id)}
                 >
                   <LiaCartPlusSolid className="text-xl" />

@@ -23,8 +23,8 @@ const AllProducts = () => {
       <div className='bg-white py-2 px-4 flex mt-28 justify-between items-center'>
           <h2 className='font-bold text-lg '>All Products</h2>
           <button className='border-2 hover:text-white transition-all 
-          hover:bg-red-600 border-red-600 
-          text-red-600 py-1 px-3 rounded-full' 
+          hover:bg-yellow-600 border-yellow-600 
+          text-yellow-600 py-1 px-3 rounded-full' 
           onClick={()=>setOpenUploadProduct(true)}>Upload Product</button>
       </div>
 

@@ -6,11 +6,10 @@ import SummaryApi from '../common';
 import Context from '../context';
 import Logo from '../components/Logo';
 
-
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const { fetchUserDetails, fetchUserAddToCart, } = useContext(Context);
+  const { fetchUserDetails, fetchUserAddToCart } = useContext(Context);
 
   const [data, setData] = useState({
     email: '',
@@ -18,6 +17,7 @@ const SignUp = () => {
     confirmPassword: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordMismatch, setPasswordMismatch] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,55 +26,61 @@ const SignUp = () => {
       ...prev,
       [name]: value,
     }));
+
+    // Reset password mismatch error when user starts typing
+    if (name === 'confirmPassword' || name === 'password') {
+      setPasswordMismatch(false);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (data.password !== data.confirmPassword) {
+      toast.error("Passwords do not match");
+      setPasswordMismatch(true);
+      return; // Stop further execution
+    }
+
     setIsSubmitting(true);
 
-    if (data.password === data.confirmPassword) {
-        try {
-            const response = await fetch(SummaryApi.signUp.url, {
-                method: SummaryApi.signUp.method,
-                credentials: 'include', // Include cookies
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+    try {
+      const response = await fetch(SummaryApi.signUp.url, {
+        method: SummaryApi.signUp.method,
+        credentials: 'include', // Include cookies
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-            const result = await response.json();
+      const result = await response.json();
 
-            if (result.success) {
-                toast.success(result.message);
+      if (result.success) {
+        toast.success(result.message);
 
-                // Automatically redirect to home
-                navigate('/');
-                fetchUserDetails();
-                fetchUserAddToCart();
-            } else {
-                toast.error(result.message);
-            }
-        } catch (error) {
-            toast.error("An error occurred. Please try again.");
-        } finally {
-            setIsSubmitting(false);
-        }
-    } else {
-        toast.error("Passwords do not match");
+        // Automatically redirect to home
+        navigate('/');
+        fetchUserDetails();
+        fetchUserAddToCart();
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-};
-
+  };
 
   return (
     <section id='signup'>
       <div className='mx-auto container p-4 mt-[100px] lg:mt-0'>
-      <div className='flex justify-center mb-8'>
-              <Link to="/">
+        <div className='flex justify-center mb-8'>
+          <Link to="/">
             <Logo w="120px" h="30px" />
-
-            </Link>
-              </div>
+          </Link>
+        </div>
         <div className='bg-white mx-auto p-4 w-full max-w-md py-5'>
           <form className='pt-6 flex flex-col gap-2' onSubmit={handleSubmit}>
             <div className='grid'>
@@ -82,7 +88,7 @@ const SignUp = () => {
               <div className='bg-slate-100 p-2'>
                 <input
                   type='email'
-                  placeholder='enter mail'
+                  placeholder='Enter email'
                   name='email'
                   value={data.email}
                   onChange={handleChange}
@@ -100,7 +106,7 @@ const SignUp = () => {
                   name='password'
                   value={data.password}
                   onChange={handleChange}
-                  placeholder='enter password'
+                  placeholder='Enter password'
                   className='w-full h-full outline-none bg-transparent'
                   required
                 />
@@ -115,13 +121,13 @@ const SignUp = () => {
 
             <div>
               <label>Confirm Password :</label>
-              <div className='bg-slate-100 flex p-2'>
+              <div className={`bg-slate-100 flex p-2 ${passwordMismatch ? 'border border-red-500' : ''}`}>
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   name='confirmPassword'
                   value={data.confirmPassword}
                   onChange={handleChange}
-                  placeholder='confirm password'
+                  placeholder='Confirm password'
                   className='w-full h-full outline-none bg-transparent'
                   required
                 />
@@ -132,6 +138,9 @@ const SignUp = () => {
                   {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                 </div>
               </div>
+              {passwordMismatch && (
+                <p className="text-red-500 text-sm mt-1">Passwords do not match</p>
+              )}
             </div>
 
             <button

@@ -71,7 +71,7 @@ const ChangeLogisticsAttendantStatus = ({
                 </div>
 
                 <button
-                    className='w-fit text-white hover:bg-red-700 cursor-pointer bg-red-600 mx-auto block py-1 px-3 rounded-full'
+                    className='w-fit text-white hover:bg-yellow-700 cursor-pointer bg-yellow-600 mx-auto block py-1 px-3 rounded-full'
                     onClick={updateLogisticsStatus}
                 >
                     Change Status

@@ -58,7 +58,7 @@ const HotDealWiseDisplay = ({hotDeal, heading}) => {
                     animate-pulse rounded-full bg-slate-200'>
                        </p>
                     <div className='flex gap-3'>
-                        <p className='text-red-600 w-full py-2 font-medium p-1 
+                        <p className='text-yellow-600 w-full py-2 font-medium p-1 
                     animate-pulse rounded-full bg-slate-200'>
                             </p>
                         <p className='text-slate-500 py-2 w-full line-through

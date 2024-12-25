@@ -43,7 +43,7 @@ const AllLogistics = () => {
                         <p><strong>Sr:</strong> {index + 1}</p>
                         <p><strong>Email:</strong> {el.email}</p>
                         <button
-                            className="text-blue-500 underline mt-2"
+                            className="text-yellow-500 underline mt-2"
                             onClick={() => setSelectedLogistics(el)}
                         >
                             View More
@@ -76,7 +76,7 @@ const AllLogistics = () => {
                             <td>{moment(el?.createdAt).format('ll')}</td>
                             <td className="flex space-x-2">
                                 <button
-                                    className="bg-red-100 p-2 rounded-full cursor-pointer hover:bg-red-500 hover:text-white"
+                                    className="bg-yellow-100 p-2 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white"
                                     onClick={() => {
                                         setSelectedLogistics(el);
                                         setOpenUpdateStatus(true);
@@ -85,7 +85,7 @@ const AllLogistics = () => {
                                     Edit Status
                                 </button>
                                 <button
-                                    className="bg-blue-100 p-2 rounded-full cursor-pointer hover:bg-blue-500 hover:text-white"
+                                    className="bg-yellow-100 p-2 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white"
                                     onClick={() => {
                                         setSelectedLogistics(el);
                                         setOpenUpdateLocation(true);
@@ -111,13 +111,13 @@ const AllLogistics = () => {
                         <p><strong>Created Date:</strong> {moment(selectedLogistics.createdAt).format('ll')}</p>
                         <div className="mt-4 space-y-2">
                             <button
-                                className="block w-full bg-blue-500 text-white py-2 rounded"
+                                className="block w-full bg-yellow-500 text-white py-2 rounded"
                                 onClick={() => setOpenUpdateLocation(true)}
                             >
                                 Edit Location
                             </button>
                             <button
-                                className="block w-full bg-red-500 text-white py-2 rounded"
+                                className="block w-full bg-yellow-500 text-white py-2 rounded"
                                 onClick={() => setOpenUpdateStatus(true)}
                             >
                                 Edit Status

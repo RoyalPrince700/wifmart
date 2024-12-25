@@ -71,13 +71,13 @@ const PayOnDeliveryOrders = () => {
                       className="w-20 h-20 object-contain border rounded-lg"
                     />
                     <div className="ml-4">
-                      <p className="font-medium text-lg truncate">
+                      <p className="text-[14px] lg:text-xl  text-ellipsis line-clamp-1">
                         {product.productId.productName}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="capitalize text-[12px] text-slate-500">
                         Quantity: {product.quantity}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="capitalize text-[12px] text-slate-500">
                         Price: {displayNARCurrency(
                           product.productId.sellingPrice
                         )}

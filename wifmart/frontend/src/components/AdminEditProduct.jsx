@@ -165,7 +165,7 @@ const AdminEditProduct = ({
 
                 {/* Dropdown for selecting product SUB category */}
                 <label htmlFor='category' className='mt-3 '>Sub Category</label>
-              <select required value={data.subCategory} name='subCategory' onChange={handleOnChange} 
+              <select value={data.subCategory} name='subCategory' onChange={handleOnChange} 
               className='p-2 bg-slate-100 border rounded'>
                 <option value={""}>Select Sub Category</option>
                 {
@@ -247,7 +247,7 @@ const AdminEditProduct = ({
                 name='sellingPrice'
                 onChange={handleOnChange}
                 className='p-2 bg-slate-100 border rounded'
-                required
+                
               />
 
               {/* Text area for product description */}

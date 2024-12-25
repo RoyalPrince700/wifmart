@@ -29,7 +29,6 @@ const Login = () => {
     setIsSubmitting(true); // disable button on submit
   
     try {
-      console.log("Submitting login form with data:", data); // Debug log
   
       const response = await fetch(SummaryApi.signIn.url, {
         method: SummaryApi.signIn.method,
@@ -39,23 +38,17 @@ const Login = () => {
         },
         body: JSON.stringify(data),
       });
-  
-      console.log("Response status:", response.status); // Log HTTP status
       const result = await response.json();
-      console.log("Response body:", result); // Log API response
   
       if (response.ok && result.success) {
-        console.log("Login successful:", result.message); // Debug log for success
         toast.success(result.message);
         fetchUserDetails();
         fetchUserAddToCart();
         navigate('/');
       } else {
-        console.warn("API returned an error:", result.message); // Warn for backend errors
         toast.error(result.message || "An error occurred. Please try again.");
       }
     } catch (error) {
-      console.error("Network or other error occurred:", error); // Error log
       toast.error("Network error. Please try again later.");
     } finally {
       setIsSubmitting(false); // Re-enable button

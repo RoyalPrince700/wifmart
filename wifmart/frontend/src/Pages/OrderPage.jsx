@@ -51,16 +51,14 @@ const OrderPage = () => {
                   <div >
                       <div className='font-medium text-lg text-ellipsis line-clamp-1'>{product.name}</div>
                       <div className='flex items-center gap-5 mt-1'>
-                      <div className='text-lg text-red-500'>{displayNARCurrency(product.price)}</div>
+                      <div className='text-lg text-yellow-500'>{displayNARCurrency(product.price)}</div>
                       <p>Quantity : {product.quantity}</p>
                       </div>
                   </div>
-
                       </div>
                     )
                   })
                 }
-              
               </div>
               <div className=' flex flex-col gap-4  py-2 min-w-[300px]'>
 
@@ -71,7 +69,6 @@ const OrderPage = () => {
               </div>
               <div>
                 <div  className='text-lg'>Shipping Details</div>
-
                 {
                   item.shipping_options.map((shipping,index)=>{
                     return(

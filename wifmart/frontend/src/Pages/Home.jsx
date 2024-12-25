@@ -12,7 +12,6 @@ function Home() {
   return (
     <div className='mt-8 lg:mt-2'>
       {/* <CategoryList/> */}
-    
       <BannerProduct/>
       <VerticalHotDealCard hotDeal={"Hot_Deal"} heading={"Hot Deal"}/>
 
@@ -28,18 +27,22 @@ function Home() {
       
       <VerticalCardProduct  category={"mobiles"} />
       {/* <VerticalCardProduct  category={"mouse"} heading={"Mouse"}/> */}
-      <VerticalCardProduct  category={"televisions"} />
+      {/* <VerticalCardProduct  category={"televisions"} /> */}
       <VerticalCardProduct  category={"camera"} />
       <VerticalCardProduct  category={"earphones"} />
-      <VerticalCardProduct  category={"printers"} />
+      {/* <VerticalCardProduct  category={"printers"} /> */}
 
-      <HorizontalCardProduct category={"speakers"} heading={"Popular Speakers"}/>
-      <HorizontalCardProduct category={"mobiles"} heading={"mobiles"}/>
+      {/* <HorizontalCardProduct category={"speakers"} heading={"Popular Speakers"}/> */}
+      {/* <HorizontalCardProduct category={"mobiles"} heading={"mobiles"}/> */}
 
       <VerticalCardProduct  category={"speakers"} heading={"Bluetooth Speakers"}/>
-      <VerticalCardProduct  category={"refrigerator"} heading={"Refrigerator"}/>
-      <VerticalCardProduct  category={"trimers"} heading={"Trimers"}/>
-      <VerticalCardProduct  category={"processor"} heading={"Processor"}/>
+      <VerticalCardProduct  category={"earphones"} />
+      <VerticalCardProduct  category={"camera"} />
+      <VerticalCardProduct  category={"mobiles"} />
+
+      {/* <VerticalCardProduct  category={"refrigerator"} heading={"Refrigerator"}/> */}
+      {/* <VerticalCardProduct  category={"trimers"} heading={"Trimers"}/> */}
+      {/* <VerticalCardProduct  category={"processor"} heading={"Processor"}/> */}
     </div> 
   )
 }

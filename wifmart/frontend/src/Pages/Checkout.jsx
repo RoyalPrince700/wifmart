@@ -22,7 +22,7 @@ const Checkout = () => {
             <div className="container mx-auto mt-10 text-center">
                 <p className="text-lg font-medium">No items in the cart. Please go back to add items.</p>
                 <button
-                    className="mt-5 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-800 transition"
+                    className="mt-5 px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-800 transition"
                     onClick={() => navigate('/cart')}
                 >
                     Back to Cart
@@ -139,7 +139,7 @@ const Checkout = () => {
             </div>
             <div className="sm:flex-col lg:flex ">
                 <button
-                    className="bg-red-600 mb-3 text-white px-4 py-2 rounded hover:bg-red-800 transition"
+                    className="bg-yellow-600 mb-3 text-white px-4 py-2 rounded hover:bg-yellow-800 transition"
                     onClick={handlePayOnDelivery}
                 >
                     Pay on Delivery

@@ -9,6 +9,20 @@ import image5 from '../assets/banner/i2.jpg';
 import image6 from '../assets/banner/i3.jpg';
 
 
+import wifbannerbig from '../assets/banner/wifbannerbig.jpg';
+import launch1 from '../assets/banner/launchBig1.jpg';
+import launch2 from '../assets/banner/launchbig2.jpg';
+import launch3 from '../assets/banner/launchbig3.jpg';
+
+
+
+import wifbannersmall from '../assets/banner/wifbannersmall.jpg';
+import launchsmall from '../assets/banner/launch1.jpg';
+import launchsmall2 from '../assets/banner/lauch2.jpg';
+import launchsmall3 from '../assets/banner/launch3.jpg';
+import hoogemob from '../assets/banner/hoogemob.jpg';
+
+
 
 import image1Mobile from '../assets/banner/callforvendor.jpg';
 import image2Mobile from '../assets/banner/p1.jpg';
@@ -23,12 +37,13 @@ import image7Mobile from '../assets/banner/im3.jpg';
 
 
 
+
 const BannerProduct = () => {
   const [currrentImage, setCurrentImage] = useState(0);
 
-  const desktopImages = [image1,image2,image3,image4,image5,image6,image6];
+  const desktopImages = [wifbannerbig,image2,image3,image4,image6];
 
-  const mobileImages = [image1Mobile, image2Mobile, image3Mobile,image4Mobile,image5Mobile,image6Mobile,image7Mobile];
+  const mobileImages = [hoogemob, launchsmall3,launchsmall,launchsmall2,wifbannersmall];
 
   const nextImage = () => {
     if (desktopImages.length - 1 > currrentImage) {
@@ -55,7 +70,7 @@ const BannerProduct = () => {
   }, [currrentImage]);
 
   return (
-    <div className="px-2 lg:mt-[120px] mt-[95px] rounded-md">
+    <div className="px-2 lg:mt-[120px] mt-[93px] rounded-md">
       <div className="h-[160px] sm:h-56 md:h-72 w-full bg-slate-200 rounded-2xl relative">
         <div className="absolute z-10 w-full h-full md:flex  items-center hidden">
           <div className="flex justify-between w-full text-2xl ">

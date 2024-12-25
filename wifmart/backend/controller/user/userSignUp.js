@@ -39,11 +39,13 @@ async function userSignUpController(req, res) {
         const token = jwt.sign(tokenData, process.env.TOKEN_SECRET_KEY, { expiresIn: '8h' });
 
         // Set token in a secure cookie
-        const tokenOptions = {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-        };
-        res.cookie("token", token, tokenOptions).json({
+        // Set cookie options
+      const tokenOption = {
+        httpOnly : true,
+        secure : true,
+        sameSite : 'None'
+      }
+        res.cookie("token", token, tokenOption).json({
             message: "Signup and login successful",
             data: tokenData,
             success: true,

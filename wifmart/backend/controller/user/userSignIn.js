@@ -44,7 +44,7 @@ async function userSignInController(req, res) {
         sameSite : 'None'
       }
       // Send token as a cookie and return response with token data
-      res.cookie("token", token, tokenOptions).json({
+      res.cookie("token", token, tokenOption).json({
         message: "Login Successfully",
         data: tokenData,
         success: true,

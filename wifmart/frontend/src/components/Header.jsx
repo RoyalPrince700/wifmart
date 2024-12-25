@@ -134,7 +134,7 @@ const Header = () => {
                        value={search}
                      />
                    </div>
-                   <button className="bg-yellow-600 shadow-lg text-white py-2 px-6 font-semibold rounded-md">
+                   <button className="bg-red-600 shadow-lg text-white py-2 px-6 font-semibold rounded-md">
                      SEARCH
                    </button>
                  </div>

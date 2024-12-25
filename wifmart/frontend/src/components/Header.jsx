@@ -149,7 +149,7 @@ const Header = () => {
                        value={search}
                      />
                    </div>
-                   <button className="bg-red-600 shadow-lg text-white py-2 px-6 font-semibold rounded-md">
+                   <button className="bg-yellow-600 shadow-lg text-white py-2 px-6 font-semibold rounded-md">
                      SEARCH
                    </button>
                  </div>
@@ -241,7 +241,7 @@ const Header = () => {
           <p className="font-semibold text-[18px]">My Cart</p>
         </div>
 
-        <div className="bg-red-600 rounded-full text-white w-5 h-5 p-1 flex items-center justify-center absolute -top-2 -right-3">
+        <div className="bg-yellow-600 rounded-full text-white w-5 h-5 p-1 flex items-center justify-center absolute -top-2 -right-3">
           <p className="text-sm">{context?.cartProductCount}</p>
         </div>
       </Link>
@@ -268,7 +268,7 @@ const Header = () => {
       </Link>
       <Link
         to="/login"
-        className="px-2 py-1 rounded-md text-white hover:bg-red-700 bg-red-600 p-3"
+        className="px-2 py-1 rounded-md text-white hover:bg-yellow-700 bg-yellow-600 p-3"
       >
         Login
       </Link>
@@ -379,7 +379,7 @@ const Header = () => {
                   <RiShoppingCartLine className="text-xl" />
                   </div>
                   
-                  <div className="bg-red-600 rounded-full text-white w-3 h-3 p-1 flex items-center 
+                  <div className="bg-yellow-600 rounded-full text-white w-3 h-3 p-1 flex items-center 
                   justify-center absolute -top-1 -right-2">
                     <p className="text-[10px]">{context?.cartProductCount}</p>
                   </div>
@@ -458,7 +458,7 @@ const Header = () => {
                 <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center 
-                    gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <FaRegCircleUser className="text-xl" />
                     <p>Account</p>
@@ -467,7 +467,7 @@ const Header = () => {
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5
-                     hover:bg-red-600 hover:text-white cursor-pointer"
+                     hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <MdOutlineContactSupport className="text-xl" />
                     <p>Support</p>
@@ -475,7 +475,7 @@ const Header = () => {
 
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <RiShoppingCartLine className="text-xl" />
                     <p>My Cart</p>
@@ -484,67 +484,67 @@ const Header = () => {
             <hr className='border-none h-[0.5px] w-full mb-2 bg-gray-200' />
             <div className='flex justify-between px-5 items-center py-2'>
                 <p className='text-gray-600 text-[14px]'>OUR CATEGORIES</p>
-                <p className='text-red-500'>See All</p>
+                <p className='text-yellow-500'>See All</p>
             </div>
             <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <IoPhonePortraitSharp className="text-xl" />
                     <p>Phone and Tablet</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <FiTv className="text-xl" />
                     <p>Appliances</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <FiTv className="text-xl" />
                     <p>Electronics</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <CiApple className="text-xl" />
                     <p>Supermarket</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <GiLipstick className="text-xl" />
                     <p>Health & Beauty</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <MdOutlineHomeWork className="text-xl" />
                     <p>Home & Office</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <CiHome className="text-xl" />
                     <p>Power</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <LuTicket className="text-xl" />
                     <p>Computing</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <GiClothes className="text-xl" />
                     <p>Women's Fashion</p>
@@ -552,7 +552,7 @@ const Header = () => {
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 pb-48 font-normal hover:font-semibold flex 
-                    items-center gap-2  py-5 px-5 hover:bg-red-600 hover:text-white cursor-pointer"
+                    items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
                       <GiClothes className="text-xl" />
                     <p>Men's Fashion</p>
@@ -561,15 +561,15 @@ const Header = () => {
               </div>   
         
         </div>
-            <div className='bottom-0 absolute bg-red-100 shadow-2xl  w-full h-36'>
+            <div className='bottom-0 absolute bg-yellow-100 shadow-2xl  w-full h-36'>
               <div className='flex flex-col gap-3 items-center my-4'>
               <button 
-              onClick={() => window.location.href = '/login'} className='bg-red-600 border hover:border-red-600 hover:text-red-600 hover:bg-red-100 text-white py-3 rounded mx-4 w-[90vw] px'
+              onClick={() => window.location.href = '/login'} className='bg-yellow-600 border hover:border-yellow-600 hover:text-yellow-600 hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
             >  Log In </button>
 
             <button
             onClick={() => window.location.href = '/singup'}
-            className='bg-inherit border border-red-600 text-red-600 hover:bg-red-600 hover:text-white py-3 rounded  mx-4  w-[90vw] px'>Sign Up </button>
+            className='bg-inherit border border-yellow-600 text-yellow-600 hover:bg-yellow-600 hover:text-white py-3 rounded  mx-4  w-[90vw] px'>Sign Up </button>
 
               </div>
           

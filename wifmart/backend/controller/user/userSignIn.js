@@ -38,13 +38,14 @@ async function userSignInController(req, res) {
       console.log("Generated Token:", token);
 
       // Set cookie options
-      const tokenOptions = {
-        httpOnly: true,
-        secure: true, // Set to true in production
-      };
+      const tokenOption = {
+        httpOnly : true,
+        secure : true,
+        sameSite : 'None'
+      }
 
       // Send token as a cookie and return response with token data
-      res.cookie("token", token, tokenOptions).json({
+      res.cookie("token", token, tokenOption).json({
         message: "Login Successfully",
         data: tokenData,
         success: true,

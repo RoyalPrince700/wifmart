@@ -113,12 +113,12 @@ const Login = () => {
                 </div>
               </div>
               <Link to={'/forgot-password'}
-                className='block w-fit ml-auto hover:underline hover:text-red-500'>
+                className='block w-fit ml-auto hover:underline hover:text-yellow-500'>
                 Forgot Password ?
               </Link>
             </div>
 
-            <button className='bg-red-600 hover:bg-red-700 text-white px-6
+            <button className='bg-yellow-600 hover:bg-yellow-700 text-white px-6
               py-4 w-full text-center max-w-[150px] rounded-md hover:scale-110 
               transition-all mx-auto block mt-6'
               type='submit'
@@ -128,7 +128,7 @@ const Login = () => {
           </form>
 
           <p className='my-5'>Don't have account ?
-            <Link to={"/sign-up"} className='text-red-600 hover:underline hover:text-red-700'>
+            <Link to={"/sign-up"} className='text-yellow-600 hover:underline hover:text-yellow-700'>
               Sign up
             </Link>
           </p>

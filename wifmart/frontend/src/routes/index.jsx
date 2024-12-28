@@ -24,6 +24,11 @@ import LADashboard from "../Pages/LaPanel";
 import ManageOrders from "../Pages/ManageAssignedLAOrder";
 import HRAllOrders from "../Pages/HRAllOrders";
 import LAAllOrders from "../Pages/LAAllOrders";
+import Support from "../Pages/Support";
+import AboutUs from "../Pages/AboutUs";
+import ContactUs from "../Pages/ContactUs";
+import TokenVerification from "../Pages/TokenVerification";
+import ResetPassword from "../Pages/ResetPassword";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +42,12 @@ const router = createBrowserRouter([
             {
                 path: "login",
                 element: <Login />,
+            }, {
+                path: "token-verification",
+                element: <TokenVerification />,
+            },{
+                path: "reset-password/:token",
+                element: <ResetPassword />,
             },
             {
                 path: "forgot-password",
@@ -45,6 +56,15 @@ const router = createBrowserRouter([
             {
                 path: "sign-up",
                 element: <SignUp />,
+            },  {
+                path: "support",
+                element: <Support />,
+            },{
+                path: "contact-us",
+                element: <ContactUs />,
+            },{
+                path: "about-us",
+                element: <AboutUs />,
             },
             {
                 path: "product-category",

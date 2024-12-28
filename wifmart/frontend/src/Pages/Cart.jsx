@@ -125,100 +125,116 @@ const Cart = () => {
     
 
     return (
-        <div className=' px-4 mx-auto mt-[100px] lg:mt-[120px]'>
-            <h1 className="text-2xl font-bold mb-5 ">My Cart</h1>
-
-            <div className='text-center text-lg '>
-                {data.length === 0 && !loading && <p className='bg-white py-5'>No Data</p>}
-            </div>
-
-            <div className='flex flex-col p-4 lg:flex-row gap-10 lg:justify-between'>
-                <div className='w-full max-w-3xl'>
-                    {loading
-                        ? loadingCart.map((_, index) => (
-                              <div
-                                  key={index}
-                                  className='w-full bg-slate-200 h-32 border border-slate-300 my-2 animate-pulse rounded'></div>
-                          ))
-                        : data.map((product) => (
-                              <div
-                                  key={product?._id}
-                                  className='w-full bg-white lg:h-32 h-32 border border-slate-300 my-2 rounded grid 
-                                  grid-cols-[128px,1fr]'>
-                                  <div className='w-32 lg:h-full h-32 bg bg-slate-200'>
-                                      <img
-                                          src={product?.productId?.productImage[0]}
-                                          className='w-full h-32 lg:h-32 object-scale-down mix-blend-multiply'
-                                      />
-                                  </div>
-                                  <div className='px-4 py-2 relative'>
-                                      <div
-                                          className='absolute right-0 bottom-0 text-yellow-600 rounded-full p-2
-                                           hover:bg-yellow-600
-                                           hover:text-white cursor-pointer'
-                                          onClick={() => deleteCartProduct(product?._id)}>
-                                          <MdDelete />
-                                      </div>
-                                      <h2 className='text-[14px] lg:text-xl  text-ellipsis line-clamp-1'>
-                                          {product?.productId?.productName}
-                                      </h2>
-                                      <p className='capitalize text-[12px] text-slate-500'>
-                                          {product?.productId?.category}
-                                      </p>
-                                      <div className='flex mb-2  lg:mb-1 flex-col lg:flex-row lg:items-center  lg:justify-between'>
-                                          <p className='text-black font-medium text-[14px] lg:text-lg'>
-                                              {displayNARCurrency(product?.productId?.sellingPrice)}
-                                          </p>
-                                          <p className='text-slate-600 font-semibold text-[14px] lg:text-lg'>
-                                              {displayNARCurrency(
-                                                  product?.productId?.sellingPrice * product?.quantity
-                                              )}
-                                          </p>
-                                      </div>
-                                      <div className='flex items-center gap-3 mt-1'>
-                                          <button
-                                              className='flex rounded hover:bg-yellow-600 hover:text-white justify-center items-center border w-6 h-6 border-yellow-600 text-yellow-600'
-                                              onClick={() => decreaseQty(product?._id, product?.quantity)}>
-                                              -
-                                          </button>
-                                          <span>{product?.quantity}</span>
-                                          <button
-                                              className='flex rounded hover:bg-yellow-600 hover:text-white justify-center items-center border w-6 h-6 border-yellow-600 text-yellow-600'
-                                              onClick={() => increaseQty(product?._id, product?.quantity)}>
-                                              +
-                                          </button>
-                                      </div>
-                                  </div>
-                              </div>
-                          ))}
-                </div>
-
-                {data[0] && (
-                    <div className='mt-5 lg:mt-0 w-full max-w-sm'>
-                        {loading ? (
-                            <div className='lg:h-36  bg-slate-200 border border-slate-300 animate-pulse'></div>
-                        ) : (
-                            <div className='h-36 bg-yellow-50'>
-                                <h2 className='text-black px-4 py-1'>Summary</h2>
-                                <div className='flex items-center justify-between px-4 font-medium text-lg text-slate-600 gap-2'>
-                                    <p>Quantity</p>
-                                    <p>{totalQty}</p>
-                                </div>
-                                <div className='flex font-medium text-lg text-slate-600 items-center justify-between px-4 gap-2'>
-                                    <p>Total Price</p>
-                                    <p>{displayNARCurrency(totalPrice)}</p>
-                                </div>
-                                <button
-                                    className='bg-yellow-600 p-2 text-white w-full'
-                                    onClick={handleCheckout}>
-                                    Checkout
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                )}
-            </div>
+        <div className="container mx-auto px-4 mt-[100px] lg:mt-[120px]">
+        <h1 className="text-2xl font-bold mb-5">My Cart</h1>
+      
+        <div className="text-center text-lg">
+          {data.length === 0 && !loading && (
+            <p className="bg-white py-5 text-gray-500">No items in your cart.</p>
+          )}
         </div>
+      
+        <div className="flex flex-col lg:flex-row gap-10 lg:justify-between">
+          {/* Cart Items */}
+          <div className="w-full max-w-3xl">
+            {loading
+              ? loadingCart.map((_, index) => (
+                  <div
+                    key={index}
+                    className="w-full bg-slate-200 h-32 border border-slate-300 my-2 animate-pulse rounded"
+                  ></div>
+                ))
+              : data.map((product) => (
+                  <div
+                    key={product?._id}
+                    className="w-full bg-white shadow-lg rounded-lg border border-gray-200 my-4 p-4 grid grid-cols-[128px,1fr] relative"
+                  >
+                    {/* Product Image */}
+                    <div className="w-32 h-32 bg-gray-50 rounded-lg">
+                      <img
+                        src={product?.productId?.productImage[0]}
+                        alt={product?.productId?.productName}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+      
+                    {/* Product Details */}
+                    <div className="px-4">
+                      <h2 className="text-sm lg:text-base font-medium text-gray-800 line-clamp-2">
+                        {product?.productId?.productName}
+                      </h2>
+                      <p className="capitalize text-sm text-gray-500">
+                        {product?.productId?.category}
+                      </p>
+                      <div className="my-2">
+                        <p className="text-sm font-medium text-gray-700">
+                          {displayNARCurrency(product?.productId?.sellingPrice)}
+                        </p>
+                        <p className="text-sm font-semibold text-gray-500 mt-1">
+                          {displayNARCurrency(
+                            product?.productId?.sellingPrice * product?.quantity
+                          )}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-3 mt-3">
+                        <button
+                          className="flex items-center justify-center w-6 h-6 border border-yellow-600 text-yellow-600 rounded hover:bg-yellow-600 hover:text-white"
+                          onClick={() => decreaseQty(product?._id, product?.quantity)}
+                        >
+                          -
+                        </button>
+                        <span className="text-gray-700">{product?.quantity}</span>
+                        <button
+                          className="flex items-center justify-center w-6 h-6 border border-yellow-600 text-yellow-600 rounded hover:bg-yellow-600 hover:text-white"
+                          onClick={() => increaseQty(product?._id, product?.quantity)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+      
+                    {/* Delete Button */}
+                    <button
+                      className="absolute bottom-2 right-0 text-yellow-600 hover:bg-yellow-600
+                       hover:text-white p-2 rounded-full"
+                      onClick={() => deleteCartProduct(product?._id)}
+                    >
+                      <MdDelete size={24} />
+                    </button>
+                  </div>
+                ))}
+          </div>
+      
+          {/* Cart Summary */}
+          {data[0] && (
+            <div className="mt-5 lg:mt-0 w-full max-w-sm">
+              {loading ? (
+                <div className="h-36 bg-slate-200 border border-slate-300 animate-pulse rounded-lg"></div>
+              ) : (
+                <div className="bg-yellow-50 shadow-lg rounded-lg p-4">
+                  <h2 className="text-lg font-semibold text-gray-700 mb-4">Summary</h2>
+                  <div className="flex justify-between items-center text-gray-600 mb-2">
+                    <p>Quantity</p>
+                    <p className="font-medium">{totalQty}</p>
+                  </div>
+                  <div className="flex justify-between items-center text-gray-600 mb-4">
+                    <p>Total Price</p>
+                    <p className="font-medium">{displayNARCurrency(totalPrice)}</p>
+                  </div>
+                  <button
+                    className="w-full bg-yellow-600 text-white py-2 rounded-lg shadow-md hover:bg-yellow-700"
+                    onClick={handleCheckout}
+                  >
+                    Checkout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      
+      
     );
 };
 

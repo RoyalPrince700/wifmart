@@ -13,6 +13,10 @@ import wifbannerbig from '../assets/banner/wifbannerbig.jpg';
 import launch1 from '../assets/banner/launchBig1.jpg';
 import launch2 from '../assets/banner/launchbig2.jpg';
 import launch3 from '../assets/banner/launchbig3.jpg';
+import uv from '../assets/banner/uvd.jpg';
+import congd from '../assets/banner/congd.jpg';
+
+
 
 
 
@@ -21,6 +25,10 @@ import launchsmall from '../assets/banner/launch1.jpg';
 import launchsmall2 from '../assets/banner/lauch2.jpg';
 import launchsmall3 from '../assets/banner/launch3.jpg';
 import hoogemob from '../assets/banner/hoogemob.jpg';
+import uvm from '../assets/banner/uvm.jpg';
+import congm from '../assets/banner/congm.jpg';
+
+
 
 
 
@@ -41,9 +49,9 @@ import image7Mobile from '../assets/banner/im3.jpg';
 const BannerProduct = () => {
   const [currrentImage, setCurrentImage] = useState(0);
 
-  const desktopImages = [wifbannerbig,image2,image3,image4,image6];
+  const desktopImages = [uv,congd];
 
-  const mobileImages = [hoogemob, launchsmall3,launchsmall,launchsmall2,wifbannersmall];
+  const mobileImages = [uvm,congm];
 
   const nextImage = () => {
     if (desktopImages.length - 1 > currrentImage) {
@@ -70,7 +78,7 @@ const BannerProduct = () => {
   }, [currrentImage]);
 
   return (
-    <div className="px-2 lg:mt-[120px] mt-[93px] rounded-md">
+    <div className="px-2 lg:mt-[95px] mt-[93px] rounded-md">
       <div className="h-[160px] sm:h-56 md:h-72 w-full bg-slate-200 rounded-2xl relative">
         <div className="absolute z-10 w-full h-full md:flex  items-center hidden">
           <div className="flex justify-between w-full text-2xl ">
@@ -99,11 +107,11 @@ const BannerProduct = () => {
         </div>
 
         {/* Mobile Version */}
-        <div className="flex h-[160px] rounded-2xl w-full p-1 overflow-hidden md:hidden">
+        <div className="flex h-[170px] rounded-2xl w-full p-1 overflow-hidden md:hidden">
           {mobileImages.map((imageURL, index) => {
             return (
               <div
-                className="h-[160px] w-full min-w-full rounded-2xl min-h-[100px] transition-all"
+                className="h-[165px] w-full min-w-full rounded-2xl min-h-[100px] transition-all"
                 key={imageURL}
                 style={{ transform: `translateX(-${currrentImage * 100}%)` }}
               >

@@ -129,21 +129,22 @@ const ProductDetails = () => {
             {data?.sellingPrice > 0 && <p className="text-yellow-600 font-semibold text-lg">{displayNARCurrency(data?.sellingPrice)}</p>}
           </div>
           <div className="flex items-center my-2 gap-3">
-            <button
-              className="border-2 text-yellow-600 font-medium rounded-md px-3 py-1 min-w-[120px] border-yellow-600
-               hover:bg-yellow-600 hover:text-white"
-              onClick={(e) => handleBuyProduct(e, data?._id)}
-            >
-              Buy
-            </button>
-            <button
-              className="border-2 font-medium rounded-md text-white bg-yellow-600 px-3 
-              py-1 min-w-[120px] border-yellow-600 hover:text-yellow-600 hover:bg-white"
-              onClick={(e) => handleAddToCart(e, data?._id)}
-            >
-              Add To Cart
-            </button>
-          </div>
+  <button
+    className="border-2 text-yellow-600 font-medium rounded-lg px-4 py-2 min-w-[140px] border-yellow-600 
+    hover:bg-yellow-600 hover:text-white transition-all duration-300 ease-in-out"
+    onClick={(e) => handleBuyProduct(e, data?._id)}
+  >
+    Buy Now
+  </button>
+  <button
+    className="border-2 font-medium rounded-lg text-white bg-yellow-600 px-4 py-2 min-w-[140px] border-yellow-600 
+    hover:text-yellow-600 hover:bg-transparent transition-all duration-300 ease-in-out"
+    onClick={(e) => handleAddToCart(e, data?._id)}
+  >
+    Add to Cart
+  </button>
+</div>
+
           <div>
             <p className="text-slate-600 font-medium my-1">Description :</p>
             <p>{data.description}</p>

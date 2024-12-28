@@ -15,10 +15,10 @@ import Context from "../context";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { MdOutlineContactSupport } from "react-icons/md";
-import { RiShoppingCartLine } from "react-icons/ri";
 import { SlArrowRight } from "react-icons/sl";
 import CategoryDropdown from './CategoryList';
-import { GiHamburgerMenu } from "react-icons/gi";
+import icon from '../assets/profile_icon.png'
+import { PiShoppingCartSimple } from "react-icons/pi";
 
 
 
@@ -55,6 +55,12 @@ const Header = () => {
   const location = useLocation();
 
   const hideSearchBar = location.pathname === "/login" || location.pathname === "/signup";
+
+          const email = user?.email || "";
+        const emailPrefix = email.split("@")[0];
+        const maskedEmail = emailPrefix.length > 4 
+          ? `${emailPrefix.slice(0, 2)}**${emailPrefix.slice(-2)}` 
+          : emailPrefix;
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -107,7 +113,7 @@ const Header = () => {
   {/* Logo */}
   <div className="hidden md:flex items-center">
     <Link to="/">
-      <Logo w="100px" h="20px" />
+      <Logo w="120px" h="25px" />
     </Link>
   </div>
 
@@ -117,7 +123,7 @@ const Header = () => {
       <CategoryDropdown />
     </div>
     <div className="flex">
-      <p className="text-[14px] font-normal whitespace-nowrap">Sell on Wifmart</p>
+      <p className="text-[14px] font-semibold whitespace-nowrap">Sell on Wifmart</p>
     </div>
   </div>
 </div>
@@ -158,8 +164,9 @@ const Header = () => {
           />
         ) : (
           <div className="flex gap-2 items-center">
-            <FaRegCircleUser className="text-2xl" />
-            <p className="text-[14px] font-normal whitespace-nowrap">Hi, {user?.email?.split('@')[0]}</p>
+            <img src={icon} alt="" className="w-5 text-black" />
+            {/* <FaRegCircleUser className="text-2xl" /> */}
+            <p className="text-[14px] font-semibold whitespace-nowrap">Hi, {user?.email?.split('@')[0]}</p>
           </div>
         )}
       </div>
@@ -221,30 +228,31 @@ const Header = () => {
     <div className="flex items-center gap-6">
       <Link to="/cart" className="text-2xl flex relative">
         <div className="flex items-center gap-2">
-          <RiShoppingCartLine className="text-xl" />
-          <p className="font-normal text-[14px] whitespace-nowrap">Cart</p>
+          <PiShoppingCartSimple className="text-2xl" />
+          <p className="font-semibold text-[14px] whitespace-nowrap">Cart</p>
         </div>
         <div className="bg-yellow-600 rounded-full text-white w-3 h-3 p-2 flex items-center justify-center absolute -top-1 -right-3">
           <p className="text-sm">{context?.cartProductCount}</p>
         </div>
       </Link>
       <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-xl" />
-        <p className="font-normal text-[14px] whitespace-nowrap">Support</p>
+        <MdOutlineContactSupport className="text-2xl" />
+        <p className="font-semibold text-[14px] whitespace-nowrap">Support</p>
       </Link>
     </div>
   ) : (
     <div className="lg:flex hidden items-center gap-5">
-      <Link className="flex items-center gap-1">
-        <FaRegCircleUser className="text-xl" />
-        <p className="text-[14px] font-medium whitespace-nowrap">Account</p>
+      <Link className="flex items-center gap-2">
+      <img src={icon} alt="" className="w-5 text-black" />
+
+        <p className="text-[14px] font-semibold whitespace-nowrap">Account</p>
       </Link>
       <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-xl" />
+        <MdOutlineContactSupport className="text-2xl" />
         <p className="text-[14px] font-medium whitespace-nowrap">Support</p>
       </Link>
       <Link to="/cart" className="flex items-center gap-1">
-        <RiShoppingCartLine className="text-xl" />
+        <PiShoppingCartSimple className="text-2xl " />
         <p className="text-[14px] font-medium whitespace-nowrap">My Cart</p>
       </Link>
       <Link
@@ -263,131 +271,118 @@ const Header = () => {
 
           <div className="flex-col pt-4 pb-3 md:hidden">
               
-           <div className="flex px-4 justify-between pb-2 md:hidden items-center">
-                  {/* Logo and Hamburger Menu */}
-                  <div className="flex md:hidden items-center  gap-1 sm:gap-6">
-                    
-                <GiHamburgerMenu onClick={() => setHambugDrop(!hambugDrop)} 
-                className='lg:hidden flex text-md cursor-pointer text-xl' />
-                  <Link to="/" className="">
-                    <Logo w="130px" h="20px" />
-                  </Link>
-                </div>
+          <div className="flex px-4 justify-between pb-2 lg:hidden items-center">
+  {/* Logo */}
+  <div className=" md:hidden  ml-[-14px]">
+    <Link to="/" className="">
+      <Logo w="100px" h="20px" />
+    </Link>
+  </div>
 
-                <div className="flex  lg:hidden items-center gap-3">
-          <div className="relative flex justify-center">
-            {user?._id && (
-              <div
-                className="text-3xl cursor-pointer flex  justify-center user-menu"
-                onClick={() => setMenuDisplay((prev) => !prev)}
-              >
-               {user?.profilePic ? (
-                              <img
-                                src={user?.profilePic}
-                                className="text-xl rounded-full"
-                                alt={user?.name}
-                              />
-                            ) : (
-                              <div className="flex h-6 gap-1 items-center">
-                                <FaRegCircleUser className="text-xl" />
-                                <p
-                                  className="font-semibold text-[10px]  truncate max-w-[100px] overflow-hidden text-ellipsis"
-                                  style={{ whiteSpace: 'nowrap' }}
-                                >
-                                  Hi, {user?.email?.split('@')[0]}
-                                </p>
-                                {/* Extracts and displays only the part before @ */}
-                              </div>
-                            )}
-
-              </div>
-            )}
-
-            {menuDisplay && (
-              <div className="absolute lg:hidden bg-white bottom-0 top-11 h-fit p-4 shadow-lg z-40 rounded w-40">
-                 <nav className="flex  flex-col gap-2">
-          {user?.role === ROLE.ADMIN && (
-            <Link
-              to="/admin-panel/all-products"
-              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
-              onClick={() => setMenuDisplay(false)}
-            >
-              Admin Panel
-            </Link>
-          )}
-
-          {user?.role === ROLE.HR && (
-            <Link
-              to="/hr-panel"
-              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
-              onClick={() => setMenuDisplay(false)}
-            >
-              HR Panel
-            </Link>
-          )}
-
-          {user?.role === ROLE.LOGISTICS_ASSOCIATE && (
-            <Link
-              to="/la-panel"
-              className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
-              onClick={() => setMenuDisplay(false)}
-            >
-              Logistics Panel
-            </Link>
-          )}
-
-          <Link
-            to="/payondeliveryorder"
-            className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
-            onClick={() => setMenuDisplay(false)}
-          >
-            Orders
+  {/* Icons: Profile, Cart, and Hamburger */}
+  <div className="flex lg:hidden items-center gap-6">
+    {/* Profile Icon */}
+    <div className="relative flex items-center justify-center">
+      <div
+        className="text-3xl cursor-pointer flex justify-center user-menu"
+        onClick={() => setMenuDisplay((prev) => !prev)}
+      >
+        {user?._id ? (
+          user?.profilePic ? (
+            <img
+              src={user?.profilePic}
+              className="rounded-full w-6 h-6 object-cover"
+              alt={user?.name}
+            />
+          ) : (
+            <img src={icon} alt="" className="w-4 text-black" />
+          )
+        ) : (
+          <Link to="/login">
+            <img src={icon} alt="" className="w-4 text-black" />
           </Link>
-          <button
-            onClick={() => {
-              handleLogout();
-              setMenuDisplay(false);
-            }}
-            className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-left"
-          >
-            Logout
-          </button>
-        </nav>
-              </div>
-            )}
-          </div>
+        )}
+      </div>
 
-          {user?._id && (
-            <div className="flex items-center gap-6">
-                  <Link to="/cart" className="text-2xl flex items-center ">
-                  <div className="flex items-center gap-2">
-                  <RiShoppingCartLine className="text-xl" />
-                  </div>
-                  
-                  <div className="bg-yellow-600 rounded-sm text-white w-3 h-3 flex items-center 
-                  justify-center ">
-                    <p className="text-[10px]">{context?.cartProductCount}</p>
-                  </div>
-                </Link>
-               
-            </div>
-          
-            
-          )}
+     {/* Profile Menu Dropdown */}
+{menuDisplay && user?._id && (
+  <div className="absolute lg:hidden bg-white bottom-0 top-11 h-fit p-4 shadow-lg z-40 rounded w-40">
+    <nav className="flex flex-col gap-2">
+      <p
+        className="truncate hover:bg-gray-100 p-2 rounded"
+        title={user?.email} // Shows full email on hover
+      >
+        Hi, {user?.email?.split("@")[0]}
+      </p>
+      {user?.role === ROLE.ADMIN && (
+        <Link
+          to="/admin-panel/all-products"
+          className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+          onClick={() => setMenuDisplay(false)}
+        >
+          Admin Panel
+        </Link>
+      )}
+      {user?.role === ROLE.HR && (
+        <Link
+          to="/hr-panel"
+          className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+          onClick={() => setMenuDisplay(false)}
+        >
+          HR Panel
+        </Link>
+      )}
+      {user?.role === ROLE.LOGISTICS_ASSOCIATE && (
+        <Link
+          to="/la-panel"
+          className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+          onClick={() => setMenuDisplay(false)}
+        >
+          Logistics Panel
+        </Link>
+      )}
+      <Link
+        to="/payondeliveryorder"
+        className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+        onClick={() => setMenuDisplay(false)}
+      >
+        Orders
+      </Link>
+      <button
+        onClick={() => {
+          handleLogout();
+          setMenuDisplay(false);
+        }}
+        className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-left"
+      >
+        Logout
+      </button>
+    </nav>
+  </div>
+)}
 
-          {!user?._id && (
-            <div className="flex lg:hidden items-center gap-5">
-               <Link to="/" className="flex items-center gap-1">
-                              <FaRegCircleUser className="text-xl" />
-                            </Link>
-              <Link to="/cart" className="flex items-center gap-1">
-                              <RiShoppingCartLine className="text-xl" />
-                            </Link>
-            </div>
-            
-          )}
+    </div>
+
+    {/* Cart Icon */}
+    <Link to="/cart" className="relative flex items-center">
+      <div className="flex items-center gap-2">
+        <PiShoppingCartSimple className="text-xl" />
+      </div>
+      {user?._id && (
+        <div className="bg-[#ffc518] absolute top-[-4px] right-[-5px] rounded-full text-white w-3 h-3 flex items-center justify-center shadow-sm">
+          <p className="text-[10px] shadow-sm">{context?.cartProductCount}</p>
         </div>
-            </div>
+      )}
+    </Link>
+
+    {/* Hamburger Menu */}
+    <RxHamburgerMenu
+      onClick={() => setHambugDrop(!hambugDrop)}
+      className="lg:hidden flex text-md cursor-pointer h-5"
+    />
+  </div>
+</div>
+
      
 
       {!hideSearchBar && (
@@ -412,7 +407,7 @@ const Header = () => {
         <div>
           <div className='flex items-center justify-center pt-6'>
             <Link to="/" onClick={() => setHambugDrop(false)}>
-            <Logo w="130px" h="20px" />
+            <Logo w="100px" h="20px" />
 
             </Link>
           </div>
@@ -429,7 +424,7 @@ const Header = () => {
           {/* These items should stack vertically */}
           <div className='flex flex-col w-full justify-center'>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/support" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5
                      hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
@@ -441,7 +436,7 @@ const Header = () => {
                     to="/cart" onClick={() => setMobileVisible(false)} // Close dropdown on click
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
                     >
-                      <RiShoppingCartLine className="text-xl" />
+                      <PiShoppingCartSimple className="text-xl" />
                     <p>My Cart</p>
                  </NavLink>
                  
@@ -534,7 +529,7 @@ const Header = () => {
           handleLogout();
           setHambugDrop(false); // Close dropdown after logging out
         }}
-        className='bg-yellow-500 border hover:border-yellow-600 hover:text-yellow-600
+        className='bg-yellow-600 border hover:border-yellow-600 hover:text-yellow-600
         hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
       >
         Logout
@@ -544,7 +539,7 @@ const Header = () => {
       <Link to="/login">
         <button
           onClick={() => setHambugDrop(false)} // Close dropdown after clicking login
-          className='bg-yellow-500 border hover:border-yellow-600 hover:text-yellow-600
+          className='bg-yellow-600 border hover:border-yellow-600 hover:text-yellow-600
           hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
         >
           Login

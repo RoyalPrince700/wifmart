@@ -8,6 +8,15 @@ const SummaryApi = {
     signIn : {
         url : `${backendDomain}/api/signin`,
         method : "post"
+    }, verifyEmail : {
+        url : `${backendDomain}/api/verify-email`,
+        method : "post"
+    }, forgotPassword : {
+        url : `${backendDomain}/api/forgot-password`,
+        method : "post"
+    },resetPassword: {
+        url: `${backendDomain}/api/reset-password`,
+        method: "post",
     },
     current_user : {
         url : `${backendDomain}/api/user-details`,

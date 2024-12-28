@@ -11,14 +11,28 @@ import { useDispatch } from 'react-redux';
 import { setUserDetails } from './store/userSlice';
 import ScrollToTop from './components/ScrollTop';
 
+
+import { matchPath } from 'react-router-dom';
+
 function App() {
   const dispatch = useDispatch();
-  const location = useLocation(); // Get the current route
+  const location = useLocation();
   const [cartProductCount, setCartProductCount] = useState(0);
 
   // List of routes where header and footer should be hidden
-  const hideHeaderFooterRoutes = ['/login', '/sign-up'];
-  const shouldHideHeaderFooter = hideHeaderFooterRoutes.includes(location.pathname);
+  const hideHeaderFooterRoutes = [
+    '/login',
+    '/sign-up',
+    '/token-verification',
+    '/forgot-password',
+    '/reset-password/:token',
+    '/verify-email',
+  ];
+
+  // Check if the current route matches any in the list
+  const shouldHideHeaderFooter = hideHeaderFooterRoutes.some((route) =>
+    matchPath({ path: route, end: true }, location.pathname)
+  );
 
   const fetchUserDetails = async () => {
     const dataResponse = await fetch(SummaryApi.current_user.url, {
@@ -45,34 +59,30 @@ function App() {
   };
 
   useEffect(() => {
-    // Fetch user details
     fetchUserDetails();
-
-    // Fetch user cart product count
     fetchUserAddToCart();
   }, []);
 
   return (
     <>
-      {/* Ensure the page scrolls to the top on route change */}
       <ScrollToTop />
 
       <Context.Provider
         value={{
-          fetchUserDetails, // User details fetch
-          cartProductCount, // Current user add-to-cart product count
+          fetchUserDetails,
+          cartProductCount,
           fetchUserAddToCart,
         }}
       >
         <ToastContainer
-          position="top-center"    // Position at the top center
-          autoClose={300}         // Close after 0.3 second
-          limit={1}                // Only display 1 toast at a time
-          closeOnClick             // Close toast on click
-          pauseOnHover             // Pause auto-close on hover
-          draggable                // Allow dragging of toast
-          theme="light"            // Optional: set theme to "light" or "dark"
-          newestOnTop={true}       // Show the newest toast on top
+          position="top-center"
+          autoClose={1000}
+          limit={1}
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="light"
+          newestOnTop={true}
         />
 
         {/* Conditionally render Header and Footer */}

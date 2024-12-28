@@ -43,28 +43,48 @@ const assignOrderToLA = require('../controller/logistic/assignOrderToLA');
 const getActiveLogisticsAssociates = require('../controller/logistic/getActiveLA');
 const getOrderForLA = require('../controller/logistic/getOrderforLA');
 const getActiveLAs = require('../controller/logistic/getActiveLA');
+const verifyEmailController = require('../controller/user/verifyEmail');
+const forgotPassword = require('../controller/user/forgotPassword');
+const resetPassword = require('../controller/user/resetPassword');
+const checkAuth = require('../controller/user/checkAuth');
 
 // Authentication routes
 router.post("/signup", UserSignUpController);
 router.post("/signin", userSignInController);
 router.get("/user-details", authToken, userDetailsController);
 router.get("/userLogout", userLogout);
+router.post("/verify-email", verifyEmailController)
+router.post("/forgot-password", forgotPassword)
+router.post("/reset-password/:token", resetPassword);
+router.get("/check-auth", authToken, checkAuth )
 
 // Token verification route
 router.get("/auth/verify", authToken, (req, res) => {
-    if (req.userId) {
-        res.status(200).json({
-            success: true,
-            message: 'Token verified successfully!',
-            userId: req.userId,
-        });
-    } else {
+    try {
+        // If authToken middleware sets req.userId, the token is valid
+        if (req.userId) {
+            return res.status(200).json({
+                success: true,
+                message: 'Token verified successfully!',
+                userId: req.userId, // Pass the user ID to the response
+            });
+        }
+
+        // If req.userId is not set, return an unauthorized response
         res.status(401).json({
             success: false,
-            message: 'Unauthorized',
+            message: 'Unauthorized access. Please login.',
+        });
+    } catch (err) {
+        // Catch unexpected errors and respond with an appropriate status code
+        console.error("Error in /auth/verify route:", err.message);
+        res.status(500).json({
+            success: false,
+            message: 'Internal Server Error',
         });
     }
 });
+
 
 // Admin panel
 router.get("/all-users", authToken, allUsers);

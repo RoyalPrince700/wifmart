@@ -1,5 +1,5 @@
 const userModel = require("../../models/userModel");
-const { sendWelcomeEmail } = require("../../mailtrap/emails");
+// const { sendWelcomeEmail } = require("../../mailtrap/emails");
 
 async function verifyEmailController(req, res) {
     try {
@@ -27,7 +27,8 @@ async function verifyEmailController(req, res) {
         user.verificationTokenExpiresAt = undefined;
         await user.save();
 
-        await sendWelcomeEmail(user.email);
+        // Commenting out the welcome email
+        // await sendWelcomeEmail(user.email);
 
         res.status(200).json({ success: true, message: "Email verified successfully" });
     } catch (error) {

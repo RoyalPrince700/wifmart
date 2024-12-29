@@ -7,11 +7,11 @@ const productSchema = mongoose.Schema({
     subCategory: { type: String, default: "" },
     hotDeal: { type: String, default: "" },
     productStatus: { type: String, default: "Available" },
-    item: { type: Number, required: true, min: 0 },
-    productImage: { type: [String], default: [] },
+    item: { type: Number, min: 0 },
+    productImage: { type: [String], default: []},
     description: { type: String, default: "" },
-    price: { type: Number, required: true, min: 0 },
-    sellingPrice: { type: Number, required: true, min: 0 },
+    price: { type: Number, min: 0},
+    sellingPrice: { type: Number, required: true, min: 0},
 }, {
     timestamps: true,
 });

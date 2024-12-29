@@ -41,12 +41,34 @@ import { MdStars } from "react-icons/md";
 
 const Header = () => {
 
+  
+    // Your state and functions
+    const [menuDisplay, setMenuDisplay] = useState(false);
+  
+    // Scroll Handler
+    const handleScroll = () => {
+      if (menuDisplay) {
+        setMenuDisplay(false); // Close dropdown on scroll
+      }
+    };
+  
+    // Attach Scroll Event
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+  
+      // Cleanup the listener on unmount
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [menuDisplay]); // Re-run only if menuDisplay changes
+  
+
 
   const [hambugDrop,setHambugDrop] = useState(false)
 
   const user = useSelector((state) => state?.user?.user);
   const dispatch = useDispatch();
-  const [menuDisplay, setMenuDisplay] = useState(false);
+  // const [menuDisplay, setMenuDisplay] = useState(false);
   const context = useContext(Context);
   const navigate = useNavigate();
   const searchInput = useLocation();

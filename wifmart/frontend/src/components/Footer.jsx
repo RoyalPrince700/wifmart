@@ -27,7 +27,7 @@ const Footer = () => {
               className="flex justify-between items-center cursor-pointer text-sm sm:text-base"
               onClick={() => toggleSection('companyInfo')}
             >
-              <h4 className="font-semibold">Company Info</h4>
+              <h3 className="font-semibold">Company Info</h3>
               <FaChevronDown
                 className={`transition-transform ${
                   openSections.companyInfo ? 'rotate-180' : ''

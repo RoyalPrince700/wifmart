@@ -1,5 +1,5 @@
 import React from 'react';
-import wifmart from '../assets/wifmartnew.png'; // Navigates from components to assets
+import wifmart from '../assets/wifmartwhite.png'; // Navigates from components to assets
 
 
 

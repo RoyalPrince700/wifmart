@@ -153,7 +153,8 @@ const Checkout = () => {
 
       <div className="flex flex-col sm:flex-row gap-4 my-3">
         <button
-          className="bg-yellow-600 text-white font-medium px-5 py-3 rounded-lg hover:bg-yellow-700 transition-all duration-300 ease-in-out"
+          className="bg-yellow-500 text-black font-medium px-5 py-3 rounded-lg
+           hover:bg-yellow-600 transition-all duration-300 ease-in-out"
           onClick={handlePayOnDelivery}
         >
           Pay on Delivery

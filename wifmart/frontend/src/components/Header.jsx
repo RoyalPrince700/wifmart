@@ -18,7 +18,8 @@ import { MdOutlineContactSupport } from "react-icons/md";
 import { SlArrowRight } from "react-icons/sl";
 import CategoryDropdown from './CategoryList';
 import icon from '../assets/profile_icon.png'
-import { PiShoppingCartSimple } from "react-icons/pi";
+import { PiShoppingCartSimpleBold } from "react-icons/pi"
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 
@@ -105,13 +106,14 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full  fixed max-h-[85px] h-[95px] bg-white top-0 lg:bg-white lg:h-[90px]  shadow-sm  z-40 flex md:py-4 lg:px-4 sm:py-3 flex-col">
-           <div className="px-2 sm:px-6 flex items-center justify-between sm:py-4 w-full flex-shrink-0">
+    <header className="w-full  fixed max-h-[93px] h-[100px] bg-gray-900 top-0 lg:bg-gray-950 lg:h-[90px]  
+    shadow-sm  z-40 flex  lg:px-4 lg:py-6  flex-col">
+           <div className="px-2 sm:px-6 flex items-center justify-between w-full flex-shrink-0">
 
 {/* Left Section - Logo and Links */}
 <div className="flex items-center gap-5 flex-shrink-0">
   {/* Logo */}
-  <div className="hidden md:flex items-center">
+  <div className="hidden lg:flex items-center">
     <Link to="/">
       <Logo w="120px" h="25px" />
     </Link>
@@ -123,15 +125,16 @@ const Header = () => {
       <CategoryDropdown />
     </div>
     <div className="flex">
-      <p className="text-[14px] font-semibold whitespace-nowrap">Sell on Wifmart</p>
+      <p className="text-[14px] font-semibold text-white whitespace-nowrap">Sell on Wifmart</p>
     </div>
   </div>
 </div>
 
 {/* Search Bar */}
 {!hideSearchBar && (
-  <div className="lg:flex w-[500px] gap-1 hidden flex-shrink-0">
-    <div className="inline-flex px-3 border border-gray-400 rounded-md items-center w-[35vw] min-w-[300px]">
+  <div className="lg:flex w-[500px] ml-4 hidden flex-shrink-0 ">
+    <div className="inline-flex px-3 border bg-white border-gray-400 rounded-l-md items-center 
+    w-[35vw] min-w-[300px]">
       <GrSearch className="text-gray-500" />
       <input
         type="text"
@@ -141,16 +144,18 @@ const Header = () => {
         value={search}
       />
     </div>
-    <button className="bg-yellow-500 text-[12px] shadow-lg text-white py-2 px-4 font-normal rounded-md">
-      Search
+    <button className="bg-yellow-500 text-[12px] shadow-lg ml-[-2px] text-black py-2 px-4 font-semibold rounded-r-md">
+      {/* Search  */}
+      <GrSearch className="text-black text-lg" />
+
     </button>
   </div>
 )}
 
 {/* Right Section - User Menu and Links */}
-<div className="lg:flex hidden items-center gap-7 flex-shrink-0">
+<div className="lg:flex hidden items-center flex-shrink-0">
   {/* User Menu */}
-  <div className="relative flex justify-center">
+  <div className="relative  flex justify-center">
     {user?._id && (
       <div
         className="text-3xl cursor-pointer flex justify-center user-menu"
@@ -164,9 +169,9 @@ const Header = () => {
           />
         ) : (
           <div className="flex gap-2 items-center">
-            <img src={icon} alt="" className="w-5 text-black" />
-            {/* <FaRegCircleUser className="text-2xl" /> */}
-            <p className="text-[14px] font-semibold whitespace-nowrap">Hi, {user?.email?.split('@')[0]}</p>
+            {/* <img src={icon} alt="" className="w-5 text-black" /> */}
+            <FaRegCircleUser className="text-2xl text-white" />
+            <p className="text-[14px] text-white font-semibold whitespace-nowrap">Hi, {user?.email?.split('@')[0]}</p>
           </div>
         )}
       </div>
@@ -228,36 +233,39 @@ const Header = () => {
     <div className="flex items-center gap-6">
       <Link to="/cart" className="text-2xl flex relative">
         <div className="flex items-center gap-2">
-          <PiShoppingCartSimple className="text-2xl" />
-          <p className="font-semibold text-[14px] whitespace-nowrap">Cart</p>
+          <PiShoppingCartSimpleBold className="text-2xl " />
+          <p className="font-semibold text-[14px] text-white whitespace-nowrap">My Cart</p>
         </div>
-        <div className="bg-yellow-600 rounded-full text-white w-3 h-3 p-2 flex items-center justify-center absolute -top-1 -right-3">
+        <div className="bg-yellow-500 rounded-full text-black w-3 h-3 p-2 flex items-center justify-center 
+        absolute -top-1 -right-3">
           <p className="text-sm">{context?.cartProductCount}</p>
         </div>
       </Link>
       <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-2xl" />
-        <p className="font-semibold text-[14px] whitespace-nowrap">Support</p>
+        <MdOutlineContactSupport className="text-2xl text-white" />
+        <p className="font-semibold text-[14px] text-white whitespace-nowrap">Support</p>
       </Link>
     </div>
   ) : (
     <div className="lg:flex hidden items-center gap-5">
-      <Link className="flex items-center gap-2">
-      <img src={icon} alt="" className="w-5 text-black" />
+      <Link to="/login" className="flex items-center gap-2">
+      {/* <img src={icon} alt="" className="w-5 text-black" />
+       */}
+            <FaRegCircleUser className="text-2xl" />
 
-        <p className="text-[14px] font-semibold whitespace-nowrap">Account</p>
+        <p className="text-[14px] font-semibold text-white whitespace-nowrap">Account</p>
       </Link>
       <Link to="/support" className="flex items-center gap-1">
         <MdOutlineContactSupport className="text-2xl" />
-        <p className="text-[14px] font-medium whitespace-nowrap">Support</p>
+        <p className="text-[14px] font-medium text-white whitespace-nowrap">Support</p>
       </Link>
       <Link to="/cart" className="flex items-center gap-1">
-        <PiShoppingCartSimple className="text-2xl " />
-        <p className="text-[14px] font-medium whitespace-nowrap">My Cart</p>
+        <PiShoppingCartSimpleBold className="text-2xl " />
+        <p className="text-[14px] font-medium text-white whitespace-nowrap">My Cart</p>
       </Link>
       <Link
         to="/login"
-        className="px-4 py-2 rounded-md text-white hover:bg-yellow-700 bg-yellow-500 font-normal p-3 text-[12px]"
+        className="px-6 py-3 rounded-md text-black hover:bg-yellow-500 bg-yellow-500 font-semibold p-3 text-[12px]"
       >
         Login
       </Link>
@@ -269,13 +277,13 @@ const Header = () => {
 
       {/* mobile */}
 
-          <div className="flex-col pt-4 pb-3 md:hidden">
+          <div className="flex-col pt-4 pb-3 lg:hidden">
               
           <div className="flex px-4 justify-between pb-2 lg:hidden items-center">
   {/* Logo */}
-  <div className=" md:hidden  ml-[-14px]">
+  <div className=" lg:hidden  ml-[-5px]">
     <Link to="/" className="">
-      <Logo w="100px" h="20px" />
+      <Logo w="120px" h="20px" />
     </Link>
   </div>
 
@@ -295,11 +303,15 @@ const Header = () => {
               alt={user?.name}
             />
           ) : (
-            <img src={icon} alt="" className="w-4 text-black" />
+            // <img src={icon} alt="" className="w-4 text-black" />
+            <FaRegCircleUser className="text-2xl text-white" />
+
           )
         ) : (
           <Link to="/login">
-            <img src={icon} alt="" className="w-4 text-black" />
+            {/* <img src={icon} alt="" className="w-4 text-black" /> */}
+            <FaRegCircleUser className="text-2xl text-white" />
+
           </Link>
         )}
       </div>
@@ -366,19 +378,19 @@ const Header = () => {
     {/* Cart Icon */}
     <Link to="/cart" className="relative flex items-center">
       <div className="flex items-center gap-2">
-        <PiShoppingCartSimple className="text-xl" />
+        <PiShoppingCartSimpleBold className="text-2xl text-white" />
       </div>
       {user?._id && (
-        <div className="bg-[#ffc518] absolute top-[-4px] right-[-5px] rounded-full text-white w-3 h-3 flex items-center justify-center shadow-sm">
+        <div className="bg-[#ffc518] absolute top-[-4px] right-[-5px] rounded-full text-black w-3 h-3 flex items-center justify-center shadow-sm">
           <p className="text-[10px] shadow-sm">{context?.cartProductCount}</p>
         </div>
       )}
     </Link>
 
     {/* Hamburger Menu */}
-    <RxHamburgerMenu
+    <GiHamburgerMenu
       onClick={() => setHambugDrop(!hambugDrop)}
-      className="lg:hidden flex text-md cursor-pointer h-5"
+      className="lg:hidden flex text-md cursor-pointer text-white text-2xl"
     />
   </div>
 </div>
@@ -404,114 +416,124 @@ const Header = () => {
           ${hambugDrop ? 'w-[100vw]' : 'w-0'}`}>
 
         {/* logo and cross */}
-        <div>
-          <div className='flex items-center justify-center pt-6'>
+        <div className="flex justify-between items-center px-2 w-full bg-gray-900 h-[70px]">
+          <div className='flex items-center '>
             <Link to="/" onClick={() => setHambugDrop(false)}>
             <Logo w="100px" h="20px" />
 
             </Link>
           </div>
           <div>
-            <RxCross1 onClick={() => setHambugDrop(false)} className='text-xl cursor-pointer absolute right-3 top-5' />
+            <RxCross1 onClick={() => setHambugDrop(false)} className='text-xl text-white cursor-pointer ' />
           </div>
-          <hr className='border-none w-full h-[0.5px] bg-gray-300 mt-5' />
         </div>
 
 
 
         {/* Menu Items */}
-        <div className='px-6 pt-4 font-normal overflow-y-auto h-[calc(100vh-64px)]'>
+        <div className='px-2 pt-4 font-normal overflow-y-auto h-[calc(100vh-64px)]'>
           {/* These items should stack vertically */}
           <div className='flex flex-col w-full justify-center'>
-                 <NavLink
-                    to="/support" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5
-                     hover:bg-yellow-600 hover:text-white cursor-pointer"
-                    >
-                      <MdOutlineContactSupport className="text-xl" />
-                    <p>Support</p>
-                 </NavLink>
-
-                 <NavLink
-                    to="/cart" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
-                    >
-                      <PiShoppingCartSimple className="text-xl" />
-                    <p>My Cart</p>
-                 </NavLink>
-                 
+               
+          <div className='text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2
+                       cursor-pointer'>
+    {user ? (
+      // Logout button when user is logged in
+      <div
+        onClick={() => {
+          handleLogout();
+          setHambugDrop(false); // Close dropdown after logging out
+        }}
+        className=' 
+         text-gray-500  rounded w-[90vw] px'
+      >
+        Logout
+      </div>
+    ) : (
+      // Login button when user is not logged in
+      <Link to="/login">
+        <div
+          onClick={() => setHambugDrop(false)} // Close dropdown after clicking login
+          className=' 
+           text-gray-500 rounded  w-[90vw] px'
+        >
+          Login &gt; &gt;
+        </div>
+      </Link>
+    )}
+  </div>
+          
             <hr className='border-none h-[0.5px] w-full mb-2 bg-gray-200' />
-            <div className='flex justify-between px-5 items-center py-2'>
+            <div className='flex justify-between px-2 items-center py-2'>
                 <p className='text-gray-600 text-[14px]'>OUR CATEGORIES</p>
-                <p className='text-yellow-500'>See All</p>
             </div>
             <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <IoPhonePortraitSharp className="text-xl" />
                     <p>Phone and Tablet</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <FiTv className="text-xl" />
                     <p>Appliances</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <FiTv className="text-xl" />
                     <p>Electronics</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <CiApple className="text-xl" />
                     <p>Supermarket</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <GiLipstick className="text-xl" />
                     <p>Health & Beauty</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <MdOutlineHomeWork className="text-xl" />
                     <p>Home & Office</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <CiHome className="text-xl" />
                     <p>Power</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <LuTicket className="text-xl" />
                     <p>Computing</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <GiClothes className="text-xl" />
                     <p>Women's Fashion</p>
                  </NavLink>
                  <NavLink
                     to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
-                    className="text-gray-500 pb-48 font-normal hover:font-semibold flex 
-                    items-center gap-2  py-5 px-5 hover:bg-yellow-600 hover:text-white cursor-pointer"
+                    className="text-gray-500 pb-10 font-normal hover:font-semibold flex 
+                    items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <GiClothes className="text-xl" />
                     <p>Men's Fashion</p>
@@ -520,36 +542,7 @@ const Header = () => {
               </div>   
         
         </div>
-        <div className='bottom-0 absolute bg-yellow-100 shadow-2xl w-full h-36'>
-  <div className='flex flex-col gap-3 items-center my-4'>
-    {user ? (
-      // Logout button when user is logged in
-      <button
-        onClick={() => {
-          handleLogout();
-          setHambugDrop(false); // Close dropdown after logging out
-        }}
-        className='bg-yellow-600 border hover:border-yellow-600 hover:text-yellow-600
-        hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
-      >
-        Logout
-      </button>
-    ) : (
-      // Login button when user is not logged in
-      <Link to="/login">
-        <button
-          onClick={() => setHambugDrop(false)} // Close dropdown after clicking login
-          className='bg-yellow-600 border hover:border-yellow-600 hover:text-yellow-600
-          hover:bg-yellow-100 text-white py-3 rounded mx-4 w-[90vw] px'
-        >
-          Login
-        </button>
-      </Link>
-    )}
-  </div>
-</div>
-
-
+      
 
       </div>
         </div>

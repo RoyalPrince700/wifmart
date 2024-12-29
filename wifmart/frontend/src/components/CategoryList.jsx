@@ -31,8 +31,8 @@ const CategoryDropdown = () => {
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <BiCategoryAlt className="text-xl" />
-        <p className="text-[14px] font-semibold">All Categories</p>
+        <BiCategoryAlt className="text-xl text-white" />
+        <p className="text-[14px] text-white font-semibold">All Categories</p>
       </div>
 
       {/* Dropdown content */}

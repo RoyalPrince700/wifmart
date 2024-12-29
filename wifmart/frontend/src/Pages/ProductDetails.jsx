@@ -112,12 +112,12 @@ const ProductDetails = () => {
 
         {/* Product Details */}
         <div className="flex flex-col gap-1">
-          <p className="bg-yellow-200 text-yellow-600 px-2 rounded-md inline-block w-fit">
+          <p className="bg-gray-200 text-gray-600 px-2 rounded-md inline-block w-fit">
             {data?.brandName}
           </p>
           <h2 className="text-2xl lg:text-4xl font-medium">{data?.productName}</h2>
-          <p className="capitalize text-slate-400">{data?.category}</p>
-          <div className="text-yellow-600 flex items-center gap-1">
+          <p className="capitalize text-slate-900">{data?.category}</p>
+          <div className="text-gray-900 flex items-center gap-1">
             <FaStar />
             <FaStar />
             <FaStar />
@@ -125,25 +125,26 @@ const ProductDetails = () => {
             <FaStarHalf />
           </div>
           <div className="flex items-center space-x-2">
-            {data?.price > 0 && <p className="text-slate-500 line-through">{displayNARCurrency(data?.price)}</p>}
-            {data?.sellingPrice > 0 && <p className="text-yellow-600 font-semibold text-lg">{displayNARCurrency(data?.sellingPrice)}</p>}
+            {data?.price > 0 && <p className="text-black line-through">{displayNARCurrency(data?.price)}</p>}
+            {data?.sellingPrice > 0 && <p className="text-black font-semibold text-lg">{displayNARCurrency(data?.sellingPrice)}</p>}
           </div>
           <div className="flex items-center my-2 gap-3">
   <button
-    className="border-2 text-yellow-600 font-medium rounded-lg px-4 py-2 min-w-[140px] border-yellow-600 
-    hover:bg-yellow-600 hover:text-white transition-all duration-300 ease-in-out"
+    className="border-2 text-black font-medium rounded-lg px-4 py-2 min-w-[140px] border-black 
+    bg-gray-100 hover:bg-gray-900 hover:text-[#F5F5DC] transition-all duration-300 ease-in-out"
     onClick={(e) => handleBuyProduct(e, data?._id)}
   >
     Buy Now
   </button>
   <button
-    className="border-2 font-medium rounded-lg text-white bg-yellow-600 px-4 py-2 min-w-[140px] border-yellow-600 
-    hover:text-yellow-600 hover:bg-transparent transition-all duration-300 ease-in-out"
+    className="border-2 text-black font-medium rounded-lg px-4 py-2 min-w-[140px] border-black
+    bg-gray-100 hover:bg-gray-900 hover:text-[#F5F5DC] transition-all duration-300 ease-in-out"
     onClick={(e) => handleAddToCart(e, data?._id)}
   >
     Add to Cart
   </button>
 </div>
+
 
           <div>
             <p className="text-slate-600 font-medium my-1">Description :</p>

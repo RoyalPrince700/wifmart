@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
 import SummaryApi from "../common";
@@ -47,72 +47,68 @@ const ResetPassword = () => {
 
   return (
     <motion.section
-      id="reset-password"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+    id="reset-password"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    <div
+      className="mx-auto  h-[100vh] flex items-center justify-center p-4 bg-gradient-to-br from-gray-800 to-gray-900 text-white"
     >
-      <div className="mx-auto container p-4 mt-16 lg:mt-0">
-        <div
-          className="flex justify-center mb-8"
-        
-        >
-          <Logo w="100px" h="20px" />
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="backdrop-blur-md bg-gray-700/50 mx-auto p-6 w-full max-w-md rounded-lg shadow-xl"
+      >
+        <div className="flex justify-center mb-8">
+          <Link to="/">
+            <Logo w="120px" h="20px" />
+          </Link>
         </div>
-
-        <motion.div
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white mx-auto p-4 w-full max-w-md py-5 rounded-md shadow-lg"
-              >
-          <h1 className="text-center text-xl font-semibold mb-4">Reset Your Password</h1>
-          <form
-            className="pt-6 flex flex-col gap-2"
-            onSubmit={handleSubmit}
+        <h1 className="text-center text-xl font-semibold text-gray-300 mb-6">
+          Reset Your Password
+        </h1>
+  
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div>
+            <label className="block mb-2 text-sm font-medium">New Password:</label>
+            <input
+              type="password"
+              placeholder="Enter new password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 rounded-md bg-gray-800/60 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              required
+            />
+          </div>
+  
+          <div>
+            <label className="block mb-2 text-sm font-medium">Confirm Password:</label>
+            <input
+              type="password"
+              placeholder="Confirm new password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full p-3 rounded-md bg-gray-800/60 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              required
+            />
+          </div>
+  
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-4 rounded-md shadow-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 disabled:opacity-50"
           >
-            <div>
-              <label>New Password:</label>
-              <div className="bg-slate-100 p-2">
-                <input
-                  type="password"
-                  placeholder="Enter new password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-full outline-none bg-transparent"
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <label>Confirm Password:</label>
-              <div className="bg-slate-100 p-2">
-                <input
-                  type="password"
-                  placeholder="Confirm new password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full h-full outline-none bg-transparent"
-                  required
-                />
-              </div>
-            </div>
-
-            <motion.button
-              className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-4 w-full text-center
-               max-w-[300px] rounded-md hover:scale-110 transition-all mx-auto block mt-6"
-              type="submit"
-              disabled={isSubmitting}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {isSubmitting ? "Resetting..." : "Reset Password"}
-            </motion.button>
-          </form>
-        </motion.div>
-      </div>
-    </motion.section>
+            {isSubmitting ? "Resetting..." : "Reset Password"}
+          </motion.button>
+        </form>
+      </motion.div>
+    </div>
+  </motion.section>
+  
   );
 };
 

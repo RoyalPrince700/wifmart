@@ -78,7 +78,7 @@ const BannerProduct = () => {
   }, [currrentImage]);
 
   return (
-    <div className="px-2 lg:mt-[95px] mt-[93px] rounded-md">
+    <div className="px-1 lg:mt-[95px] mt-[93px] rounded-md">
       <div className="h-[160px] sm:h-56 md:h-72 w-full bg-slate-200 rounded-2xl relative">
         <div className="absolute z-10 w-full h-full md:flex  items-center hidden">
           <div className="flex justify-between w-full text-2xl ">

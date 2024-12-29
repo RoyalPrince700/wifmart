@@ -60,9 +60,9 @@ const HotDealWiseDisplay = ({ hotDeal, heading }) => {
 
                 {/* Product Details */}
                 <div className="p-4">
-                  <h2 className="font-semibold text-lg text-black truncate">
+                  <p className="font-semibold text-lg text-black truncate">
                     {product?.productName}
-                  </h2>
+                  </p>
                   <p className="text-gray-500 capitalize mt-1">
                     {product?.hotDeal}
                   </p>

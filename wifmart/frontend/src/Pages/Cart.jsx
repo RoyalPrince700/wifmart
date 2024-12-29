@@ -222,7 +222,8 @@ const Cart = () => {
                     <p className="font-medium">{displayNARCurrency(totalPrice)}</p>
                   </div>
                   <button
-                    className="w-full bg-yellow-600 text-white py-2 rounded-lg shadow-md hover:bg-yellow-700"
+                    className="w-full bg-yellow-500 text-black py-2 rounded-lg shadow-md
+                     hover:bg-yellow-600"
                     onClick={handleCheckout}
                   >
                     Checkout

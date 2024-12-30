@@ -95,10 +95,16 @@ const Footer = () => {
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
             <p className="text-sm text-gray-400">&copy; 2024 WIFMART. All Rights Reserved.</p>
             <div className="flex space-x-4 text-lg text-gray-300">
-              <FaFacebook className="hover:text-yellow-500" />
-              <FaTwitter className="hover:text-yellow-500" />
-              <FaInstagram className="hover:text-yellow-500" />
-              <FaPinterest className="hover:text-yellow-500" />
+              {/* <FaFacebook className="hover:text-yellow-500" /> */}
+              <a href="https://x.com/Wifmartofficial?t=lrCWxgox2bR5yiHPktXWUw&s=09" target="_blank" rel="noopener noreferrer">
+  <FaTwitter className="hover:text-yellow-500" />
+</a>
+
+<a href="https://www.instagram.com/wifmartofficial?igsh=MTY5Mnh0c21hbGxlag==" target="_blank" rel="noopener noreferrer">
+  <FaInstagram className="hover:text-yellow-500" />
+</a>
+
+              {/* <FaPinterest className="hover:text-yellow-500" /> */}
             </div>
           </div>
           <div className="mt-4 text-center text-sm space-x-4 text-gray-400">

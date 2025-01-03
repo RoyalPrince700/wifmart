@@ -29,7 +29,15 @@ const SummaryApi = {
     allUser : {
         url : `${backendDomain}/api/all-users`,
         method : 'get'
-    },allLogistics : {
+    },userGrowth : {
+        url : `${backendDomain}/api/user-growth`,
+        method : 'get'
+    },
+    allUserActivity : {
+        url : `${backendDomain}/api//all-users-activity`,
+        method : 'get'
+    },
+    allLogistics : {
         url : `${backendDomain}/api/all-logistics-associate`,
         method : 'get'
     },getActiveLA : {
@@ -46,6 +54,16 @@ const SummaryApi = {
     allOrders : {
         url : `${backendDomain}/api/all-orders`,
         method : 'get'
+    },assignedOrders : {
+        url : `${backendDomain}/api/assigned-order`,
+        method : 'get'
+    },
+    dailySales : {
+        url : `${backendDomain}/api/daily-sales`,
+        method : 'get'
+    }, salesByChannel : {
+        url : `${backendDomain}/api/sales-channel`,
+        method : `get`
     },
     updateUser : {
         url : `${backendDomain}/api/update-user`,
@@ -65,6 +83,10 @@ const SummaryApi = {
     },
     allProduct : {
         url : `${backendDomain}/api/get-product`,
+        method : "get"
+    },
+    salesTrend : {
+        url : `${backendDomain}/api/sales-trend`,
         method : "get"
     },
     updateProduct : {

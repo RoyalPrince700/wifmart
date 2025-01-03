@@ -12,10 +12,15 @@ const CategoryDropdown = () => {
 
   const fetchCategoryProduct = async () => {
     setLoading(true);
-    const response = await fetch(SummaryApi.categoryProduct.url);
-    const dataResponse = await response.json();
-    setLoading(false);
-    setCategoryProduct(dataResponse.data);
+    try {
+      const response = await fetch(SummaryApi.categoryProduct.url);
+      const dataResponse = await response.json();
+      setCategoryProduct(dataResponse.data || []); // Fallback to empty array if no data
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -47,23 +52,27 @@ const CategoryDropdown = () => {
               ? categoryLoading.map((_, index) => (
                   <div
                     className="h-12 w-full rounded-md bg-slate-200 animate-pulse"
-                    key={"categoryLoading" + index}
+                    key={`categoryLoading-${index}`}
                   ></div>
                 ))
               : categoryProduct.map((product, index) => (
                   <Link
                     to={`/product-category?category=${product?.category}`}
                     className="flex items-center gap-2 p-2 hover:bg-slate-100 rounded-md"
-                    key={product?.category}
+                    key={product?.category || `product-${index}`} // Fallback key
                   >
                     <div className="w-10 h-10 rounded-md overflow-hidden bg-slate-200 flex items-center justify-center">
-                      <img
-                        src={product?.productImage[0]}
-                        alt={product?.category}
-                        className="h-full object-scale-down mix-blend-multiply"
-                      />
+                      {product?.productImage?.[0] ? ( // Check if productImage exists and has at least one element
+                        <img
+                          src={product.productImage[0]}
+                          alt={product.category || 'Category'}
+                          className="h-full object-scale-down mix-blend-multiply"
+                        />
+                      ) : (
+                        <span className="text-xs text-gray-500">No Image</span> // Placeholder for missing image
+                      )}
                     </div>
-                    <span className="capitalize">{product?.category}</span>
+                    <span className="capitalize">{product?.category || 'Unknown'}</span>
                   </Link>
                 ))}
           </div>
@@ -74,6 +83,7 @@ const CategoryDropdown = () => {
 };
 
 export default CategoryDropdown;
+
 
 
 

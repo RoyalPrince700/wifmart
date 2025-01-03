@@ -4,24 +4,24 @@ const assignOrderToLA = async (req, res) => {
     try {
         console.log("Request received:", req.body); // Log the request body for debugging
 
-        const { userId } = req.body;
+        const { userId, orderId } = req.body; // Include orderId in the request
 
-        // Validate the userId in the request
-        if (!userId) {
-            console.log("Error: UserId is missing in the request.");
-            return res.status(400).json({ success: false, message: "UserId is required" });
+        // Validate the userId and orderId in the request
+        if (!userId || !orderId) {
+            console.log("Error: UserId or OrderId is missing in the request.");
+            return res.status(400).json({ success: false, message: "UserId and OrderId are required" });
         }
 
-        // Find and update the first unassigned pending order
+        // Find and update the specified order
         const updatedOrder = await Checkout.findOneAndUpdate(
-            { status: "Pending", assignedTo: null }, // Filter: Pending and unassigned orders
+            { _id: orderId, status: "Pending", assignedTo: null }, // Filter by orderId and unassigned status
             { assignedTo: userId }, // Assign to the specified user
             { new: true } // Return the updated document
         );
 
         if (!updatedOrder) {
-            console.log("No pending orders available to assign.");
-            return res.status(404).json({ success: false, message: "No pending orders available" });
+            console.log("Order not found or already assigned.");
+            return res.status(404).json({ success: false, message: "Order not found or already assigned" });
         }
 
         console.log("Order successfully assigned:", {

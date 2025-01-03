@@ -29,6 +29,12 @@ import AboutUs from "../Pages/AboutUs";
 import ContactUs from "../Pages/ContactUs";
 import TokenVerification from "../Pages/TokenVerification";
 import ResetPassword from "../Pages/ResetPassword";
+import AdminOverview from "../Pages/AdminOverview";
+import OverviewPage from "../Pages/OverviewPage";
+import UsersPage from "../Pages/UsersPage";
+import SalesPage from "../Pages/SalesPage";
+import OrdersPage from "../Pages/OrdersPage";
+import AssignedOrders from "../Pages/AssignedOrders";
 
 const router = createBrowserRouter([
     {
@@ -106,7 +112,7 @@ const router = createBrowserRouter([
             }, {
                 path: "checkout",
                 element: <Checkout />,
-            },
+            }, 
             {
                 path: "la-panel",
                 element: <LADashboard />,
@@ -118,19 +124,45 @@ const router = createBrowserRouter([
                 ],
             },
             {
-                path: "admin-panel",
-                element: <AdminPanel />,
+                path: "admin-overview",
+                        element: <AdminOverview />,
                 children: [
                     {
-                        path: "all-users",
-                        element: <AllUsers />,
+                        path: "overview",
+                        element: <OverviewPage />,
                     },
                     {
                         path: "all-products",
                         element: <AllProducts />,
                     }, {
-                        path: "all-orders",
-                        element: <AllOrders />,
+                        path: "user-page",
+                                element: <UsersPage />,
+                    },{
+                        path: "order-page",
+                                element: <OrdersPage />,
+                    },{
+                        path: "sale-page",
+                        element: <SalesPage />,
+                    },
+                    
+                    {
+                        path: "admin-overview",
+                        element: <AdminOverview />,
+                        children: [
+                            {
+                                path: "overview",
+                                element: <OverviewPage />,
+                            },{
+                                path: "user-page",
+                                element: <UsersPage />
+                            },{
+                                path: "sale-page",
+                                element: <SalesPage />
+                            },{
+                                path: "order-page",
+                                element: <OrdersPage />
+                            },
+                        ]
                     },
                 ],
             },
@@ -147,6 +179,10 @@ const router = createBrowserRouter([
                     },{
                         path: "hr-orders",
                         element: <HRAllOrders />,
+                    },
+                    {
+                        path: "assigned-orders",
+                        element: <AssignedOrders />,
                     },
                   
                 ],

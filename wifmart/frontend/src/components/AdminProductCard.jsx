@@ -9,50 +9,51 @@ const AdminProductCard = ({ data, fetchdata }) => {
     const [deleteProduct, setDeleteProduct] = useState(false); // State for managing delete modal visibility
 
     return (
-        <div className='bg-white p-4 rounded shadow'>
-            <div className='w-40'>
-                <div className='w-32 h-32 flex justify-center items-center'>
-                    <img
-                        src={data?.productImage[0]}
-                        width={120}
-                        height={120}
-                        className='object-fill mx-auto h-full rounded'
-                        alt={data?.productName || "Product Image"}
-                    />
-                </div>
-                <h1 className='text-ellipsis line-clamp-2 font-medium my-2'>
-                    {data?.productName}
-                </h1>
-
-                <div>
-                    {/* Conditionally render the price if it's greater than 0 */}
-                    {data.sellingPrice > 0 && (
-                        <p className='font-semibold text-black'>
-                            {displayNGNCurrency(data.sellingPrice)}
-                        </p>
-                    )}
-
-                    <div className='flex gap-2 mt-2'>
-                        {/* Edit button to open the modal */}
-                        <div
-                            className='w-fit ml-auto p-2 cursor-pointer bg-red-100 hover:text-white hover:bg-red-600 rounded-full'
-                            onClick={() => setEditProduct(true)}
-                        >
-                            <MdModeEditOutline />
-                        </div>
-
-                        {/* Delete button to open the delete modal */}
-                        <div
-                            className='w-fit ml-auto p-2 cursor-pointer bg-red-100 hover:text-white hover:bg-red-600 rounded-full'
-                            onClick={() => setDeleteProduct(true)}
-                        >
-                            <MdDelete />
-                        </div>
-                    </div>
-                </div>
+        <div className="bg-white p-4 rounded shadow-md w-48 hover:shadow-lg transition-shadow">
+            {/* Product Image */}
+            <div className="w-full h-32 flex justify-center items-center mb-2">
+                <img
+                    src={data?.productImage[0] || '/placeholder-image.png'} // Fallback image
+                    className="object-cover w-full h-full rounded"
+                    alt={data?.productName || "Product Image"}
+                />
             </div>
 
-            {/* Display the edit product modal */}
+            {/* Product Name */}
+            <h1 className="text-gray-800 text-sm font-semibold mb-2 truncate">
+                {data?.productName || "Unnamed Product"}
+            </h1>
+
+            {/* Product Price */}
+            {data.sellingPrice > 0 && (
+                <p className="text-yellow-700 font-bold text-sm mb-2">
+                    {displayNGNCurrency(data.sellingPrice)}
+                </p>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex justify-end gap-2 mt-2">
+    {/* Edit Button */}
+    <button
+        className="p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white transition-all"
+        onClick={() => setEditProduct(true)}
+        title="Edit Product"
+    >
+        <MdModeEditOutline className="text-xl" />
+    </button>
+
+    {/* Delete Button */}
+    <button
+        className="p-2 rounded-full bg-red-500 hover:bg-red-700 text-white transition-all"
+        onClick={() => setDeleteProduct(true)}
+        title="Delete Product"
+    >
+        <MdDelete className="text-xl" />
+    </button>
+</div>
+
+
+            {/* Edit Product Modal */}
             {editProduct && (
                 <AdminEditProduct
                     productData={data}
@@ -61,7 +62,7 @@ const AdminProductCard = ({ data, fetchdata }) => {
                 />
             )}
 
-            {/* Display the delete product modal conditionally */}
+            {/* Delete Product Modal */}
             {deleteProduct && (
                 <AdminDeleteProduct
                     productId={data?._id} // Use `_id` from the product schema

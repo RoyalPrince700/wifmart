@@ -204,7 +204,7 @@ const Header = () => {
         <nav className="flex flex-col gap-2">
           {user?.role === ROLE.ADMIN && (
             <Link
-              to="/admin-panel/all-products"
+              to="/admin-overview"
               className="whitespace-nowrap text-[14px] font-normal hover:bg-gray-100 p-2 rounded"
               onClick={() => setMenuDisplay(false)}
             >

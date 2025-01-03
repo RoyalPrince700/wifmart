@@ -37,18 +37,18 @@ const ChangeOrderStatus = ({ orderId, currentStatus, onClose, callFunc }) => {
     };
 
     return (
-        <div className="fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-center items-center bg-slate-200 bg-opacity-40">
-            <div className="mx-auto bg-white shadow-md p-4 w-full max-w-sm">
-                <button className="block ml-auto" onClick={onClose}>
-                    <IoMdClose />
+        <div className="fixed inset-0 w-full h-full z-10 flex justify-center items-center bg-black bg-opacity-60">
+            <div className="mx-auto bg-gray-800 text-white shadow-md p-6 w-full max-w-sm rounded-lg">
+                <button className="block ml-auto text-white hover:text-red-500" onClick={onClose}>
+                    <IoMdClose size={24} />
                 </button>
-                <h1 className="pb-4 text-lg font-medium">Change Order Status</h1>
-                <p>Order ID: {orderId}</p>
+                <h1 className="pb-4 text-xl font-semibold text-yellow-500">Change Order Status</h1>
+                <p className="text-gray-300 mb-4">Order ID: <span className="text-white">{orderId}</span></p>
 
                 <div className="flex items-center justify-between my-4">
-                    <p>Status</p>
+                    <p className="text-gray-300">Status</p>
                     <select
-                        className="border px-4 py-1"
+                        className="border border-gray-600 bg-gray-700 text-white px-4 py-2 rounded-md focus:outline-none focus:ring focus:ring-yellow-500"
                         value={orderStatus}
                         onChange={handleStatusChange}
                     >
@@ -61,7 +61,7 @@ const ChangeOrderStatus = ({ orderId, currentStatus, onClose, callFunc }) => {
                 </div>
 
                 <button
-                    className="w-fit text-white hover:bg-yellow-700 cursor-pointer bg-yellow-600 mx-auto block py-1 px-3 rounded-full"
+                    className="w-full text-white bg-yellow-600 hover:bg-yellow-700 py-2 px-4 rounded-md mt-4"
                     onClick={updateOrderStatus}
                 >
                     Change Status

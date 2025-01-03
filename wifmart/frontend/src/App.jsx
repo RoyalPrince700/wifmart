@@ -13,6 +13,7 @@ import ScrollToTop from './components/ScrollTop';
 
 
 import { matchPath } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const dispatch = useDispatch();

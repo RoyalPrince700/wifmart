@@ -113,9 +113,9 @@ const UploadProduct = ({
   }
 
   return (
-    <div className='fixed bg-opacity-35 flex justify-center mt-10 items-center bg-slate-200
+    <div className='fixed bg-opacity-35 flex justify-center mt-10 items-center bg-gray-800
      w-full h-full bottom-0 top-0 left-0 right-0'>
-        <div className='bg-white rounded p-4 w-full max-w-2xl h-full max-h-[80%]
+        <div className='bg-gray-700 rounded p-4 w-full max-w-2xl h-full max-h-[80%]
         overflow-hidden'>
             {/* Modal header with close button */}
             <div className='flex justify-between items-center pb-3'>

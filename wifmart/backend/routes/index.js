@@ -47,6 +47,12 @@ const verifyEmailController = require('../controller/user/verifyEmail');
 const forgotPassword = require('../controller/user/forgotPassword');
 const resetPassword = require('../controller/user/resetPassword');
 const checkAuth = require('../controller/user/checkAuth');
+const allUserActivity = require('../controller/user/allUserActivity');
+const userGrowth = require('../controller/user/userGrowth');
+const dailySalesController = require('../controller/order/dailySalesController');
+const salesByChannelController = require('../controller/order/salesByChannelController');
+const salesTrendController = require('../controller/order/salesTrendController');
+const assignedOrdersController = require('../controller/order/assignedOrder');
 
 // Authentication routes
 router.post("/signup", UserSignUpController);
@@ -88,28 +94,36 @@ router.get("/auth/verify", authToken, (req, res) => {
 
 // Admin panel
 router.get("/all-users", authToken, allUsers);
+router.get("/user-growth", authToken, userGrowth);
+router.get("/all-users-activity", authToken, allUserActivity);
+
+
 router.get("/all-logistics-associate", authToken, allLogisticsAssociates);
 router.get("/get-active-logistics-associate", authToken, getActiveLAs);
+router.get("/assigned-order", assignedOrdersController);
+
 
 
 router.get("/all-orders", authToken, allOrdersController);
+router.get("/daily-sales", authToken, dailySalesController);
+router.get("/sales-channel", authToken, salesByChannelController);
+router.get("/sales-trend", authToken, salesTrendController);
+
+
+ 
+
+
 
 router.post("/update-user", authToken, updateUser);
 router.post("/update-logistics-attendants", authToken, updateLogisticsAttendant);
 router.post("/assign-logistics-attendants", authToken, assignOrderToLA);
 router.get("/get-order-logistics-attendants", authToken, getOrderForLA);
 
-
-
-
 router.post("/update-user-order", authToken, updateOrderStatus);
-
 router.post("/delete-uploaded-product", authToken, deleteProductController);
 router.post('/api/place-food-order', authToken, placeFoodOrder);
-
 // Food menu route
 router.get('/api/food-menu', getFoodMenuController);
-
 // Upload product
 router.post("/upload-product", authToken, uploadProductController);
 router.get("/get-product", getProductController);
@@ -118,18 +132,12 @@ router.get("/get-categoryProduct", getCategoryProduct);
 router.get("/get-sub-categoryProduct", getSubCategoryProduct);
 router.get("/get-hot-dealProduct", getHotDealWiseProduct);
 router.get("/get-product-status", getProductStatus);
-
 router.post("/category-product", getCategoryWiseProduct);
 router.post("/sub-category-product", getSubCategoryWiseProduct);
 router.post("/hot-deal-product", getHotDealWiseProduct);
 router.post("/product-status", getProductStatusWise);
-
 router.post("/product-details", getProductDetails);
-
-
-
 router.post('/checkout', authToken, createCheckout); // Create checkout
-
 // User add to cart
 router.post("/addtocart", authToken, addToCartController);
 router.get("/countAddToCartProduct", authToken, countAddToCartProduct);
@@ -139,7 +147,6 @@ router.post("/delete-cart-product", authToken, deleteAddToCartProduct);
 router.get("/search", searchProduct);
 router.post("/filter-product", filterProductController);
 router.get('/payondelivery-orders', authToken, getUserOrders);
-
 // Payment and order
 router.post("/process-payment", authToken, paymentController);
 router.post("/webhook", webhooks);

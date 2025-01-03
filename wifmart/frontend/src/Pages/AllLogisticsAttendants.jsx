@@ -35,7 +35,7 @@ const AllLogistics = () => {
     }, []);
 
     return (
-        <div className="pb-4 bg-white mt-[110px]">
+        <div className="pb-4 bg-gray-800 mt-[110px]">
             {/* Mobile View */}
             <div className="md:hidden">
                 {allLogistics.map((el, index) => (
@@ -43,7 +43,7 @@ const AllLogistics = () => {
                         <p><strong>Sr:</strong> {index + 1}</p>
                         <p><strong>Email:</strong> {el.email}</p>
                         <button
-                            className="text-yellow-500 underline mt-2"
+                            className="text-gray-500 underline mt-2"
                             onClick={() => setSelectedLogistics(el)}
                         >
                             View More
@@ -55,7 +55,7 @@ const AllLogistics = () => {
             {/* Desktop Table */}
             <table className="w-full userTable hidden md:table">
                 <thead>
-                    <tr className="bg-black text-white">
+                    <tr className="bg-gray-900 text-white">
                         <th>Sr.</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -65,7 +65,7 @@ const AllLogistics = () => {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='bg-gray-800'>
                     {allLogistics.map((el, index) => (
                         <tr key={el._id}>
                             <td>{index + 1}</td>
@@ -76,7 +76,7 @@ const AllLogistics = () => {
                             <td>{moment(el?.createdAt).format('ll')}</td>
                             <td className="flex space-x-2">
                                 <button
-                                    className="bg-yellow-100 p-2 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white"
+                                    className="bg-gray-600 p-2 rounded-full cursor-pointer hover:bg-gray-500 hover:text-white"
                                     onClick={() => {
                                         setSelectedLogistics(el);
                                         setOpenUpdateStatus(true);
@@ -85,7 +85,7 @@ const AllLogistics = () => {
                                     Edit Status
                                 </button>
                                 <button
-                                    className="bg-yellow-100 p-2 rounded-full cursor-pointer hover:bg-yellow-500 hover:text-white"
+                                    className="bg-gray-600 p-2 rounded-full cursor-pointer hover:bg-gray-500 hover:text-white"
                                     onClick={() => {
                                         setSelectedLogistics(el);
                                         setOpenUpdateLocation(true);
@@ -111,13 +111,13 @@ const AllLogistics = () => {
                         <p><strong>Created Date:</strong> {moment(selectedLogistics.createdAt).format('ll')}</p>
                         <div className="mt-4 space-y-2">
                             <button
-                                className="block w-full bg-yellow-500 text-white py-2 rounded"
+                                className="block w-full bg-gray-500 text-white py-2 rounded"
                                 onClick={() => setOpenUpdateLocation(true)}
                             >
                                 Edit Location
                             </button>
                             <button
-                                className="block w-full bg-yellow-500 text-white py-2 rounded"
+                                className="block w-full bg-gray-500 text-white py-2 rounded"
                                 onClick={() => setOpenUpdateStatus(true)}
                             >
                                 Edit Status

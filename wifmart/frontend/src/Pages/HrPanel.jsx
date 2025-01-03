@@ -42,12 +42,12 @@ const HRPanel = () => {
 
             {/* Sidebar */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-20" onClick={closeMobileMenu}>
+                <div className="fixed  inset-0 bg-black bg-opacity-50 z-20" onClick={closeMobileMenu}>
                     <div
-                        className="absolute left-0 top-0 bg-gray-800 text-gray-100 w-60 h-full p-4 shadow-lg"
+                        className="absolute pt-24 left-0 top-0 bg-gray-800 text-gray-100 w-60 h-full p-4 shadow-lg"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="h-32 flex flex-col justify-center items-center">
+                        <div className="h-32 pt-8 flex flex-col justify-center items-center">
                             <FaRegCircleUser className="text-5xl" />
                             <p className="capitalize text-lg font-semibold">{user?.name}</p>
                             <p className="text-sm">{user?.role}</p>
@@ -67,13 +67,19 @@ const HRPanel = () => {
                             >
                                 Manage Orders
                             </Link>
+                            <Link
+                                    to={"assigned-orders"}
+                                    className="px-2 py-1 rounded-lg hover:bg-gray-700"
+                                >
+                                    Assigned Orders
+                                </Link>
                         </nav>
                     </div>
                 </div>
             )}
 
             {/* Desktop Sidebar */}
-            <div className="hidden md:block bg-gray-800 text-gray-100 w-60 h-full p-4 shadow-lg">
+            <div className="hidden md:block bg-gray-800 text-gray-100 w-60 h-full  p-4 shadow-lg">
                 <div className="h-32 flex flex-col justify-center items-center">
                     <FaRegCircleUser className="text-5xl" />
                     <p className="capitalize text-lg font-semibold">{user?.name}</p>

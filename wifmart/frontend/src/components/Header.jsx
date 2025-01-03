@@ -204,7 +204,7 @@ const Header = () => {
         <nav className="flex flex-col gap-2">
           {user?.role === ROLE.ADMIN && (
             <Link
-              to="/admin-overview"
+              to="/admin-overview/overview"
               className="whitespace-nowrap text-[14px] font-normal hover:bg-gray-100 p-2 rounded"
               onClick={() => setMenuDisplay(false)}
             >
@@ -350,7 +350,7 @@ const Header = () => {
       </p>
       {user?.role === ROLE.ADMIN && (
         <Link
-          to="/admin-panel/all-products"
+          to="/admin-overview/overview"
           className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
           onClick={() => setMenuDisplay(false)}
         >

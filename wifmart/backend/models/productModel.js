@@ -6,7 +6,7 @@ const productSchema = mongoose.Schema({
     sellerBrandName: { type: String, required: true },
     sellerPhoneNumber: { type: String, required: true },
     sellerName: { type: String, required: true },
-    category: { type: String, required: true },
+    category: { type: String, },
     subCategory: { type: String, default: "" },
     hotDeal: { type: String, default: "" },
     productStatus: { type: String, default: "Available" },

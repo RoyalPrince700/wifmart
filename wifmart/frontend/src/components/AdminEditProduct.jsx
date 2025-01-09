@@ -268,7 +268,7 @@ const AdminEditProduct = ({
                 name='sellingPrice'
                 onChange={handleOnChange}
                 className='p-2 bg-slate-800 border rounded'
-                required
+                
               />
 
               {/* Input fields for item left */}

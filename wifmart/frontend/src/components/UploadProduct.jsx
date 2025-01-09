@@ -268,7 +268,7 @@ const UploadProduct = ({
                 name='sellingPrice'
                 onChange={handleOnChange}
                 className='p-2 bg-slate-700 border rounded'
-                required
+                
               />
 
                {/* Input fields for item left  */}

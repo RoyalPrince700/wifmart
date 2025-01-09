@@ -14,7 +14,7 @@ function Home() {
       {/* <CategoryList/> */}
       <BannerProduct/>
       <VerticalCardProduct category={"food"} />
-      <VerticalHotDealCard hotDeal={"Hot_Deal"} />
+      {/* <VerticalHotDealCard hotDeal={"Hot_Deal"} />
       <VerticalCardProduct  category={"speakers"} />
       <VerticalCardProduct  category={"earphones"} />
       <VerticalCardProduct  category={"camera"} />
@@ -24,7 +24,7 @@ function Home() {
       <VerticalCardProduct category={"food"} />
       <VerticalCardProduct  category={"mobiles"} />
       <VerticalCardProduct  category={"camera"} />
-      <VerticalCardProduct  category={"earphones"} />
+      <VerticalCardProduct  category={"earphones"} /> */}
 
 
 

@@ -23,71 +23,74 @@ const SalesPage = () => {
         return `₦${new Intl.NumberFormat("en-NG").format(value.toFixed(2))}`;
     };
 
+    const calculateSalesGrowth = (salesYesterday, salesTwoDaysAgo) => {
+        if (salesTwoDaysAgo === 0) return "N/A"; // Avoid division by zero
+        const growth = ((salesYesterday - salesTwoDaysAgo) / salesTwoDaysAgo) * 100;
+        return `${growth.toFixed(2)}%`;
+    };
+
     useEffect(() => {
         const fetchSalesData = async () => {
             try {
-                const response = await fetch(SummaryApi.allOrders.url, {
-                    method: SummaryApi.allOrders.method,
-                    credentials: "include",
+                const response = await fetch(SummaryApi.assignedOrders.url, {
+                    method: SummaryApi.assignedOrders.method,
+                    headers: { "Content-Type": "application/json" },
                 });
-                const dataResponse = await response.json();
-
-                if (dataResponse.success) {
-                    const allOrders = dataResponse.data;
-
-                    // Filter delivered orders
-                    const deliveredOrders = allOrders.filter(order => order.status === "Delivered");
-
+                const data = await response.json();
+        
+                if (data.success) {
+                    const assignedOrders = data.data;
+        
+                    // Filter delivered and pending orders
+                    const deliveredOrders = assignedOrders.filter(order => order.status === "Delivered");
+                    const pendingOrders = assignedOrders.filter(order => order.status === "Pending"); // Define pendingOrders
+        
                     // Calculate Total Revenue
-                    const totalRevenue = deliveredOrders.reduce((sum, order) => sum + order.totalPrice, 0);
-
+                    const totalRevenue = deliveredOrders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+        
                     // Calculate Average Order Value
-                    const averageOrderValue = totalRevenue / (allOrders.length || 1);
-
+                    const averageOrderValue = deliveredOrders.length
+                        ? totalRevenue / deliveredOrders.length
+                        : 0;
+        
                     // Calculate Conversion Rate
-                    const conversionRate = (deliveredOrders.length / (allOrders.length || 1)) * 100;
-
+                    const conversionRate = deliveredOrders.length
+                        ? (pendingOrders.length / deliveredOrders.length) * 100
+                        : 0;
+        
+                    // Mock Sales Data for the Last Two Days
+                    const salesYesterday = deliveredOrders
+                        .filter(order => new Date(order.date).toDateString() === new Date().toDateString())
+                        .reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+        
+                    const salesTwoDaysAgo = deliveredOrders
+                        .filter(order => 
+                            new Date(order.date).toDateString() === 
+                            new Date(new Date().setDate(new Date().getDate() - 1)).toDateString()
+                        )
+                        .reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+        
                     // Calculate Sales Growth
-                    const now = new Date();
-                    const last7DaysOrders = allOrders.filter(order =>
-                        new Date(order.createdAt) >= new Date(now.setDate(now.getDate() - 7))
-                    );
-
-                    const last7DaysRevenue = last7DaysOrders
-                        .filter(order => order.status === "Delivered")
-                        .reduce((sum, order) => sum + order.totalPrice, 0);
-
-                    const previous7DaysOrders = allOrders.filter(order =>
-                        new Date(order.createdAt) >= new Date(now.setDate(now.getDate() - 14)) &&
-                        new Date(order.createdAt) < new Date(now.setDate(now.getDate() - 7))
-                    );
-
-                    const previous7DaysRevenue = previous7DaysOrders
-                        .filter(order => order.status === "Delivered")
-                        .reduce((sum, order) => sum + order.totalPrice, 0);
-
-                    const salesGrowth =
-                        previous7DaysRevenue > 0
-                            ? ((last7DaysRevenue - previous7DaysRevenue) / previous7DaysRevenue) * 100
-                            : 0;
-
+                    const salesGrowth = calculateSalesGrowth(salesYesterday, salesTwoDaysAgo);
+        
                     // Update state
                     setSalesStats({
                         totalRevenue: formatCurrency(totalRevenue),
                         averageOrderValue: formatCurrency(averageOrderValue),
                         conversionRate: `${conversionRate.toFixed(2)}%`,
-                        salesGrowth: `${salesGrowth.toFixed(2)}%`,
+                        salesGrowth,
                     });
                 } else {
-                    setError(dataResponse.message || "Failed to fetch data.");
+                    setError(data.message || "Failed to fetch sales data.");
                 }
             } catch (error) {
                 console.error("Error fetching sales data:", error);
-                setError("Failed to fetch data.");
+                setError("Failed to fetch sales data.");
             } finally {
                 setLoading(false);
             }
         };
+        
 
         fetchSalesData();
     }, []);

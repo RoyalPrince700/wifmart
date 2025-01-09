@@ -23,17 +23,19 @@ const OverviewPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // Fetch all orders
-                const ordersResponse = await fetch(SummaryApi.allOrders.url, {
-                    method: SummaryApi.allOrders.method,
-                    credentials: "include",
+                // Fetch assigned orders
+                const assignedOrdersResponse = await fetch(SummaryApi.assignedOrders.url, {
+                    method: SummaryApi.assignedOrders.method,
+                    headers: { "Content-Type": "application/json" },
                 });
-                const ordersData = await ordersResponse.json();
+                const assignedOrdersData = await assignedOrdersResponse.json();
 
                 let totalSales = 0;
-                if (ordersData.success) {
-                    const deliveredOrders = ordersData.data.filter(order => order.status === "Delivered");
-                    totalSales = deliveredOrders.reduce((sum, order) => sum + (order.totalPrice || 0), 0);
+                if (assignedOrdersData.success) {
+                    totalSales = assignedOrdersData.data.reduce(
+                        (sum, order) => sum + (order.totalPrice || 0) * (order.totalQuantity || 1),
+                        0
+                    );
                 }
 
                 // Fetch all users
@@ -120,12 +122,10 @@ const OverviewPage = () => {
             </main>
 
             {/* CHARTS */}
-
-				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-					<SalesOverviewChart />
-					<CategoryDistributionChart />
-					{/* <SalesChannelChart /> */}
-				</div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <SalesOverviewChart />
+                <CategoryDistributionChart />
+            </div>
         </div>
     );
 };

@@ -9,7 +9,7 @@ const AdminProductCard = ({ data, fetchdata }) => {
     const [deleteProduct, setDeleteProduct] = useState(false); // State for managing delete modal visibility
 
     return (
-        <div className="bg-white p-4 rounded shadow-md w-48 hover:shadow-lg transition-shadow">
+        <div className="bg-gray-900 p-4 rounded shadow-md w-48 hover:shadow-lg transition-shadow">
             {/* Product Image */}
             <div className="w-full h-32 flex justify-center items-center mb-2">
                 <img
@@ -20,13 +20,13 @@ const AdminProductCard = ({ data, fetchdata }) => {
             </div>
 
             {/* Product Name */}
-            <h1 className="text-gray-800 text-sm font-semibold mb-2 truncate">
+            <h1 className="text-gray-100 text-sm font-semibold mb-2 truncate">
                 {data?.productName || "Unnamed Product"}
             </h1>
 
             {/* Product Price */}
             {data.sellingPrice > 0 && (
-                <p className="text-yellow-700 font-bold text-sm mb-2">
+                <p className="text-white font-bold text-sm mb-2">
                     {displayNGNCurrency(data.sellingPrice)}
                 </p>
             )}
@@ -35,7 +35,7 @@ const AdminProductCard = ({ data, fetchdata }) => {
             <div className="flex justify-end gap-2 mt-2">
     {/* Edit Button */}
     <button
-        className="p-2 rounded-full bg-yellow-500 hover:bg-yellow-700 text-white transition-all"
+        className="p-2 rounded-full bg-yellow-500 hover:bg-yellow-400 text-white transition-all"
         onClick={() => setEditProduct(true)}
         title="Edit Product"
     >

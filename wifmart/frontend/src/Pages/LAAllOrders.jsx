@@ -84,56 +84,65 @@ const LAAllOrders = () => {
                   </td>
                 </tr>
                 {expandedOrderId === order._id && (
-                  <tr>
-                    <td colSpan={5}>
-                      <div className="p-4 bg-gray-800 flex flex-col space-y-2">
-                        <h3 className="font-bold text-lg mb-2">
-                          Order Details
-                        </h3>
-                        <p>
-                          <strong>Customer Name:</strong>{" "}
-                          {order.name || "Unknown"}
-                        </p>
-                        <p>
-                          <strong>Phone Number:</strong>{" "}
-                          {order.number || "N/A"}
-                        </p>
-                        <p>
-                          <strong>Address:</strong> {order.address || "N/A"}
-                        </p>
-                        <p>
-                          <strong>Note:</strong> {order.note || "N/A"}
-                        </p>
-                        <p>
-                          <strong>Total Price:</strong>{" "}
-                          {displayNARCurrency(order.totalPrice.toFixed(2))}
-                        </p>
+  <tr>
+    <td colSpan={5}>
+      <div className="p-4 bg-gray-800 flex flex-col space-y-2">
+        <h3 className="font-bold text-lg mb-2">Order Details</h3>
+        <p>
+          <strong>Customer Name:</strong> {order.name || "Unknown"}
+        </p>
+        <p>
+          <strong>Phone Number:</strong> {order.number || "N/A"}
+        </p>
+        <p>
+          <strong>Address:</strong> {order.address || "N/A"}
+        </p>
+        <p>
+          <strong>Note:</strong> {order.note || "N/A"}
+        </p>
+        <p>
+          <strong>Total Price:</strong>{" "}
+          {displayNARCurrency(order.totalPrice.toFixed(2))}
+        </p>
 
-                        <h3 className="font-bold text-lg mt-4">Cart Items</h3>
-                        <ul className="list-disc pl-4">
-                          {order.cartItems.map((item, idx) => (
-                            <li key={idx} className="space-y-1">
-                              <p>
-                                <strong>Product Name:</strong>{" "}
-                                {item.productId?.productName || "Unknown"}
-                              </p>
-                              {item.productId?.productImage?.[0] && (
-                                <img
-                                  src={item.productId.productImage[0]}
-                                  alt={item.productId.productName}
-                                  className="w-16 h-16 object-cover"
-                                />
-                              )}
-                              <p>
-                                <strong>Quantity:</strong> {item.quantity}
-                              </p>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                )}
+        <h3 className="font-bold text-lg mt-4">Cart Items</h3>
+        <ul className="list-disc pl-4">
+          {order.cartItems.map((item, idx) => (
+            <li key={idx} className="space-y-1">
+              <p>
+                <strong>Product Name:</strong>{" "}
+                {item.productId?.productName || "Unknown"}
+              </p>
+              {item.productId?.productImage?.[0] && (
+                <img
+                  src={item.productId.productImage[0]}
+                  alt={item.productId.productName}
+                  className="w-16 h-16 object-cover"
+                />
+              )}
+              <p>
+                <strong>Quantity:</strong> {item.quantity}
+              </p>
+              <p>
+                <strong>Seller Name:</strong>{" "}
+                {item.productId?.sellerName || "N/A"}
+              </p>
+              <p>
+                <strong>Seller Brand Name:</strong>{" "}
+                {item.productId?.sellerBrandName || "N/A"}
+              </p>
+              <p>
+                <strong>Seller Phone Number:</strong>{" "}
+                {item.productId?.sellerPhoneNumber || "N/A"}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </td>
+  </tr>
+)}
+
               </React.Fragment>
             ))}
           </tbody>

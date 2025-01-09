@@ -17,7 +17,10 @@ const getUserOrders = async (req, res) => {
     const userOrders = await checkoutModel
       .find({ userId: currentUserId }) // Filter by current user
       .sort({ createdAt: -1 })
-      .populate("cartItems.productId", "productName productImage sellingPrice") // Populate product details
+      .populate(
+        "cartItems.productId", 
+        "productName productImage sellingPrice sellerName sellerBrandName sellerPhoneNumber" // Include seller details
+      )
       .populate("userId", "name number address email"); // Populate user details
 
     // Log the fetched data for debugging

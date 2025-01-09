@@ -8,6 +8,8 @@ import DisplayImage from './DisplayImage';  // Importing the component to displa
 import { MdDelete } from 'react-icons/md'  // Importing the delete icon
 import SummaryApi from '../common';
 import {toast} from 'react-toastify'
+import productDeal from '../helpers/productDeal'
+import productStatus from '../helpers/productStatus'  // Importing the product categories list from a helper file
 
 
 const AdminEditProduct = ({
@@ -23,10 +25,16 @@ const AdminEditProduct = ({
     brandName: productData?.brandName,
     category: productData?.category,
     subCategory: productData?.subCategory,
+    hotDeal: productData?.hotDeal,
     productImage: productData?.productImage || [],
     description: productData?.description,
     price: productData?.price,
+    item: productData?.item,
     sellingPrice: productData?.sellingPrice,
+     productStatus: productData?.productStatus,
+     sellerName: productData?.sellerName, 
+    sellerBrandName: productData?.sellerBrandName,
+    sellerPhoneNumber : productData?.sellerPhoneNumber,
   })
 
   // State to manage whether fullscreen image display is open
@@ -109,9 +117,9 @@ const AdminEditProduct = ({
 
   }
   return (
-    <div className='fixed bg-opacity-35 flex justify-center items-center bg-slate-200
+    <div className='fixed bg-opacity-35 flex justify-center mt-10 items-center bg-slate-900
      w-full h-full bottom-0 top-0 left-0 right-0'>
-        <div className='bg-white rounded p-4 w-full max-w-2xl h-full max-h-[80%]
+        <div className='bg-gray-800 rounded p-4 w-full  max-w-2xl h-full max-h-[80%]
         overflow-hidden'>
             {/* Modal header with close button */}
             <div className='flex justify-between items-center pb-3'>
@@ -122,7 +130,7 @@ const AdminEditProduct = ({
                 </div>
             </div>
 
-            {/* Form for uploading product */}
+            {/* Form for editing product */}
             <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
               {/* Input field for product name */}
               <label htmlFor='productName'>Product Name</label>
@@ -133,7 +141,7 @@ const AdminEditProduct = ({
                 name='productName'
                 value={data.productName}
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-800 border rounded'
                 required
               />
 
@@ -146,13 +154,13 @@ const AdminEditProduct = ({
                 value={data.brandName}
                 name='brandName'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-800 border rounded'
                 required
               />
 
               {/* Dropdown for selecting product category */}
               <label htmlFor='category' className='mt-3 '>Category</label>
-              <select required value={data.category} name='category' onChange={handleOnChange} className='p-2 bg-slate-100 border rounded'>
+              <select  value={data.category} name='category' onChange={handleOnChange} className='p-2 bg-slate-800 border rounded'>
                 <option value={""}>Select Category</option>
                 {
                   productCategory.map((el, index) => {
@@ -163,10 +171,10 @@ const AdminEditProduct = ({
                 }
               </select>
 
-                {/* Dropdown for selecting product SUB category */}
-                <label htmlFor='category' className='mt-3 '>Sub Category</label>
+              {/* Dropdown for selecting product SUB category */}
+              <label htmlFor='subCategory' className='mt-3 '>Sub Category</label>
               <select value={data.subCategory} name='subCategory' onChange={handleOnChange} 
-              className='p-2 bg-slate-100 border rounded'>
+              className='p-2 bg-slate-800 border rounded'>
                 <option value={""}>Select Sub Category</option>
                 {
                   productSubCategory.map((el, index) => {
@@ -177,10 +185,24 @@ const AdminEditProduct = ({
                 }
               </select>
 
+              {/* Dropdown for selecting product deal */}
+              <label htmlFor='hotDeal' className='mt-3 '>Hot Deal</label>
+              <select value={data.hotDeal} name='hotDeal' onChange={handleOnChange} 
+              className='p-2 bg-slate-800 border rounded'>
+                <option value={""}>Select Deal</option>
+                {
+                  productDeal.map((el, index) => {
+                    return (
+                      <option value={el.value} key={el.value + index}>{el.value}</option>
+                    )
+                  })
+                }
+              </select>
+
               {/* File upload section for product image */}
               <label htmlFor='productImage' className='mt-3 '>Product Image</label>
               <label htmlFor='uploadImageInput'>
-                <div className='p-2 cursor-pointer bg-slate-100 border rounded h-32 w-full flex justify-center items-center'>
+                <div className='p-2 cursor-pointer bg-slate-800 border rounded h-32 w-full flex justify-center items-center'>
                   <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
                     <span className='text-4xl'> <FaCloudUploadAlt /></span>  {/* Cloud upload icon */}
                     <p className='text-sm'>Upload Product Image</p>
@@ -203,7 +225,7 @@ const AdminEditProduct = ({
                                 alt={el}
                                 width={80} 
                                 height={80} 
-                                className='bg-slate-100 cursor-pointer' 
+                                className='bg-slate-800 cursor-pointer' 
                                 onClick={() => {
                                   setOpenFullScreenImage(true)
                                   setFullScreenImage(el)
@@ -234,29 +256,91 @@ const AdminEditProduct = ({
                 value={data.price}
                 name='price'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
-                
+                className='p-2 bg-slate-800 border rounded'
               />
 
               <label htmlFor='sellingPrice' className='mt-3'>Selling Price :</label>
               <input 
                 type='number' 
                 id='sellingPrice' 
-                placeholder='Enter selling Price' 
+                placeholder='Enter Selling Price' 
                 value={data.sellingPrice}
                 name='sellingPrice'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
-                
+                className='p-2 bg-slate-800 border rounded'
+                required
+              />
+
+              {/* Input fields for item left */}
+              <label htmlFor='item' className='mt-3'>Item :</label>
+              <input 
+                type='number' 
+                id='item' 
+                placeholder='Enter Item Left' 
+                value={data.item}
+                name='item'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-800 border rounded'
               />
 
               {/* Text area for product description */}
               <label htmlFor='description' className='mt-3'>Description :</label>
-              <textarea className='h-28 bg-slate-100 border resize-none p-1' 
-                placeholder='Enter product Description' rows={3}
+              <textarea className='h-28 bg-slate-800 border resize-none p-1' 
+                placeholder='Enter Product Description' rows={3}
                 onChange={handleOnChange} name='description'
                 value={data.description}>
               </textarea>
+
+              {/* Dropdown for selecting product status */}
+              <label htmlFor='productStatus' className='mt-3 '>Product Status</label>
+              <select value={data.productStatus} name='productStatus' onChange={handleOnChange} 
+              className='p-2 bg-slate-800 border rounded'>
+                <option value={""}>Select Product Status</option>
+                {
+                  productStatus.map((el, index) => {
+                    return (
+                      <option value={el.value} key={el.value + index}>{el.value}</option>
+                    )
+                  })
+                }
+              </select>
+
+              {/* Input fields for seller details */}
+              <label htmlFor='sellerName' className='mt-3'>Seller Name</label>
+              <input 
+                type='text' 
+                id='sellerName' 
+                placeholder='Enter Seller Name' 
+                value={data.sellerName}
+                name='sellerName'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-800 border rounded'
+                required
+              />
+
+              <label htmlFor='sellerBrandName' className='mt-3'>Seller Brand Name</label>
+              <input 
+                type='text' 
+                id='sellerBrandName' 
+                placeholder='Enter Seller Brand Name' 
+                value={data.sellerBrandName}
+                name='sellerBrandName'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-800 border rounded'
+                required
+              />
+
+              <label htmlFor='sellerPhoneNumber' className='mt-3'>Seller Phone Number</label>
+              <input 
+                type='text' 
+                id='sellerPhoneNumber' 
+                placeholder='Enter Seller Phone Number' 
+                value={data.sellerPhoneNumber}
+                name='sellerPhoneNumber'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-800 border rounded'
+                required
+              />
 
               {/* Submit button */}
               <button className='px-3 hover:bg-red-700 
@@ -273,7 +357,8 @@ const AdminEditProduct = ({
         )
       }
     </div>
-  )
+)
+
 }
 
 export default AdminEditProduct

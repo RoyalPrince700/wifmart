@@ -30,6 +30,9 @@ const UploadProduct = ({
     item: "",
     sellingPrice: "",
     productStatus: "",
+    sellerName: "",
+    sellerBrandName: "",
+    sellerPhoneNumber : ""
   })
 
   // State to manage whether fullscreen image display is open
@@ -137,7 +140,7 @@ const UploadProduct = ({
                 name='productName'
                 value={data.productName}
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-700 border rounded'
                 required
               />
 
@@ -150,13 +153,13 @@ const UploadProduct = ({
                 value={data.brandName}
                 name='brandName'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-700 border rounded'
                 required
               />
 
               {/* Dropdown for selecting product category */}
               <label htmlFor='category' className='mt-3 '>Category</label>
-              <select value={data.category} name='category' onChange={handleOnChange} className='p-2 bg-slate-100 border rounded'>
+              <select value={data.category} name='category' onChange={handleOnChange} className='p-2 bg-slate-700 border rounded'>
                 <option value={""}>Select Category</option>
                 {
                   productCategory.map((el, index) => {
@@ -170,7 +173,7 @@ const UploadProduct = ({
                 {/* Dropdown for selecting product SUB category */}
                 <label htmlFor='category' className='mt-3 '>Sub Category</label>
               <select value={data.subCategory} name='subCategory' onChange={handleOnChange} 
-              className='p-2 bg-slate-100 border rounded'>
+              className='p-2 bg-slate-700 border rounded'>
                 <option value={""}>Select Sub Category</option>
                 {
                   productSubCategory.map((el, index) => {
@@ -184,7 +187,7 @@ const UploadProduct = ({
                 {/* Dropdown for selecting product deal */}
                 <label htmlFor='hotDeal' className='mt-3 '>Hot deal</label>
               <select value={data.hotDeal} name='hotDeal' onChange={handleOnChange} 
-              className='p-2 bg-slate-100 border rounded'>
+              className='p-2 bg-slate-700 border rounded'>
                 <option value={""}>Select Deal</option>
                 {
                   productDeal.map((el, index) => {
@@ -198,7 +201,7 @@ const UploadProduct = ({
               {/* File upload section for product image */}
               <label htmlFor='productImage' className='mt-3 '>Product Image</label>
               <label htmlFor='uploadImageInput'>
-                <div className='p-2 cursor-pointer bg-slate-100 border rounded h-32 w-full flex justify-center items-center'>
+                <div className='p-2 cursor-pointer bg-slate-700 border rounded h-32 w-full flex justify-center items-center'>
                   <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
                     <span className='text-4xl'> <FaCloudUploadAlt /></span>  {/* Cloud upload icon */}
                     <p className='text-sm'>Upload Product Image</p>
@@ -221,7 +224,7 @@ const UploadProduct = ({
                                 alt={el}
                                 width={80} 
                                 height={80} 
-                                className='bg-slate-100 cursor-pointer' 
+                                className='bg-slate-700 cursor-pointer' 
                                 onClick={() => {
                                   setOpenFullScreenImage(true)
                                   setFullScreenImage(el)
@@ -252,7 +255,7 @@ const UploadProduct = ({
                 value={data.price}
                 name='price'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-700 border rounded'
                 
               />
 
@@ -264,7 +267,7 @@ const UploadProduct = ({
                 value={data.sellingPrice}
                 name='sellingPrice'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-700 border rounded'
                 required
               />
 
@@ -277,22 +280,22 @@ const UploadProduct = ({
                 value={data.item}
                 name='item'
                 onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
+                className='p-2 bg-slate-700 border rounded'
                 
               />
 
               {/* Text area for product description */}
               <label htmlFor='description' className='mt-3'>Description :</label>
-              <textarea className='h-28 bg-slate-100 border resize-none p-1' 
+              <textarea className='h-28 bg-slate-700 border resize-none p-1' 
                 placeholder='Enter product Description' rows={3}
                 onChange={handleOnChange} name='description'
                 value={data.description}>
               </textarea>
 
-                {/* Dropdown for selecting product SUB category */}
+                {/* Dropdown for selecting product status */}
                 <label htmlFor='productStatus' className='mt-3 '>Product Status</label>
               <select value={data.productStatus} name='productStatus' onChange={handleOnChange} 
-              className='p-2 bg-slate-100 border rounded'>
+              className='p-2 bg-slate-700 border rounded'>
                 <option value={""}>Select Product Status</option>
                 {
                   productStatus.map((el, index) => {
@@ -302,6 +305,46 @@ const UploadProduct = ({
                   })
                 }
               </select>
+
+               {/* Input field for seller name */}
+               <label htmlFor='brandName' className='mt-3'>Seller Name</label>
+              <input 
+                type='text' 
+                id='sellerName' 
+                placeholder='Enter Seller Brand Name' 
+                value={data.sellerName}
+                name='sellerName'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-700 border rounded'
+                required
+              />
+              {/* Input field for seller brand name */}
+               <label htmlFor='brandName' className='mt-3'>Seller Brand Name</label>
+              <input 
+                type='text' 
+                id='sellerBrandName' 
+                placeholder='Enter Seller Brand Name' 
+                value={data.sellerBrandName}
+                name='sellerBrandName'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-700 border rounded'
+                required
+              />
+
+              {/* Input field for seller Phone Number */}
+              <label htmlFor='brandName' className='mt-3'>Seller Phone Number</label>
+              <input 
+                type='text' 
+                id='sellerPhoneNumber' 
+                placeholder='Enter Seller Phone Number' 
+                value={data.sellerPhoneNumber}
+                name='sellerPhoneNumber'
+                onChange={handleOnChange}
+                className='p-2 bg-slate-700 border rounded'
+                required
+              />
+
+                
 
               {/* Submit button */}
               <button className='px-3 hover:bg-red-700 text-white py-2 mb-10 bg-red-600'>Upload Product</button>

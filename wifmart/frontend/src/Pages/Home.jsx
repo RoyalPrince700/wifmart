@@ -40,7 +40,7 @@ function Home() {
       <VerticalCardProduct  category={"camera"} />
       <VerticalCardProduct  category={"mobiles"} />
 
-      {/* <VerticalCardProduct  category={"refrigerator"} heading={"Refrigerator"}/> */}
+      <VerticalCardProduct  category={"refrigerator"} heading={"Refrigerator"}/>
       {/* <VerticalCardProduct  category={"trimers"} heading={"Trimers"}/> */}
       {/* <VerticalCardProduct  category={"processor"} heading={"Processor"}/> */}
     </div> 

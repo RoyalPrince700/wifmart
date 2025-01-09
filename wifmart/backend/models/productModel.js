@@ -14,7 +14,7 @@ const productSchema = mongoose.Schema({
     productImage: { type: [String], default: []},
     description: { type: String, default: "" },
     price: { type: Number, min: 0},
-    sellingPrice: { type: Number, required: true, min: 0},
+    sellingPrice: { type: Number, min: 0},
 }, {
     timestamps: true,
 });

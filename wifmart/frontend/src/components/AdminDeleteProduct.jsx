@@ -40,7 +40,7 @@ const AdminDeleteProduct = ({ onClose, productId, fetchData }) => {
     return (
         <div className="fixed bg-opacity-35 flex justify-center items-center bg-slate-200 w-full h-full bottom-0 top-0 left-0 right-0">
             {/* Modal content */}
-            <div className="bg-white rounded p-4 w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
+            <div className="bg-gray-800 rounded p-4 w-full max-w-2xl h-full max-h-[80%] overflow-hidden">
                 <div className="flex justify-between items-center pb-3">
                     <h2 className="font-bold text-lg">Delete Product</h2>
                     <div className="w-fit cursor-pointer ml-auto text-2xl hover:text-red-600" onClick={onClose}>

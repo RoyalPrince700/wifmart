@@ -13,34 +13,35 @@ function Home() {
     <div className='mt-8 lg:mt-2'>
       {/* <CategoryList/> */}
       <BannerProduct/>
-      <VerticalHotDealCard hotDeal={"Hot_Deal"} heading={"Hot Deal"}/>
+      <VerticalCardProduct category={"food"} />
+      <VerticalHotDealCard hotDeal={"Hot_Deal"} />
+      <VerticalCardProduct  category={"speakers"} />
+      <VerticalCardProduct  category={"earphones"} />
+      <VerticalCardProduct  category={"camera"} />
+      <VerticalCardProduct  category={"mobiles"} />
+
+      <VerticalCardProduct  category={"refrigerator"} />
+      <VerticalCardProduct category={"food"} />
+      <VerticalCardProduct  category={"mobiles"} />
+      <VerticalCardProduct  category={"camera"} />
+      <VerticalCardProduct  category={"earphones"} />
+
+
+
+
 
       {/* <VerticalSubCardProduct subCategory={"Item7"} /> */}
       {/* <VerticalSubCardProduct subCategory={"Nutri_C"} /> */}
-      <VerticalCardProduct category={"food"} />
-
-
-      
 
       {/* <VerticalCardProduct subCategory={"Item7"} /> */}
       {/* <VerticalCardProduct category={"watches"} /> */}
       
-      <VerticalCardProduct  category={"mobiles"} />
       {/* <VerticalCardProduct  category={"mouse"} heading={"Mouse"}/> */}
       {/* <VerticalCardProduct  category={"televisions"} /> */}
-      <VerticalCardProduct  category={"camera"} />
-      <VerticalCardProduct  category={"earphones"} />
       {/* <VerticalCardProduct  category={"printers"} /> */}
 
       {/* <HorizontalCardProduct category={"speakers"} heading={"Popular Speakers"}/> */}
       {/* <HorizontalCardProduct category={"mobiles"} heading={"mobiles"}/> */}
-
-      <VerticalCardProduct  category={"speakers"} heading={"Bluetooth Speakers"}/>
-      <VerticalCardProduct  category={"earphones"} />
-      <VerticalCardProduct  category={"camera"} />
-      <VerticalCardProduct  category={"mobiles"} />
-
-      <VerticalCardProduct  category={"refrigerator"} heading={"Refrigerator"}/>
       {/* <VerticalCardProduct  category={"trimers"} heading={"Trimers"}/> */}
       {/* <VerticalCardProduct  category={"processor"} heading={"Processor"}/> */}
     </div> 

@@ -14,6 +14,12 @@ function Home() {
       {/* <CategoryList/> */}
       <BannerProduct/>
       <VerticalCardProduct category={"food"} />
+      <VerticalCardProduct  category={"necklace"} />
+      <VerticalCardProduct  category={"wears"} />
+      <VerticalCardProduct  category={"SkinCare"} />
+
+
+
       {/* <VerticalHotDealCard hotDeal={"Hot_Deal"} />
       <VerticalCardProduct  category={"speakers"} />
       <VerticalCardProduct  category={"earphones"} />

@@ -15,6 +15,10 @@ const productCategory = [
     { id: 13, label: "SkinCare", value: "SkinCare" },
     { id: 13, label: "shoes", value: "shoes" },
     { id: 13, label: "sneakers", value: "sneakers" },
+    { id: 13, label: "necklace", value: "necklace" },
+    { id: 13, label: "earring", value: "earring" },
+
+
 
 
     { id: 13, label: "Others", value: "Others" },

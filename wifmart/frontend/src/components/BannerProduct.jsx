@@ -49,9 +49,9 @@ import image7Mobile from '../assets/banner/im3.jpg';
 const BannerProduct = () => {
   const [currrentImage, setCurrentImage] = useState(0);
 
-  const desktopImages = [uv,congd];
+  const desktopImages = [wifbannerbig,image3,];
 
-  const mobileImages = [uvm,congm];
+  const mobileImages = [wifbannersmall,image6Mobile];
 
   const nextImage = () => {
     if (desktopImages.length - 1 > currrentImage) {

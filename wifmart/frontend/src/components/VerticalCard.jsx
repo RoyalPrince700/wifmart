@@ -24,7 +24,7 @@ const VerticalCard = ({ loading, data = [] }) => {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-6 justify-center">
       {loading
         ? loadingList.map((_, index) => (
             <div
@@ -42,16 +42,16 @@ const VerticalCard = ({ loading, data = [] }) => {
             <Link
               to={`/product/${product?._id}`}
               key={product?._id}
-              className="min-w-[120px] sm:min-w-[150px] md:min-w-[200px] max-w-[200px] bg-white rounded-md shadow hover:shadow-lg transition-all h-auto flex flex-col"
+              className="bg-white rounded-md shadow hover:shadow-lg transition-all h-auto flex flex-col"
             >
               {/* Product Image */}
               <div className="bg-gray-100 h-[120px] sm:h-[150px] flex justify-center items-center">
-                  <img
-                    src={product?.productImage[0]}
-                    alt={product?.productName}
-                    className="object-contain h-full hover:scale-110 transition-transform mix-blend-multiply"
-                  />
-                </div>
+                <img
+                  src={product?.productImage[0]}
+                  alt={product?.productName}
+                  className="object-contain h-full hover:scale-110 transition-transform mix-blend-multiply"
+                />
+              </div>
 
               {/* Product Details */}
               <div className="p-2 flex-1 flex flex-col">
@@ -75,5 +75,7 @@ const VerticalCard = ({ loading, data = [] }) => {
     </div>
   );
 };
+
+
 
 export default VerticalCard;

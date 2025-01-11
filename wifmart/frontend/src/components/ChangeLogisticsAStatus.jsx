@@ -45,8 +45,8 @@ const ChangeLogisticsAttendantStatus = ({
     };
 
     return (
-        <div className='fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-center items-center bg-slate-200 bg-opacity-40'>
-            <div className='mx-auto bg-white shadow-md p-4 w-full max-w-sm'>
+        <div className='fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-center items-center bg-slate-800 bg-opacity-40'>
+            <div className='mx-auto bg-gray-800 shadow-md p-4 w-full max-w-sm'>
                 <button className='block ml-auto' onClick={onClose}>
                     <IoMdClose />
                 </button>
@@ -58,7 +58,7 @@ const ChangeLogisticsAttendantStatus = ({
                 <div className='flex items-center justify-between my-4'>
                     <p>Status</p>
                     <select
-                        className='border px-4 py-1'
+                        className='border px-4 py-1 bg-gray-800'
                         value={logisticsStatus}
                         onChange={handleStatusChange}
                     >

@@ -27,14 +27,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true); // disable button on submit
+    setIsSubmitting(true); // Disable button on submit
   
     try {
       const response = await fetch(SummaryApi.signIn.url, {
         method: SummaryApi.signIn.method,
-        credentials: 'include',
+        credentials: "include",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -44,9 +44,11 @@ const Login = () => {
         toast.success(result.message);
         fetchUserDetails();
         fetchUserAddToCart();
-        navigate('/');
-      } else if (result.message === "Email not verified. Please verify your email before logging in.") {
-        toast.warning("Your email is not verified. Please check your email for verification instructions.");
+        navigate("/"); // Redirect to homepage
+      } else if (result.redirect) {
+        // Redirect for unverified email
+        toast.warning(result.message || "Redirecting to verification...");
+        navigate("/token-verification"); // Redirect to the token page
       } else {
         toast.error(result.message || "An error occurred. Please try again.");
       }
@@ -56,6 +58,7 @@ const Login = () => {
       setIsSubmitting(false); // Re-enable button
     }
   };
+  
   
 
   return (

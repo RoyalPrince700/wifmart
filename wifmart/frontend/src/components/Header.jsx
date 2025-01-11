@@ -44,88 +44,91 @@ const Header = () => {
   
     // Your state and functions
     const [menuDisplay, setMenuDisplay] = useState(false);
-  
+    const [hambugDrop, setHambugDrop] = useState(false);
+    
+    const user = useSelector((state) => state?.user?.user);
+    const dispatch = useDispatch();
+    const context = useContext(Context);
+    const navigate = useNavigate();
+    const searchInput = useLocation();
+    const URLSearch = new URLSearchParams(searchInput?.search);
+    const searchQuery = URLSearch.getAll("q");
+    const [search, setSearch] = useState(searchQuery);
+    const location = useLocation();
+    
+    const hideSearchBar = location.pathname === "/login" || location.pathname === "/signup";
+    
+    const email = user?.email || "";
+    const emailPrefix = email.split("@")[0];
+    const maskedEmail =
+      emailPrefix.length > 4
+        ? `${emailPrefix.slice(0, 2)}**${emailPrefix.slice(-2)}`
+        : emailPrefix;
+    
+    // Clear search input when leaving the search page
+    useEffect(() => {
+      if (!location.pathname.includes("search")) {
+        setSearch(""); // Reset the search input
+      }
+    }, [location.pathname]);
+    
     // Scroll Handler
     const handleScroll = () => {
       if (menuDisplay) {
         setMenuDisplay(false); // Close dropdown on scroll
       }
     };
-  
+    
     // Attach Scroll Event
     useEffect(() => {
       window.addEventListener("scroll", handleScroll);
-  
+    
       // Cleanup the listener on unmount
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
-    }, [menuDisplay]); // Re-run only if menuDisplay changes
-  
-
-
-  const [hambugDrop,setHambugDrop] = useState(false)
-
-  const user = useSelector((state) => state?.user?.user);
-  const dispatch = useDispatch();
-  // const [menuDisplay, setMenuDisplay] = useState(false);
-  const context = useContext(Context);
-  const navigate = useNavigate();
-  const searchInput = useLocation();
-  const URLSearch = new URLSearchParams(searchInput?.search);
-  const searchQuery = URLSearch.getAll("q");
-  const [search, setSearch] = useState(searchQuery);
-  const location = useLocation();
-
-  const hideSearchBar = location.pathname === "/login" || location.pathname === "/signup";
-
-          const email = user?.email || "";
-        const emailPrefix = email.split("@")[0];
-        const maskedEmail = emailPrefix.length > 4 
-          ? `${emailPrefix.slice(0, 2)}**${emailPrefix.slice(-2)}` 
-          : emailPrefix;
-
-  const handleLogout = async () => {
-    const fetchData = await fetch(SummaryApi.logout_user.url, {
-      method: SummaryApi.logout_user.method,
-      credentials: "include",
-    });
-
-   
-
-    const data = await fetchData.json();
-    if (data.success) {
-      toast.success(data.message);
-      dispatch(setUserDetails(null));
-      navigate("/");
-    } else if (data.error) {
-      toast.error(data.message);
-    }
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest(".user-menu") && menuDisplay) {
-        setMenuDisplay(false);
+    }, [menuDisplay]);
+    
+    const handleLogout = async () => {
+      const fetchData = await fetch(SummaryApi.logout_user.url, {
+        method: SummaryApi.logout_user.method,
+        credentials: "include",
+      });
+    
+      const data = await fetchData.json();
+      if (data.success) {
+        toast.success(data.message);
+        dispatch(setUserDetails(null));
+        navigate("/");
+      } else if (data.error) {
+        toast.error(data.message);
       }
     };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
+    
+    useEffect(() => {
+      const handleClickOutside = (e) => {
+        if (!e.target.closest(".user-menu") && menuDisplay) {
+          setMenuDisplay(false);
+        }
+      };
+    
+      document.addEventListener("click", handleClickOutside);
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+      };
+    }, [menuDisplay]);
+    
+    const handleSearch = (e) => {
+      const { value } = e.target;
+      setSearch(value);
+    
+      if (value) {
+        navigate(`/search?q=${value}`);
+      } else {
+        navigate("/search");
+      }
     };
-  }, [menuDisplay]);
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-    setSearch(value);
-
-    if (value) {
-      navigate(`/search?q=${value}`);
-    } else {
-      navigate("/search");
-    }
-  };
+    
 
   return (
     <header className="w-full  fixed max-h-[93px] h-[100px] bg-gray-900 top-0 lg:bg-gray-950 lg:h-[90px]  

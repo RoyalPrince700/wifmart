@@ -1,6 +1,7 @@
 const productCategory = [
     { id: 1, label: "Airpodes", value: "airpodes" },
-    { id: 2, label: "Camera", value: "camera" },
+    { id: 2, label: "scentbytessy", value: "scentbytessy" },
+    { id: 14, label: "Niyyahsatelier", value: "Niyyahsatelier" },
     { id: 3, label: "Earphones", value: "earphones" },
     { id: 4, label: "Food", value: "food" },
     { id: 5, label: "Mobiles", value: "mobiles" },
@@ -12,16 +13,16 @@ const productCategory = [
     { id: 11, label: "Kitchen_utensils", value: "Kitchen_utensils" },
     { id: 12, label: "Televisions", value: "televisions" },
     { id: 13, label: "Watches", value: "watches" },
-    { id: 13, label: "SkinCare", value: "SkinCare" },
-    { id: 13, label: "shoes", value: "shoes" },
-    { id: 13, label: "sneakers", value: "sneakers" },
-    { id: 13, label: "necklace", value: "necklace" },
-    { id: 13, label: "earring", value: "earring" },
+    { id: 15, label: "SkinCare", value: "SkinCare" },
+    { id: 16, label: "shoes", value: "shoes" },
+    { id: 17, label: "sneakers", value: "sneakers" },
+    { id: 18, label: "necklace", value: "necklace" },
+    { id: 19, label: "earring", value: "earring" },
 
 
 
 
-    { id: 13, label: "Others", value: "Others" },
+    { id: 20, label: "Others", value: "Others" },
 
 
 ];

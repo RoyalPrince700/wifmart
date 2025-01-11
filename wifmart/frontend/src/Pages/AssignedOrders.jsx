@@ -52,7 +52,9 @@ const AssignedOrders = () => {
                             {orders.map((order) => (
                                 <tr key={order._id} className="border-t border-gray-700">
                                     <td className="px-4 py-2">{order.orderId}</td>
-                                    <td className="px-4 py-2">{order.assignedTo?.email || "Unassigned"}</td>
+                                    <td className="px-4 py-2">
+                {order.assignedTo?.email ? order.assignedTo.email.replace("@gmail.com", "") : "Unassigned"}</td>
+
                                     <td className="px-4 py-2">
                                         <span
                                             className={`px-2 py-1 rounded text-sm ${

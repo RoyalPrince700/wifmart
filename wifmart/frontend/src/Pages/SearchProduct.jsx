@@ -27,7 +27,7 @@ useEffect(()=>{
 },[query])
 
   return (
-    <div className='mt-[100px] mx-auto p-4'>
+    <div className=' mt-[100px] mx-auto p-4'>
       {
         loading && (
           <p className='text-lg text-center'>Loading .....</p>

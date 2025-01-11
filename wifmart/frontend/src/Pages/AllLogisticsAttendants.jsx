@@ -102,7 +102,7 @@ const AllLogistics = () => {
             {/* Full-Screen Modal for Mobile */}
             {selectedLogistics && (
                 <div className="fixed inset-0 z-10 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white w-full max-w-md p-4">
+                    <div className="bg-gray-700 w-full max-w-md p-4">
                         <h2 className="text-lg font-semibold">Logistics Details</h2>
                         <p><strong>Name:</strong> {selectedLogistics.name}</p>
                         <p><strong>Email:</strong> {selectedLogistics.email}</p>

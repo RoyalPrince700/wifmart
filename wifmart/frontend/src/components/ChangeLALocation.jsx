@@ -47,9 +47,9 @@ const ChangeLogisticsAttendantLocation = ({
 
     return (
         <div
-            className="fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-center items-center bg-slate-200 bg-opacity-40"
+            className="fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-center items-center bg-slate-700 bg-opacity-40"
         >
-            <div className="mx-auto bg-white shadow-md p-4 w-full max-w-sm">
+            <div className="mx-auto bg-gray-800 shadow-md p-4 w-full max-w-sm">
                 <button className="block ml-auto" onClick={onClose}>
                     <IoMdClose />
                 </button>
@@ -57,11 +57,11 @@ const ChangeLogisticsAttendantLocation = ({
                 <p>Name: {name}</p>
                 <p>Email: {email}</p>
 
-                <div className="flex items-center justify-between my-4">
+                <div className="flex items-center justify-between my-4 ">
                     <p>Location</p>
                     <input
                         type="text"
-                        className="border px-4 py-1 w-full"
+                        className="border px-4 py-1 w-full bg-slate-800"
                         value={attendantLocation}
                         onChange={(e) => setAttendantLocation(e.target.value)}
                         placeholder="Enter Location"
@@ -69,7 +69,7 @@ const ChangeLogisticsAttendantLocation = ({
                 </div>
 
                 <button
-                    className="w-fit text-white hover:bg-red-700 cursor-pointer bg-red-600 mx-auto block py-1 px-3 rounded-full"
+                    className="w-fit text-white hover:bg-yellow-700 cursor-pointer bg-yellow-600 mx-auto block py-1 px-3 rounded-full"
                     onClick={handleUpdateLocation}
                 >
                     Update Location

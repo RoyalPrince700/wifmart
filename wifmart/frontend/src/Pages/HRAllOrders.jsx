@@ -88,8 +88,8 @@ const HRAllOrders = () => {
           <thead>
             <tr className="border-b text-white">
               <th className="p-2 text-left">Order ID</th>
-              <th className="p-2 text-left">Customer</th>
-              <th className="p-2 text-left">Assigned LA</th>
+              {/* <th className="p-2 text-left">Customer</th> */}
+              {/* <th className="p-2 text-left">Assigned LA</th> */}
               <th className="p-2 text-left">Assign</th>
             </tr>
           </thead>

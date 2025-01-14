@@ -18,6 +18,8 @@ const productCategory = [
     { id: 17, label: "sneakers", value: "sneakers" },
     { id: 18, label: "necklace", value: "necklace" },
     { id: 19, label: "earring", value: "earring" },
+    { id: 21, label: "NYSC KIT", value: "NYSC KIT" },
+
 
 
     { id: 20, label: "Others", value: "Others" },

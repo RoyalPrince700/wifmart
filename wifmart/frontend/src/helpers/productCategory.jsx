@@ -13,16 +13,18 @@ const productCategory = [
     { id: 11, label: "Kitchen_utensils", value: "Kitchen_utensils" },
     { id: 12, label: "Televisions", value: "televisions" },
     { id: 13, label: "Watches", value: "watches" },
-    { id: 15, label: "SkinCare", value: "SkinCare" },
+    { id: 15, label: "SkinCare", value: "Skin Care" },
     { id: 16, label: "shoes", value: "shoes" },
     { id: 17, label: "sneakers", value: "sneakers" },
     { id: 18, label: "necklace", value: "necklace" },
     { id: 19, label: "earring", value: "earring" },
 
 
-
-
     { id: 20, label: "Others", value: "Others" },
+
+    { id: 21, label: "ScentsbyTessy", value: "Scents By Tessy" },
+    { id: 22, label: "juicevillie", value: "JuiceVillie" },
+    { id: 23, label: "Chickinz", value: "Chickinz" },
 
 
 ];

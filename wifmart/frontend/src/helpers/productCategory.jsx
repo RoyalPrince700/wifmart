@@ -1,6 +1,6 @@
 const productCategory = [
     { id: 1, label: "Airpodes", value: "airpodes" },
-    { id: 2, label: "scentbytessy", value: "scentbytessy" },
+    { id: 2, label: "ScentsbyTessy", value: "Scents By Tessy" },
     { id: 14, label: "Niyyahsatelier", value: "Niyyahsatelier" },
     { id: 3, label: "Earphones", value: "earphones" },
     { id: 4, label: "Food", value: "food" },
@@ -22,9 +22,6 @@ const productCategory = [
 
     { id: 20, label: "Others", value: "Others" },
 
-    { id: 21, label: "ScentsbyTessy", value: "Scents By Tessy" },
-    { id: 22, label: "juicevillie", value: "JuiceVillie" },
-    { id: 23, label: "Chickinz", value: "Chickinz" },
 
 
 ];

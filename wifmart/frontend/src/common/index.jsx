@@ -175,7 +175,19 @@ const SummaryApi = {
     },payondeliveryorder : {
         url : `${backendDomain}/api/payondelivery-orders`,
         method : 'get'
-    },
+    }, createNotification : {
+        url : `${backendDomain}/api/create-notification`,
+        method : 'post'
+    }, getNotification : {
+        url : `${backendDomain}/api/get-notification`,
+        method : 'get'
+    }, markAsRead : {
+        url : `${backendDomain}/api/mark-as-read`,
+        method : 'post'
+    },  countUnreadNotifications : {
+        url : `${backendDomain}/api/unread-count`,
+        method : 'get'
+    }, 
     
 };
 

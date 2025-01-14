@@ -35,6 +35,7 @@ import UsersPage from "../Pages/UsersPage";
 import SalesPage from "../Pages/SalesPage";
 import OrdersPage from "../Pages/OrdersPage";
 import AssignedOrders from "../Pages/AssignedOrders";
+import NotificationsPage from "../Pages/NotificationPage";
 
 const router = createBrowserRouter([
     {
@@ -106,7 +107,11 @@ const router = createBrowserRouter([
             {
                 path: "order",
                 element: <OrderPage />,
-            },  {
+            }, {
+                path: "notifications",
+                element: <NotificationsPage />,
+            },
+             {
                 path: "payondeliveryorder",
                 element: <PayOnDeliveryOrders />,
             }, {

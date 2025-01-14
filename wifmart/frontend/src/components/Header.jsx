@@ -20,6 +20,7 @@ import CategoryDropdown from './CategoryList';
 import icon from '../assets/profile_icon.png'
 import { PiShoppingCartSimpleBold } from "react-icons/pi"
 import { GiHamburgerMenu } from "react-icons/gi";
+import { FaBell } from 'react-icons/fa';
 
 
 
@@ -55,6 +56,7 @@ const Header = () => {
     const searchQuery = URLSearch.getAll("q");
     const [search, setSearch] = useState(searchQuery);
     const location = useLocation();
+    const { notificationCount } = useContext(Context);
     
     const hideSearchBar = location.pathname === "/login" || location.pathname === "/signup";
     
@@ -193,11 +195,30 @@ const Header = () => {
             alt={user?.name}
           />
         ) : (
+          <div className="relative flex items-center gap-2">
+          {/* User Icon and Greeting */}
           <div className="flex gap-2 items-center">
-            {/* <img src={icon} alt="" className="w-5 text-black" /> */}
+            {/* Uncomment the image line if needed */}
+            {/* <img src={icon} alt="User Icon" className="w-5 text-black" /> */}
             <FaRegCircleUser className="text-2xl text-white" />
-            <p className="text-[14px] text-white font-semibold whitespace-nowrap">Hi, {user?.email?.split('@')[0]}</p>
+            <p className="text-[14px] text-white font-semibold whitespace-nowrap">
+              Hi, {user?.email?.split('@')[0] || "Guest"}
+            </p>
           </div>
+        
+          {/* Notification Count Badge */}
+          {context?.notificationCount > 0 && (
+            <div
+              className=" rounded-full text-black w-3 h-3 p-2 flex items-center justify-center 
+        absolute -top-1 -right-3"
+            >
+                <FaBell className="text-[#ffc518]  absolute w-3 h-3" />
+              {/* <p className="text-sm">{context?.notificationCount}</p> */}
+            </div>
+          )}
+        </div>
+        
+         
         )}
       </div>
     )}
@@ -233,12 +254,20 @@ const Header = () => {
             </Link>
           )}
           <Link
+            to="/notifications"
+            className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-[14px] font-normal"
+            onClick={() => setMenuDisplay(false)}
+          >
+            Notifications
+          </Link>
+          <Link
             to="/payondeliveryorder"
             className="whitespace-nowrap hover:bg-gray-100 p-2 rounded text-[14px] font-normal"
             onClick={() => setMenuDisplay(false)}
           >
             Orders
           </Link>
+          
           <button
             onClick={() => {
               handleLogout();
@@ -255,10 +284,10 @@ const Header = () => {
 
   {/* Cart and Support Links */}
   {user?._id ? (
-    <div className="flex items-center gap-6">
+    <div className="ml-6 flex items-center gap-6">
       <Link to="/cart" className="text-2xl flex relative">
         <div className="flex items-center gap-2">
-          <PiShoppingCartSimpleBold className="text-2xl " />
+          <PiShoppingCartSimpleBold className="text-2xl text-white" />
           <p className="font-semibold text-[14px] text-white whitespace-nowrap">My Cart</p>
         </div>
         <div className="bg-yellow-500 rounded-full text-black w-3 h-3 p-2 flex items-center justify-center 
@@ -329,7 +358,27 @@ const Header = () => {
             />
           ) : (
             // <img src={icon} alt="" className="w-4 text-black" />
+            <div className="relative flex items-center gap-2">
+            {/* Profile Icon */}
             <FaRegCircleUser className="text-2xl text-white" />
+          
+            {/* Notification Badge */}
+            {user?._id && context?.notificationCount > 0 && (
+              <div className="absolute top-[-4px] right-[5px]">
+                {/* Bell Icon */} 
+                <FaBell className="text-[#ffc518]  absolute w-3 h-3" />
+                
+                {/* Notification Number */}
+                {/* <span className="absolute w-3 h-3 text-[10px] text-black flex items-center justify-center rounded-full translate-x-2 translate-y-[-1]"> */}
+                  {/* {context?.notificationCount} */}
+                {/* </span> */}
+              </div>
+            )}
+          </div>
+          
+          
+          
+          
 
           )
         ) : (
@@ -378,6 +427,13 @@ const Header = () => {
           Logistics Panel
         </Link>
       )}
+        <Link
+        to="/notifications"
+        className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
+        onClick={() => setMenuDisplay(false)}
+      >
+        Notification
+      </Link>
       <Link
         to="/payondeliveryorder"
         className="whitespace-nowrap hover:bg-gray-100 p-2 rounded"
@@ -423,11 +479,11 @@ const Header = () => {
      
 
       {!hideSearchBar && (
-        <div className="flex w-full px-4 text-[12px] lg:hidden items-center">
+        <div className="flex w-full px-2 text-[14px] lg:hidden items-center">
           <input
             type="text"
             placeholder="Search products, brands and categories here..."
-            className="w-full outline-none border rounded-md py-1 px-4 focus-within:shadow-md"
+            className="w-full outline-none border rounded-md py-2 px-4 focus-within:shadow-md"
             onChange={handleSearch}
             value={search}
           />

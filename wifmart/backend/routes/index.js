@@ -53,6 +53,10 @@ const dailySalesController = require('../controller/order/dailySalesController')
 const salesByChannelController = require('../controller/order/salesByChannelController');
 const salesTrendController = require('../controller/order/salesTrendController');
 const assignedOrdersController = require('../controller/order/assignedOrder');
+const createNotification = require('../controller/notifications/createNotification');
+const getNotifications = require('../controller/notifications/getNotification');
+const markAsRead = require('../controller/notifications/markAsRead');
+const countUnreadNotifications = require('../controller/user/countNotification');
 
 // Authentication routes
 router.post("/signup", UserSignUpController);
@@ -75,7 +79,6 @@ router.get("/auth/verify", authToken, (req, res) => {
                 userId: req.userId, // Pass the user ID to the response
             });
         }
-
         // If req.userId is not set, return an unauthorized response
         res.status(401).json({
             success: false,
@@ -91,34 +94,27 @@ router.get("/auth/verify", authToken, (req, res) => {
     }
 });
 
+// notification
 
+router.post("/create-notification", authToken,createNotification);
+router.get("/get-notification",authToken, getNotifications);
+router.post("/mark-as-read",authToken, markAsRead);
+router.get( "/unread-count",authToken, countUnreadNotifications);
 // Admin panel
 router.get("/all-users", authToken, allUsers);
 router.get("/user-growth", authToken, userGrowth);
 router.get("/all-users-activity", authToken, allUserActivity);
-
-
 router.get("/all-logistics-associate", authToken, allLogisticsAssociates);
 router.get("/get-active-logistics-associate", authToken, getActiveLAs);
 router.get("/assigned-order", assignedOrdersController);
-
-
-
 router.get("/all-orders", authToken, allOrdersController);
 router.get("/daily-sales", authToken, dailySalesController);
 router.get("/sales-channel", authToken, salesByChannelController);
 router.get("/sales-trend", authToken, salesTrendController);
-
-
- 
-
-
-
 router.post("/update-user", authToken, updateUser);
 router.post("/update-logistics-attendants", authToken, updateLogisticsAttendant);
 router.post("/assign-logistics-attendants", authToken, assignOrderToLA);
 router.get("/get-order-logistics-attendants", authToken, getOrderForLA);
-
 router.post("/update-user-order", authToken, updateOrderStatus);
 router.post("/delete-uploaded-product", authToken, deleteProductController);
 router.post('/api/place-food-order', authToken, placeFoodOrder);

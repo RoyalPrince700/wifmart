@@ -46,6 +46,11 @@ const PayOnDeliveryOrders = () => {
             {/* Order Header */}
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-3">
               <div>
+             
+              <p className="text-sm text-gray-500 mb-1">
+                  <span className="font-medium text-gray-700">Order Id:</span>{" "}
+                  {(item._id)}
+                </p>
                 <p className="text-sm text-gray-500 mb-1">
                   <span className="font-medium text-gray-700">Order Placed:</span>{" "}
                   {moment(item.createdAt).format("LL")}
@@ -78,7 +83,7 @@ const PayOnDeliveryOrders = () => {
                   <img
                     src={product.productId.productImage[0]}
                     alt={product.productId.productName}
-                    className="w-full sm:w-20 sm:h-20 h-auto object-contain border rounded-lg"
+                    className="w-20 sm:w-20 sm:h-20 h-20 object-contain border rounded-lg"
                   />
                   <div className="w-full">
                     <p className="text-sm lg:text-base font-medium text-gray-800 line-clamp-2">

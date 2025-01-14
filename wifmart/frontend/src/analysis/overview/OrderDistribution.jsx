@@ -13,8 +13,8 @@ const OrderDistribution = () => {
 	useEffect(() => {
 		const fetchOrderStatus = async () => {
 			try {
-				const response = await fetch(SummaryApi.allOrders.url, {
-					method: SummaryApi.allOrders.method,
+				const response = await fetch(SummaryApi.assignedOrders.url, {
+					method: SummaryApi.assignedOrders.method,
 					credentials: "include",
 				});
 				const data = await response.json();

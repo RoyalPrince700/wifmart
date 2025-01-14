@@ -36,7 +36,7 @@ const LAAllOrders = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       <h1 className="text-2xl font-bold mb-4">My Assigned Orders</h1>
       <div className="bg-gray-800 p-4 shadow rounded overflow-x-auto">
         <table className="w-full border-collapse text-sm md:text-base">
@@ -89,6 +89,9 @@ const LAAllOrders = () => {
       <div className="p-4 bg-gray-800 flex flex-col space-y-2">
         <h3 className="font-bold text-lg mb-2">Order Details</h3>
         <p>
+          <strong>Order Id:</strong> {order._id || "Unknown"}
+        </p>
+        <p>
           <strong>Customer Name:</strong> {order.name || "Unknown"}
         </p>
         <p>
@@ -109,6 +112,7 @@ const LAAllOrders = () => {
         <ul className="list-disc pl-4">
           {order.cartItems.map((item, idx) => (
             <li key={idx} className="space-y-1">
+             
               <p>
                 <strong>Product Name:</strong>{" "}
                 {item.productId?.productName || "Unknown"}

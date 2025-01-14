@@ -1,4 +1,5 @@
 const orderModel = require("../../models/checkoutModel");
+const NotificationModel = require("../../models/notification"); // Import notification model
 
 async function updateOrderStatus(req, res) {
     console.log("Request User ID:", req.userId);
@@ -27,9 +28,20 @@ async function updateOrderStatus(req, res) {
             });
         }
 
+        // Create a notification for the user
+        const userNotification = new NotificationModel({
+            userId: updatedOrder.userId, // Assuming the order model has a userId field
+            type: "Order Status Update",
+            message: `The status of your order #${updatedOrder._id} has been updated to: ${status}.`,
+            isRead: false,
+            createdAt: new Date(),
+        });
+
+        await userNotification.save();
+
         res.json({
             data: updatedOrder,
-            message: "Order status updated successfully",
+            message: "Order status updated successfully, and notification sent to the user.",
             success: true,
             error: false,
         });

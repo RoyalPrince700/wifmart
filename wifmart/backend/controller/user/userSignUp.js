@@ -1,13 +1,14 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const userModel = require("../../models/userModel");
+const NotificationModel = require("../../models/notification"); // Import the notification model
 const { sendVerificationEmail } = require("../../mailtrap/emails");
 
 async function userSignUpController(req, res) {
   const { email, password } = req.body;
 
   try {
-    if (!email || !password ) {
+    if (!email || !password) {
       return res.status(400).json({ success: false, message: "All fields are required" });
     }
 
@@ -43,20 +44,29 @@ async function userSignUpController(req, res) {
     // Send verification email
     await sendVerificationEmail(newUser.email, verificationToken);
 
+    // Create a welcome notification
+    const welcomeNotification = new NotificationModel({
+      userId: newUser._id,
+      type: "Welcome Message",
+      message: `Welcome to our platform, ${newUser.email}! We're thrilled to have you here.`,
+      isRead: false,
+      createdAt: new Date(),
+    });
+
+    await welcomeNotification.save();
+
     res.status(201).json({
       success: true,
       message: "User created successfully",
       user: {
         ...newUser._doc,
-        password: undefined,
+        password: undefined, // Exclude password from response
       },
     });
   } catch (error) {
-    console.error("Error in verifying Email:", error);
+    console.error("Error during signup:", error);
     res.status(500).json({ success: false, message: error.message });
   }
 }
 
 module.exports = userSignUpController;
-
-

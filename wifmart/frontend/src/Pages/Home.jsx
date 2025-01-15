@@ -16,7 +16,7 @@ function Home() {
       <VerticalCardProduct category={"food"} />
       <VerticalCardProduct  category={"necklace"} />
       <VerticalCardProduct  category={"wears"} />
-      <VerticalCardProduct  category={"SkinCare"} />
+      <VerticalCardProduct  category={"Skin Care"} />
 
 
 

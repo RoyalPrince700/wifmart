@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState } from "react";
 import Logo from "./Logo";
 import { GrSearch } from "react-icons/gr";
@@ -157,24 +156,22 @@ const Header = () => {
   </div>
 </div>
 
-{/* Search Bar */}
+{/* Search Bar - Reduced width for desktop */}
 {!hideSearchBar && (
-  <div className="lg:flex w-[500px] ml-4 hidden flex-shrink-0 ">
+  <div className="lg:flex w-[400px] ml-4 hidden flex-shrink-0">
     <div className="inline-flex px-3 border bg-white border-gray-400 rounded-l-md items-center 
-    w-[35vw] min-w-[300px]">
+    w-[30vw] min-w-[250px] max-w-[400px]">
       <GrSearch className="text-gray-500" />
       <input
         type="text"
         className="w-full text-[12px] font-normal outline-none bg-inherit pl-3"
-        placeholder="Search products, brands and categories"
+        placeholder="Search products, brands..."
         onChange={handleSearch}
         value={search}
       />
     </div>
     <button className="bg-yellow-500 text-[12px] shadow-lg ml-[-2px] text-black py-2 px-4 font-semibold rounded-r-md">
-      {/* Search  */}
       <GrSearch className="text-black text-lg" />
-
     </button>
   </div>
 )}
@@ -198,8 +195,6 @@ const Header = () => {
           <div className="relative flex items-center gap-2">
           {/* User Icon and Greeting */}
           <div className="flex gap-2 items-center">
-            {/* Uncomment the image line if needed */}
-            {/* <img src={icon} alt="User Icon" className="w-5 text-black" /> */}
             <FaRegCircleUser className="text-2xl text-white" />
             <p className="text-[14px] text-white font-semibold whitespace-nowrap">
               Hi, {user?.email?.split('@')[0] || "Guest"}
@@ -213,12 +208,9 @@ const Header = () => {
         absolute -top-1 -right-3"
             >
                 <FaBell className="text-[#ffc518]  absolute w-3 h-3" />
-              {/* <p className="text-sm">{context?.notificationCount}</p> */}
             </div>
           )}
         </div>
-        
-         
         )}
       </div>
     )}
@@ -282,7 +274,7 @@ const Header = () => {
     )}
   </div>
 
-  {/* Cart and Support Links */}
+  {/* Cart and Support Links - Removed Support link for desktop */}
   {user?._id ? (
     <div className="ml-6 flex items-center gap-6">
       <Link to="/cart" className="text-2xl flex relative">
@@ -295,24 +287,15 @@ const Header = () => {
           <p className="text-sm">{context?.cartProductCount}</p>
         </div>
       </Link>
-      <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-2xl text-white" />
-        <p className="font-semibold text-[14px] text-white whitespace-nowrap">Support</p>
-      </Link>
+      {/* Support link removed on desktop as requested */}
     </div>
   ) : (
     <div className="lg:flex hidden items-center gap-5">
       <Link to="/login" className="flex items-center gap-2">
-      {/* <img src={icon} alt="" className="w-5 text-black" />
-       */}
             <FaRegCircleUser className="text-2xl" />
-
         <p className="text-[14px] font-semibold text-white whitespace-nowrap">Account</p>
       </Link>
-      <Link to="/support" className="flex items-center gap-1">
-        <MdOutlineContactSupport className="text-2xl" />
-        <p className="text-[14px] font-medium text-white whitespace-nowrap">Support</p>
-      </Link>
+      {/* Support link removed on desktop as requested */}
       <Link to="/cart" className="flex items-center gap-1">
         <PiShoppingCartSimpleBold className="text-2xl " />
         <p className="text-[14px] font-medium text-white whitespace-nowrap">My Cart</p>
@@ -357,35 +340,18 @@ const Header = () => {
               alt={user?.name}
             />
           ) : (
-            // <img src={icon} alt="" className="w-4 text-black" />
             <div className="relative flex items-center gap-2">
-            {/* Profile Icon */}
             <FaRegCircleUser className="text-2xl text-white" />
-          
-            {/* Notification Badge */}
             {user?._id && context?.notificationCount > 0 && (
               <div className="absolute top-[-4px] right-[5px]">
-                {/* Bell Icon */} 
                 <FaBell className="text-[#ffc518]  absolute w-3 h-3" />
-                
-                {/* Notification Number */}
-                {/* <span className="absolute w-3 h-3 text-[10px] text-black flex items-center justify-center rounded-full translate-x-2 translate-y-[-1]"> */}
-                  {/* {context?.notificationCount} */}
-                {/* </span> */}
               </div>
             )}
           </div>
-          
-          
-          
-          
-
           )
         ) : (
           <Link to="/login">
-            {/* <img src={icon} alt="" className="w-4 text-black" /> */}
             <FaRegCircleUser className="text-2xl text-white" />
-
           </Link>
         )}
       </div>
@@ -396,7 +362,7 @@ const Header = () => {
     <nav className="flex flex-col gap-2">
       <p
         className="truncate hover:bg-gray-100 p-2 rounded"
-        title={user?.email} // Shows full email on hover
+        title={user?.email}
       >
         Hi, {user?.email?.split("@")[0]}
       </p>
@@ -501,15 +467,12 @@ const Header = () => {
           <div className='flex items-center '>
             <Link to="/" onClick={() => setHambugDrop(false)}>
             <Logo w="100px" h="20px" />
-
             </Link>
           </div>
           <div>
             <RxCross1 onClick={() => setHambugDrop(false)} className='text-xl text-white cursor-pointer ' />
           </div>
         </div>
-
-
 
         {/* Menu Items */}
         <div className='px-2 pt-4 font-normal overflow-y-auto h-[calc(100vh-64px)]'>
@@ -519,26 +482,22 @@ const Header = () => {
           <div className='text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2
                        cursor-pointer'>
     {user ? (
-      // Logout button when user is logged in
       <div
         onClick={() => {
           handleLogout();
-          setHambugDrop(false); // Close dropdown after logging out
+          setHambugDrop(false);
         }}
-        className=' 
-         text-gray-500  rounded w-[90vw] px'
+        className='text-gray-500  rounded w-[90vw] px'
       >
         Logout
       </div>
     ) : (
-      // Login button when user is not logged in
       <Link to="/login">
         <div
-          onClick={() => setHambugDrop(false)} // Close dropdown after clicking login
-          className=' 
-           text-gray-500 rounded  w-[90vw] px'
+          onClick={() => setHambugDrop(false)}
+          className='text-gray-500 rounded  w-[90vw] px'
         >
-          Login &gt; &gt;
+          Login > >
         </div>
       </Link>
     )}
@@ -549,70 +508,70 @@ const Header = () => {
                 <p className='text-gray-600 text-[14px]'>OUR CATEGORIES</p>
             </div>
             <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <IoPhonePortraitSharp className="text-xl" />
                     <p>Phone and Tablet</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <FiTv className="text-xl" />
                     <p>Appliances</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <FiTv className="text-xl" />
                     <p>Electronics</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <CiApple className="text-xl" />
                     <p>Supermarket</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <GiLipstick className="text-xl" />
                     <p>Health & Beauty</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <MdOutlineHomeWork className="text-xl" />
                     <p>Home & Office</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <CiHome className="text-xl" />
                     <p>Power</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <LuTicket className="text-xl" />
                     <p>Computing</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 font-normal hover:font-semibold flex items-center gap-2  py-5 px-2   cursor-pointer"
                     >
                       <GiClothes className="text-xl" />
                     <p>Women's Fashion</p>
                  </NavLink>
                  <NavLink
-                    to="/" onClick={() => setMobileVisible(false)} // Close dropdown on click
+                    to="/" onClick={() => setMobileVisible(false)}
                     className="text-gray-500 pb-10 font-normal hover:font-semibold flex 
                     items-center gap-2  py-5 px-2   cursor-pointer"
                     >
